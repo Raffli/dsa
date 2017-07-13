@@ -1,0 +1,21 @@
+md-sidenav {
+  width: 200px;
+  position: fixed;
+}
+md-sidenav-container {
+  height:100%
+}
+
+centered {
+  text-align: center;
+}
+
+
+.app-sidenav {
+  background-color: darkblue;
+}
+
+.list-item {
+  background-color:blue;
+  margin:10px;
+}

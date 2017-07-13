@@ -1,0 +1,32 @@
+
+<div *ngIf="held===undefined">
+  <span>Es wurde kein Held ausgewählt. Bitte lade einen hoch</span>
+  <input type="file" (change)="fileUploaded($event)">
+</div>
+<div *ngIf="held!==undefined" class="bordered">
+
+
+  <md-tab-group>
+    <md-tab label="Übersicht">
+      <md-grid-list cols="4">
+        <md-grid-tile>
+      <md-card >
+        <h4>Name: {{held.name}}</h4>
+      </md-card>
+        </md-grid-tile>
+        <md-grid-tile>
+      <md-card>
+        test
+      </md-card>
+          </md-grid-tile>
+      </md-grid-list>
+
+    </md-tab>
+    <md-tab label="Two">
+      <h1>Some more tab content</h1>
+      <p>...</p>
+    </md-tab>
+  </md-tab-group>
+
+</div>
+
