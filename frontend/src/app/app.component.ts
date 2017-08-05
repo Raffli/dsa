@@ -3,6 +3,7 @@ import {FormControl} from '@angular/forms';
 
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+import {MenuItem} from "primeng/components/common/menuitem";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,15 +11,15 @@ import 'rxjs/add/operator/map';
 })
 export class AppComponent {
 
-  photo = 'http://bilder.bild.de/fotos/bild-de-15401182/Bild/20.bild.png';
-  links = [
+  items: MenuItem[] = [
     {
-      name:'Home',
-      href:''
+      label: 'Home',
+      routerLink:'home'
     },
     {
-      name:'Heldenbogen',
-      href:'heldenbogen'
+      label: 'Held',
+      routerLink:'heldenbogen'
     }
-  ]
+  ];
+
 }

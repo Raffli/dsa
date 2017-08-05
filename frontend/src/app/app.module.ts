@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {MdAutocompleteModule, MdInputContainer, MdInputDirective, MdCard, MdButton, MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import 'hammerjs';
 
@@ -13,6 +12,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HeldDetailComponent } from './held-detail/held-detail.component';
 import {AttributService} from "./service/attribut.service";
 import {HeldenService} from "./service/helden.service";
+
+
+import {MenuModule, MenubarModule, DataTableModule, SharedModule} from 'primeng/primeng';
 
 const appRoutes: Routes = [
   {
@@ -37,7 +39,7 @@ const appRoutes: Routes = [
     HeldDetailComponent
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule, MaterialModule,
+    BrowserModule, BrowserAnimationsModule, MenuModule, MenubarModule, DataTableModule, SharedModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }

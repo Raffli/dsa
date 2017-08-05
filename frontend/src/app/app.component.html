@@ -1,35 +1,9 @@
-<section class="mat-typography" style="height:100%">
-  <md-toolbar color="primary">
 
-    <button md-icon-button (click)="sidenav.toggle()">
-      <md-icon class="md-24" >menu</md-icon>
-    </button>
+<p-menubar [model]="items"></p-menubar>
 
-    <span layout-alignt="center center" >Willkommen!</span>
-    <span flex></span>
-    <button md-fab [ngStyle]="{'background-image': 'url(' + photo + ')'}" >asd</button>
-
-  </md-toolbar>
+<router-outlet></router-outlet>
 
 
-
-  <md-sidenav-container>
-    <md-sidenav #sidenav mode="side" class="app-sidenav" opened="true">
-
-      <md-nav-list>
-        <md-list-item *ngFor="let link of links" class="list-item">
-          <a md-line [href]="link.href">{{ link.name }}</a>
-        </md-list-item>
-      </md-nav-list>
-
-    </md-sidenav>
-
-
-
-
-      <router-outlet></router-outlet>
-  </md-sidenav-container>
-</section>
 
 
 

@@ -12,6 +12,7 @@ export class HeldDetailComponent implements OnInit {
 
   constructor(private heldenService: HeldenService) { }
 
+  public data = [{title: 'asdasd'}];
 
   @Input()
   held: Held;

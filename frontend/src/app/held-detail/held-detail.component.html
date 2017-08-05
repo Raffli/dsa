@@ -3,37 +3,42 @@
   <span>Es wurde kein Held ausgewählt. Bitte lade einen hoch</span>
   <input type="file" (change)="fileUploaded($event)">
 </div>
+
+
 <div *ngIf="held!==undefined" class="bordered">
 
+  <p-dataTable [value]="data">
+    <p-headerColumnGroup>
+      <p-row>
+        <p-column header="Name" rowspan="1"></p-column>
+        <p-column header="Sale Rate" colspan="4"></p-column>
+      </p-row>
+      <p-row>
+        <p-column header="Sales" colspan="2"></p-column>
+        <p-column header="Profits" colspan="2"></p-column>
+      </p-row>
+      <p-row>
+        <p-column header="Last Year"></p-column>
+        <p-column header="This Year"></p-column>
+        <p-column header="Last Year"></p-column>
+        <p-column header="This Year"></p-column>
+      </p-row>
+    </p-headerColumnGroup>
 
-  <md-tab-group>
-    <md-tab label="Übersicht">
+    <p-column field="title"></p-column>
+    <p-column field="lastYearSale"></p-column>
+    <p-column field="thisYearSale"></p-column>
+    <p-column field="lastYearProfit"></p-column>
+    <p-column field="thisYearProfit"></p-column>
 
-      <md-grid-list cols="10">
-        <md-grid-tile *ngFor="let attribut of getMainAttributes()">
-          <md-card class="attribute">{{attribut.shortcut}} {{attribut.value}}</md-card>
-        </md-grid-tile>
-      </md-grid-list>
-
-      <md-grid-list cols="6">
-        <md-grid-tile colspan="4">
-      <md-card >
-        <h4>Name: {{held.name}}</h4>
-      </md-card>
-        </md-grid-tile>
-        <md-grid-tile>
-      <md-card>
-        test
-      </md-card>
-          </md-grid-tile>
-      </md-grid-list>
-
-    </md-tab>
-    <md-tab label="Two">
-      <h1>Some more tab content</h1>
-      <p>...</p>
-    </md-tab>
-  </md-tab-group>
+    <p-footerColumnGroup>
+      <p-row>
+        <p-column footer="Totals:" colspan="3"></p-column>
+        <p-column footer="$506,202"></p-column>
+        <p-column footer="$531,020"></p-column>
+      </p-row>
+    </p-footerColumnGroup>
+  </p-dataTable>
 
 </div>
 

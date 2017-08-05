@@ -19,15 +19,24 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css",
+        "../node_modules/primeng/resources/primeng.min.css",
+        "../node_modules/primeng/resources/themes/omega/theme.css",
+		"../node_modules/bootstrap/dist/css/bootstrap.min.css"
       ],
       "scripts": [],
-      "environmentSource": "environments/environment.ts",
+	  "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
+      },
+      "dependencies": {
+        "primeng": "^4.1.0",
+        "font-awesome": "^4.7.0"
       }
     }
+
   ],
   "e2e": {
     "protractor": {
