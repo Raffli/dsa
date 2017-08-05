@@ -5,13 +5,14 @@ import {Vorteil} from "../data/vorteil";
 import {Sonderfertigkeit} from "../data/sonderfertigkeit";
 import {Talent} from "../data/talent";
 import {Lernmethode} from "../data/enums/lernmethode";
+import {AttributService} from "./attribut.service";
 
 @Injectable()
 export class HeldenService {
 
   private _held:Held
 
-  constructor() {
+  constructor(private attributService:AttributService) {
     this._held = this.loadHeld(this.testHeld)
   }
 
@@ -107,9 +108,9 @@ export class HeldenService {
       let value = parseInt(node.getAttribute('value'));
       let startwert = parseInt(node.getAttribute('startwert'));
       let mod = parseInt(node.getAttribute('mod'));
+      let attShort = this.attributService.getAttributShortcut(name);
 
-
-      let attribut = new Attribut(name, value, startwert, mod);
+      let attribut = new Attribut(name, value, startwert, mod, attShort);
       attribute.push(attribut);
     }
     return attribute;

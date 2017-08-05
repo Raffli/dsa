@@ -8,8 +8,15 @@
 
   <md-tab-group>
     <md-tab label="Übersicht">
-      <md-grid-list cols="4">
-        <md-grid-tile>
+
+      <md-grid-list cols="10">
+        <md-grid-tile *ngFor="let attribut of getMainAttributes()">
+          <md-card class="attribute">{{attribut.shortcut}} {{attribut.value}}</md-card>
+        </md-grid-tile>
+      </md-grid-list>
+
+      <md-grid-list cols="6">
+        <md-grid-tile colspan="4">
       <md-card >
         <h4>Name: {{held.name}}</h4>
       </md-card>

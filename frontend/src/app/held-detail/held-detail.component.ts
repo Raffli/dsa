@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {Held} from "../data/held";
 import {HeldenService} from "../service/helden.service";
+import {Attribut} from "../data/attribut";
 
 @Component({
   selector: 'held-detail',
@@ -38,6 +39,12 @@ export class HeldDetailComponent implements OnInit {
     }
 
     reader.readAsText(files[0]);
+  }
+
+  getMainAttributes() : Attribut[] {
+    let ret = this.held.attribute.slice(0,9);
+    ret.push(this.held.attribute[13]);
+    return ret;
   }
 
 }

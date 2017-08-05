@@ -11,6 +11,8 @@ import { HeldenbogenComponent } from './heldenbogen/heldenbogen.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HeldDetailComponent } from './held-detail/held-detail.component';
+import {AttributService} from "./service/attribut.service";
+import {HeldenService} from "./service/helden.service";
 
 const appRoutes: Routes = [
   {
@@ -41,7 +43,7 @@ const appRoutes: Routes = [
       { enableTracing: false }
     )
   ],
-  providers: [],
+  providers: [AttributService, HeldenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,12 +6,14 @@ export class Attribut {
   value: number;
   startwert:number;
   mod:number;
+  shortcut: string;
 
 
-  constructor(name: string, value: number, startwert: number, mod: number) {
+  constructor(name: string, value: number, startwert: number, mod: number, shortcut:string) {
     this.name = name;
     this.value = value;
     this.startwert = startwert;
     this.mod = mod;
+    this.shortcut = shortcut;
   }
 }
