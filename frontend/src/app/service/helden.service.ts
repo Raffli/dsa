@@ -174,6 +174,7 @@ export class HeldenService {
         (data: TalentData) => {
           talent.komplexitaet = data.komplexitaet;
           talent.kategoroie = data.kategorie;
+          console.log(talent)
         }, (error:any) => {
           console.log(error)
         }

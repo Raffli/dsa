@@ -6,11 +6,12 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 import {Talent} from "../data/talent";
 import {TalentData} from "../data/talentdata";
+import {Http, Response} from "@angular/http"
 
 @Injectable()
 export class TalentService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:Http) { }
 
    public getTalentByName(name: string) : Observable<TalentData> {
     return this.http.get('/api/talente/byname?name='+name).map((res:Response) =>res.json())

@@ -28,7 +28,6 @@ public class TalentController {
 	
 	@GetMapping("byname")
 	public ResponseEntity<TalentEntity> findByName(@RequestParam("name")String name) {
-		System.out.println("call");
 		TalentEntity entity = this.talentRepository.findByName(name);
 		if(entity == null) {
 			log.error("Unmapped talent: "+name);

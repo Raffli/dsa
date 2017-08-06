@@ -5,6 +5,7 @@ import 'hammerjs';
 
 import { RouterModule, Routes } from '@angular/router';
 import {HttpClientModule} from '@angular/common/http'
+import {HttpModule} from '@angular/http'
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HeldenbogenComponent } from './heldenbogen/heldenbogen.component';
@@ -41,7 +42,7 @@ const appRoutes: Routes = [
     HeldDetailComponent
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule, MenuModule, MenubarModule, DataTableModule, SharedModule, HttpClientModule,
+    BrowserModule, BrowserAnimationsModule, MenuModule, MenubarModule, DataTableModule, SharedModule, HttpModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }
