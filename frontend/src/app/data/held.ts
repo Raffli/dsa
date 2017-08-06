@@ -11,7 +11,9 @@ export class Held {
 
   rasse:string;
   geschlecht:string;
+  kultur: string;
   alter: number;
+
 
   profession: string;
   abenteuerPunkteTotal: number;
@@ -26,7 +28,7 @@ export class Held {
 
 
   constructor(xml: string, rasse: string, geschlecht: string, alter: number, profession: string, abenteuerPunkteTotal: number, abenteuerPunkteFrei: number, name: string, attribute: Attribut[], vorteile: Vorteil[], sonderfertigkeiten: Sonderfertigkeit[],
-              talente: Talent[]) {
+              talente: Talent[], kultur: string) {
     this.xml = xml;
     this.rasse = rasse;
     this.geschlecht = geschlecht;
@@ -39,5 +41,6 @@ export class Held {
     this.vorteile = vorteile;
     this.sonderfertigkeiten = sonderfertigkeiten;
     this.talente = talente;
+    this.kultur = kultur;
   }
 }

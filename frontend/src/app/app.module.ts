@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import 'hammerjs';
 
 import { RouterModule, Routes } from '@angular/router';
+import {HttpClientModule} from '@angular/common/http'
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HeldenbogenComponent } from './heldenbogen/heldenbogen.component';
@@ -15,6 +16,7 @@ import {HeldenService} from "./service/helden.service";
 
 
 import {MenuModule, MenubarModule, DataTableModule, SharedModule} from 'primeng/primeng';
+import {TalentService} from "./service/talent.service";
 
 const appRoutes: Routes = [
   {
@@ -39,13 +41,13 @@ const appRoutes: Routes = [
     HeldDetailComponent
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule, MenuModule, MenubarModule, DataTableModule, SharedModule,
+    BrowserModule, BrowserAnimationsModule, MenuModule, MenubarModule, DataTableModule, SharedModule, HttpClientModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }
     )
   ],
-  providers: [AttributService, HeldenService],
+  providers: [AttributService, HeldenService, TalentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

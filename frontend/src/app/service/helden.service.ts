@@ -6,13 +6,15 @@ import {Sonderfertigkeit} from "../data/sonderfertigkeit";
 import {Talent} from "../data/talent";
 import {Lernmethode} from "../data/enums/lernmethode";
 import {AttributService} from "./attribut.service";
+import {TalentService} from "./talent.service";
+import {TalentData} from "../data/talentdata";
 
 @Injectable()
 export class HeldenService {
 
   private _held:Held
 
-  constructor(private attributService:AttributService) {
+  constructor(private attributService:AttributService, private talentService:TalentService) {
     this._held = this.loadHeld(this.testHeld)
   }
 
@@ -42,15 +44,21 @@ export class HeldenService {
     let vorteile = this.extractVorteile(xmlDoc);
     let sonderfertigkeiten = this.extractSonderfertigkeiten(xmlDoc);
     let talente = this.extractTalente(xmlDoc);
-
+    let kultur = this.extractKultur(xmlDoc);
 
 
     let hero = new Held(xml, rasse, geschlecht, alter, profession, apTotal, apFree, name, attribute, vorteile, sonderfertigkeiten,
-      talente);
+      talente, kultur);
 
     return hero;
   }
 
+
+  private extractKultur(xmlDoc: Document) : string {
+    let node = xmlDoc.getElementsByTagName('kultur')[0];
+    let kultur = node.getAttribute('string');
+    return kultur;
+  }
 
   private extractProfession(xmlDoc: Document):string {
     let node = xmlDoc.getElementsByTagName('ausbildung')[0];
@@ -156,15 +164,20 @@ export class HeldenService {
     for(let i=0; i<nodes.length;i++) {
       let node = nodes[i];
       let lernmethode = node.getAttribute('lernmethode');
-      let lernEnum : Lernmethode;
-      if(lernmethode=='Gegenseitiges Lehren') lernEnum = Lernmethode.Gegenseitiges_Lehren;
-      else if(lernmethode =='Selbststudium')  lernEnum = Lernmethode.Selbststudium;
-      else if(lernmethode =='Lehrmeister') lernEnum = Lernmethode.Lehrmeister;
-      else lernEnum = Lernmethode.Freie_Steigerung
       let name = node.getAttribute('name');
+
       let probe = node.getAttribute('probe');
       let value = parseInt(node.getAttribute('value'));
-      let talent = new Talent(lernEnum, name, probe, value);
+      let be = node.getAttribute('be');
+      let talent = new Talent(lernmethode, name, probe, value, be);
+      this.talentService.getTalentByName(name).subscribe(
+        (data: TalentData) => {
+          talent.komplexitaet = data.komplexitaet;
+          talent.kategoroie = data.kategorie;
+        }, (error:any) => {
+          console.log(error)
+        }
+      )
       talente.push(talent);
     }
     return talente;

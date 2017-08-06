@@ -6,38 +6,52 @@
 
 
 <div *ngIf="held!==undefined" class="bordered">
+  <table>
+    <tr>
+      <td *ngFor="let attribut of getMainAttributes()">
+        {{attribut.shortcut}} {{attribut.value}}
+      </td>
+    </tr>
 
-  <p-dataTable [value]="data">
-    <p-headerColumnGroup>
-      <p-row>
-        <p-column header="Name" rowspan="1"></p-column>
-        <p-column header="Sale Rate" colspan="4"></p-column>
-      </p-row>
-      <p-row>
-        <p-column header="Sales" colspan="2"></p-column>
-        <p-column header="Profits" colspan="2"></p-column>
-      </p-row>
-      <p-row>
-        <p-column header="Last Year"></p-column>
-        <p-column header="This Year"></p-column>
-        <p-column header="Last Year"></p-column>
-        <p-column header="This Year"></p-column>
-      </p-row>
-    </p-headerColumnGroup>
+    <tr>
+      <td colspan="10" class="noborder">Name : {{held.name}}</td>
+    </tr>
+    <tr>
+      <td colspan="5" class="noborder">Rasse : {{held.rasse}}</td>
+      <td colspan="5" class="noborder">Kultur : {{held.kultur}}</td>
+    </tr>
+    <tr>
+      <td colspan="10" class="noborder">Profession : {{held.profession}}</td>
 
-    <p-column field="title"></p-column>
-    <p-column field="lastYearSale"></p-column>
-    <p-column field="thisYearSale"></p-column>
-    <p-column field="lastYearProfit"></p-column>
-    <p-column field="thisYearProfit"></p-column>
+    </tr>
+    <tr >
+      <td class="noheight" colspan="10"></td>
+    </tr>
+    <tr>
+      <td colspan="5" class="noborder">Geschlecht: {{held.geschlecht}}</td>
+      <td colspan="5" class="noborder">Geburtsdatum : {{held.geburtsdatum}}</td>
+    </tr>
+    <tr>
+      <td colspan="5" class="noborder">Größe: {{held.groesse}}</td>
+      <td colspan="5" class="noborder">Gewicht: {{held.gewicht}}</td>
+    </tr>
+    <tr>
+      <td colspan="5" class="noborder">Haarfarbe: {{held.haarfarbe}}</td>
+      <td colspan="5" class="noborder">Augenfarbe: {{held.augenfarbe}}</td>
+    </tr>
+    <tr>
+      <td colspan="5" class="noborder">Stand: {{held.stand}}</td>
+      <td colspan="5" class="noborder">Titel : {{held.titel}}</td>
+    </tr>
 
-    <p-footerColumnGroup>
-      <p-row>
-        <p-column footer="Totals:" colspan="3"></p-column>
-        <p-column footer="$506,202"></p-column>
-        <p-column footer="$531,020"></p-column>
-      </p-row>
-    </p-footerColumnGroup>
+  </table>
+
+
+  <p-dataTable [value]="held.talente">
+    <p-column field="name" header="Name" ></p-column>
+    <p-column field="probe" header="Probe" [style]="{width:'200px'}"></p-column>
+    <p-column field="be" header="BE" [style]="{width:'100px'}"></p-column>
+    <p-column field="value" header="Wert" [style]="{width:'50px'}"></p-column>
   </p-dataTable>
 
 </div>
