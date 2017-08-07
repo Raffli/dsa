@@ -9,6 +9,8 @@ export class Held {
 
   xml:string;
 
+  
+
   rasse:string;
   geschlecht:string;
   kultur: string;

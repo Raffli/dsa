@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.busybeever.dsa.data.entities.SprachEntity;
 import de.busybeever.dsa.data.entities.TalentEntity;
+import de.busybeever.dsa.data.repository.SchriftRepository;
+import de.busybeever.dsa.data.repository.SprachRepository;
 import de.busybeever.dsa.data.repository.TalentRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,19 +24,37 @@ public class TalentController {
 	@Autowired
 	private TalentRepository talentRepository;
 	
+	@Autowired
+	private SchriftRepository schriftRepository;
+	
+	@Autowired
+	private SprachRepository sprachRepository;
+	
 	@GetMapping
 	public Iterable<TalentEntity> getAll() {
 		return this.talentRepository.findAll();
 	}
 	
 	@GetMapping("byname")
-	public ResponseEntity<TalentEntity> findByName(@RequestParam("name")String name) {
-		TalentEntity entity = this.talentRepository.findByName(name);
-		if(entity == null) {
-			log.error("Unmapped talent: "+name);
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	public ResponseEntity<?> findByName(@RequestParam("name")String name) {
+		if(name.startsWith("Sprachen kennen ")) {
+			name = name.substring(16);
+			return buildEntity(this.sprachRepository.findByName(name), "Unmapped language: "+name);
+		} else if(name.startsWith("Lesen/Schreiben ")){
+			name = name.substring(16);
+			return buildEntity(this.schriftRepository.findByName(name), "Unmapped lettering: "+name);		
 		}
+		return buildEntity(this.talentRepository.findByName(name), "Unmapped talent: "+name);
 		
-		return new ResponseEntity<>(entity, HttpStatus.OK);
+	}
+	
+	private <T> ResponseEntity<T> buildEntity(T from, String errorMessage) {
+		
+		if(from == null) {
+			log.error(errorMessage);
+			return new ResponseEntity<T>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<T>(from, HttpStatus.OK);
+		}
 	}
 }

@@ -9,7 +9,7 @@ export class Talent {
   value: number;
   be: string;
   komplexitaet: string;
-  kategoroie: string;
+  kategorie: string;
 
 
   constructor(lernmethode: string, name: string, probe: string, value: number, be:string) {

@@ -8,6 +8,7 @@ import {Lernmethode} from "../data/enums/lernmethode";
 import {AttributService} from "./attribut.service";
 import {TalentService} from "./talent.service";
 import {TalentData} from "../data/talentdata";
+import {Observable, Observer} from 'rxjs/Rx'
 
 @Injectable()
 export class HeldenService {
@@ -15,7 +16,9 @@ export class HeldenService {
   private _held:Held
 
   constructor(private attributService:AttributService, private talentService:TalentService) {
-    this._held = this.loadHeld(this.testHeld)
+    this.loadHeld(this.testHeld, (held:Held) => {
+      this._held =held;
+    })
   }
 
   getHeld(): Held {
@@ -27,7 +30,7 @@ export class HeldenService {
     this._held = value;
   }
 
-  loadHeld(xml : string):Held {
+  loadHeld(xml : string, callback : (held:Held) => void):void {
 
 
     let parser = new DOMParser();
@@ -43,14 +46,13 @@ export class HeldenService {
     let attribute = this.extractAttribute(xmlDoc);
     let vorteile = this.extractVorteile(xmlDoc);
     let sonderfertigkeiten = this.extractSonderfertigkeiten(xmlDoc);
-    let talente = this.extractTalente(xmlDoc);
     let kultur = this.extractKultur(xmlDoc);
+    this.extractTalente(xmlDoc, (talente:Talent[]) => {
+      let hero = new Held(xml, rasse, geschlecht, alter, profession, apTotal, apFree, name, attribute, vorteile, sonderfertigkeiten,
+        talente, kultur);
+      callback(hero);
+    });
 
-
-    let hero = new Held(xml, rasse, geschlecht, alter, profession, apTotal, apFree, name, attribute, vorteile, sonderfertigkeiten,
-      talente, kultur);
-
-    return hero;
   }
 
 
@@ -158,9 +160,10 @@ export class HeldenService {
     return sonderfertigkeiten;
   }
 
-  private extractTalente(xmlDoc: Document) : Talent[] {
+  private extractTalente(xmlDoc: Document, callback: (data: Talent[]) => void) : Talent[] {
     let nodes = xmlDoc.getElementsByTagName('talent')
     let talente = [];
+
     for(let i=0; i<nodes.length;i++) {
       let node = nodes[i];
       let lernmethode = node.getAttribute('lernmethode');
@@ -170,17 +173,28 @@ export class HeldenService {
       let value = parseInt(node.getAttribute('value'));
       let be = node.getAttribute('be');
       let talent = new Talent(lernmethode, name, probe, value, be);
-      this.talentService.getTalentByName(name).subscribe(
+      let obs = this.talentService.getTalentByName(name);
+
+      obs.subscribe(
         (data: TalentData) => {
           talent.komplexitaet = data.komplexitaet;
-          talent.kategoroie = data.kategorie;
-          console.log(talent)
+          talent.kategorie = data.kategorie;
+          if(i==nodes.length-1) {
+            callback(talente);
+
+          }
         }, (error:any) => {
           console.log(error)
+          console.log(name)
         }
       )
+
+
+
       talente.push(talent);
+
     }
+
     return talente;
   }
 

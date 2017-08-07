@@ -32,12 +32,13 @@ export class HeldDetailComponent implements OnInit {
     reader.onload = file => {
       var contents: any = file.target;
       let text = contents.result;
-      let held = this.heldenService.loadHeld(text);
-      console.log(held)
-      if(held != null) {
-        this.heldChanged.emit(held);
+      this.heldenService.loadHeld(text, (held:Held) => {
+        if(held != null) {
+          this.heldChanged.emit(held);
+        }
+      });
       }
-    }
+
 
     reader.readAsText(files[0]);
   }
