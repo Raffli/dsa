@@ -18,6 +18,8 @@ import {HeldenService} from "./service/helden.service";
 
 import {MenuModule, MenubarModule, DataTableModule, SharedModule} from 'primeng/primeng';
 import {TalentService} from "./service/talent.service";
+import {TabViewModule} from "primeng/components/tabview/tabview";
+import { SheetOverviewComponent } from './held/sheet-overview/sheet-overview.component';
 
 const appRoutes: Routes = [
   {
@@ -39,10 +41,11 @@ const appRoutes: Routes = [
     HeldenbogenComponent,
     HomeComponent,
     PageNotFoundComponent,
-    HeldDetailComponent
+    HeldDetailComponent,
+    SheetOverviewComponent
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule, MenuModule, MenubarModule, DataTableModule, SharedModule, HttpModule,
+    BrowserModule, BrowserAnimationsModule, MenuModule, MenubarModule, DataTableModule, SharedModule, HttpModule, TabViewModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }

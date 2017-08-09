@@ -148,6 +148,11 @@ export class HeldenService {
       let value = parseInt(node.getAttribute('value'));
       let startwert = parseInt(node.getAttribute('startwert'));
       let mod = parseInt(node.getAttribute('mod'));
+      if(name!='Magieresistenz') {
+        value +=mod;
+      } else {
+        value = 8+mod ;
+      }
       let attShort = this.attributService.getAttributShortcut(name);
 
       let attribut = new Attribut(name, value, startwert, mod, attShort);

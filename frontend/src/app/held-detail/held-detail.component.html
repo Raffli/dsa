@@ -1,4 +1,5 @@
 
+
 <div *ngIf="held===undefined">
   <span>Es wurde kein Held ausgewählt. Bitte lade einen hoch</span>
   <input type="file" (change)="fileUploaded($event)">
@@ -6,55 +7,19 @@
 
 
 <div *ngIf="held!==undefined" class="bordered">
-  <table>
-    <tr>
-      <td *ngFor="let attribut of getMainAttributes()">
-        {{attribut.shortcut}} {{attribut.value}}
-      </td>
-    </tr>
+  <p-tabView>
+    <p-tabPanel header="Übersicht">
 
-    <tr>
-      <td colspan="10" class="noborder">Name : {{held.name}}</td>
-    </tr>
-    <tr>
-      <td colspan="5" class="noborder">Rasse : {{held.rasse}}</td>
-      <td colspan="5" class="noborder">Kultur : {{held.kultur}}</td>
-    </tr>
-    <tr>
-      <td colspan="10" class="noborder">Profession : {{held.profession}}</td>
-
-    </tr>
-    <tr >
-      <td class="noheight" colspan="10"></td>
-    </tr>
-    <tr>
-      <td colspan="5" class="noborder">Geschlecht: {{held.geschlecht}}</td>
-      <td colspan="5" class="noborder">Geburtsdatum : {{held.getGeburtstag()}}</td>
-    </tr>
-    <tr>
-      <td colspan="5" class="noborder">Größe: {{held.groesse /2}} Finger ({{held.groesse}} cm)</td>
-      <td colspan="5" class="noborder">Gewicht: {{held.gewicht}} Stein</td>
-    </tr>
-    <tr>
-      <td colspan="5" class="noborder">Haarfarbe: {{held.aussehen.haarfarbe}}</td>
-      <td colspan="5" class="noborder">Augenfarbe: {{held.aussehen.augenfarbe}}</td>
-    </tr>
-    <tr>
-      <td colspan="5" class="noborder">Stand: {{held.aussehen.stand}}</td>
-      <td colspan="5" class="noborder">Titel : {{held.aussehen.titel}}</td>
-    </tr>
-
-  </table>
+      <app-sheet-overview [held]="held"></app-sheet-overview>
 
 
-  <p-dataTable [value]="held.talente">
-    <p-column field="name" header="Name" ></p-column>
-    <p-column field="kategorie" header="kategorie" ></p-column>
+    </p-tabPanel>
+    <p-tabPanel header="Kampfbogen">
+      FIGHT
+    </p-tabPanel>
 
-    <p-column field="probe" header="Probe" [style]="{width:'200px'}"></p-column>
-    <p-column field="be" header="BE" [style]="{width:'100px'}"></p-column>
-    <p-column field="value" header="Wert" [style]="{width:'50px'}"></p-column>
-  </p-dataTable>
+  </p-tabView>
+
 
 </div>
 

@@ -43,10 +43,6 @@ export class HeldDetailComponent implements OnInit {
     reader.readAsText(files[0]);
   }
 
-  getMainAttributes() : Attribut[] {
-    let ret = this.held.attribute.slice(0,9);
-    ret.push(this.held.attribute[13]);
-    return ret;
-  }
+
 
 }
