@@ -7,6 +7,7 @@ import javax.persistence.Table;
 @Table(name="sprachen")
 public class SprachEntity extends SprachBaseEntity{
 
+	
 	public String getKategorie() {
 		return "Sprachen";
 	}

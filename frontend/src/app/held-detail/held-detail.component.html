@@ -29,19 +29,19 @@
     </tr>
     <tr>
       <td colspan="5" class="noborder">Geschlecht: {{held.geschlecht}}</td>
-      <td colspan="5" class="noborder">Geburtsdatum : {{held.geburtsdatum}}</td>
+      <td colspan="5" class="noborder">Geburtsdatum : {{held.getGeburtstag()}}</td>
     </tr>
     <tr>
-      <td colspan="5" class="noborder">Größe: {{held.groesse}}</td>
-      <td colspan="5" class="noborder">Gewicht: {{held.gewicht}}</td>
+      <td colspan="5" class="noborder">Größe: {{held.groesse /2}} Finger ({{held.groesse}} cm)</td>
+      <td colspan="5" class="noborder">Gewicht: {{held.gewicht}} Stein</td>
     </tr>
     <tr>
-      <td colspan="5" class="noborder">Haarfarbe: {{held.haarfarbe}}</td>
-      <td colspan="5" class="noborder">Augenfarbe: {{held.augenfarbe}}</td>
+      <td colspan="5" class="noborder">Haarfarbe: {{held.aussehen.haarfarbe}}</td>
+      <td colspan="5" class="noborder">Augenfarbe: {{held.aussehen.augenfarbe}}</td>
     </tr>
     <tr>
-      <td colspan="5" class="noborder">Stand: {{held.stand}}</td>
-      <td colspan="5" class="noborder">Titel : {{held.titel}}</td>
+      <td colspan="5" class="noborder">Stand: {{held.aussehen.stand}}</td>
+      <td colspan="5" class="noborder">Titel : {{held.aussehen.titel}}</td>
     </tr>
 
   </table>
