@@ -10,6 +10,8 @@ import {TalentService} from "./talent.service";
 import {TalentData} from "../data/talentdata";
 import {Observable, Observer} from 'rxjs/Rx'
 import {Aussehen} from "../data/aussehen";
+import {SprachTalent} from "../data/sprachtalent";
+import {KampfTalent} from "../data/kampftalent";
 
 @Injectable()
 export class HeldenService {
@@ -198,7 +200,8 @@ export class HeldenService {
   private extractTalente(xmlDoc: Document, callback: (data: Talent[]) => void) : Talent[] {
     let nodes = xmlDoc.getElementsByTagName('talent')
     let talente = [];
-
+    let sprachtalente : SprachTalent[] = [];
+    let kampftalente : KampfTalent[] = [];
     let observableBatch : Observable<TalentData>[] = [];
     for(let i=0; i<nodes.length;i++) {
       let node = nodes[i];
@@ -213,6 +216,12 @@ export class HeldenService {
       observableBatch.push(obs);
       obs.subscribe(
         (data: TalentData) => {
+          if(data.kategorie == 'Kampf') {
+
+          } else if(data.kategorie == 'Sprache') {
+
+
+          }
           talent.komplexitaet = data.komplexitaet;
           talent.kategorie = data.kategorie;
           if(i==nodes.length-1) {
