@@ -9,6 +9,8 @@ import {Attribut} from "../../data/attribut";
 })
 export class SheetOverviewComponent implements OnInit {
 
+  public filter: string;
+
   constructor() { }
 
   @Input()

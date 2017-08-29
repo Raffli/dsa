@@ -180,7 +180,7 @@ create table sprachen(
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	name varchar(40) NOT NULL UNIQUE,
 	lernkomplexitaet varchar(5) NOT NULL,
-    komplexitaet varchar(5) NOT NULL,
+    komplexitaet INTEGER NOT NULL,
     PRIMARY KEY(id)
 );
 
@@ -227,7 +227,7 @@ create table schriften(
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	name varchar(40) NOT NULL UNIQUE,
 	lernkomplexitaet varchar(5) NOT NULL,
-    komplexitaet varchar(5) NOT NULL,
+    komplexitaet INTEGER NOT NULL,
     PRIMARY KEY(id)
 );
 

@@ -37,9 +37,41 @@
   </tr>
 
 </table>
+{{filter}}
 
+<div class="col-sm-12 col-lg-6">
+  <h5>Kampftalente</h5>
+  <table>
+    <tr *ngFor="let talent of held.talente.kampftalente">
+      <td>{{talent.name}}</td>
+      <td>{{talent.be}}</td>
+      <td>{{talent.at}}</td>
+      <td>{{talent.pa}}</td>
+    </tr>
+  </table>
 
-<p-dataTable [value]="held.talente">
+</div>
+<div class="col-sm-12 col-lg-6">
+  <h5>Sprachen</h5>
+  <table>
+    <tr *ngFor="let talent of held.talente.sprachen">
+      <td>{{talent.name}}</td>
+      <td>{{talent.komplexitaet}}</td>
+      <td>{{talent.value}}</td>
+    </tr>
+  </table>
+
+</div>
+<input type="text" [(ngModel)]="filter" />
+
+<p-dataTable [value]="held.talente.kampftalente">
+  <p-column field="name" header="Name" ></p-column>
+  <p-column field="be" header="BE" [style]="{width:'100px'}"></p-column>
+  <p-column field="at" header="AT" [style]="{width:'50px'}"></p-column>
+  <p-column field="pa" header="PA" [style]="{width:'50px'}"></p-column>
+</p-dataTable>
+
+<p-dataTable [value]="held.talente.talente">
   <p-column field="name" header="Name" ></p-column>
   <p-column field="kategorie" header="kategorie" ></p-column>
 
@@ -47,3 +79,16 @@
   <p-column field="be" header="BE" [style]="{width:'100px'}"></p-column>
   <p-column field="value" header="Wert" [style]="{width:'50px'}"></p-column>
 </p-dataTable>
+<h3>Sprachen</h3>
+<p-dataTable [value]="held.talente.sprachen">
+  <p-column field="name" header="Name" ></p-column>
+  <p-column field="komplexitaet" header="Komplexitaet" [style]="{width:'100px'}"></p-column>
+  <p-column field="value" header="Wert" [style]="{width:'50px'}"></p-column>
+</p-dataTable>
+<h3>Schriften</h3>
+<p-dataTable [value]="held.talente.schriften">
+  <p-column field="name" header="Name" ></p-column>
+  <p-column field="komplexitaet" header="Komplexitaet" [style]="{width:'100px'}"></p-column>
+  <p-column field="value" header="Wert" [style]="{width:'50px'}"></p-column>
+</p-dataTable>
+

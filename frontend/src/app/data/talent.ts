@@ -8,7 +8,7 @@ export class Talent {
   probe: string;
   value: number;
   be: string;
-  komplexitaet: string;
+  komplexitaet: number;
   kategorie: string;
 
 

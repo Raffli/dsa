@@ -12,6 +12,7 @@ import {Observable, Observer} from 'rxjs/Rx'
 import {Aussehen} from "../data/aussehen";
 import {SprachTalent} from "../data/sprachtalent";
 import {KampfTalent} from "../data/kampftalent";
+import {Talente} from "../data/talente";
 
 @Injectable()
 export class HeldenService {
@@ -53,9 +54,8 @@ export class HeldenService {
     let groesseGewicht = this.extractGewichtGroesse(xmlDoc);
     let aussehen = this.extractAussehen(xmlDoc);
 
-    this.extractTalente(xmlDoc, (talente:Talent[]) => {
-      let hero = new Held(rasse, geschlecht, profession, apTotal, apFree, name, attribute, vorteile, sonderfertigkeiten,
-        talente, kultur, groesseGewicht.groesse, groesseGewicht.gewicht, aussehen);
+    this.extractTalente(xmlDoc, (talente: Talente) => {
+      let hero = new Held(rasse, geschlecht, profession, apTotal, apFree, name, attribute, vorteile, sonderfertigkeiten, kultur, groesseGewicht.groesse, groesseGewicht.gewicht, aussehen, talente);
       callback(hero);
     });
 
@@ -197,35 +197,49 @@ export class HeldenService {
     return sonderfertigkeiten;
   }
 
-  private extractTalente(xmlDoc: Document, callback: (data: Talent[]) => void) : Talent[] {
+  private extractTalente(xmlDoc: Document, callback: (talente: Talente) => void) : Talent[] {
     let nodes = xmlDoc.getElementsByTagName('talent')
     let talente = [];
+    let schriftTalente: SprachTalent[] = [];
     let sprachtalente : SprachTalent[] = [];
     let kampftalente : KampfTalent[] = [];
     let observableBatch : Observable<TalentData>[] = [];
+    const talentData : Talente = new Talente(sprachtalente, schriftTalente, talente, kampftalente)
     for(let i=0; i<nodes.length;i++) {
       let node = nodes[i];
       let lernmethode = node.getAttribute('lernmethode');
       let name = node.getAttribute('name');
-
       let probe = node.getAttribute('probe');
       let value = parseInt(node.getAttribute('value'));
       let be = node.getAttribute('be');
-      let talent = new Talent(lernmethode, name, probe, value, be);
+
       let obs = this.talentService.getTalentByName(name);
       observableBatch.push(obs);
       obs.subscribe(
         (data: TalentData) => {
-          if(data.kategorie == 'Kampf') {
+          if(data.kategorie === 'Kampf') {
+            const talent = new KampfTalent(name, lernmethode, value, be, value, value)
 
-          } else if(data.kategorie == 'Sprache') {
+            kampftalente.push(talent);
+          } else if(data.kategorie === 'Sprachen') {
+            const talent: SprachTalent =  data as SprachTalent;
+            talent.value = value;
+            sprachtalente.push(talent);
 
+
+          } else if(data.kategorie == 'Schrift') {
+            const talent: SprachTalent =  data as SprachTalent;
+            talent.value = value;
+            schriftTalente.push(talent);
+          } else {
+            const talent = new Talent(lernmethode, name, probe, value, be);
+            talent.komplexitaet = data.komplexitaet;
+            talent.kategorie = data.kategorie;
+            talente.push(talent);
 
           }
-          talent.komplexitaet = data.komplexitaet;
-          talent.kategorie = data.kategorie;
-          if(i==nodes.length-1) {
-            callback(talente);
+          if (i === nodes.length -1) {
+            callback(talentData);
 
           }
         }, (error:any) => {
@@ -243,7 +257,7 @@ export class HeldenService {
 
 
 
-      talente.push(talent);
+
 
     }
 

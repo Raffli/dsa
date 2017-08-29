@@ -7,14 +7,15 @@ import 'rxjs/add/operator/catch'
 import {Talent} from "../data/talent";
 import {TalentData} from "../data/talentdata";
 import {Http, Response} from "@angular/http"
+import {RestService} from "./rest.service";
 
 @Injectable()
 export class TalentService {
 
-  constructor(private http:Http) { }
+  constructor(private rest: RestService) { }
 
-   public getTalentByName(name: string) : Observable<TalentData> {
-    return this.http.get('/api/talente/byname?name='+name).map((res:Response) =>res.json())
+   public getTalentByName(name: string): Observable<TalentData> {
+    return this.rest.get('/api/talente/byname?name=' + name).map((res:Response) =>res.json())
       .catch((error:any) => Observable.throw(error))
   }
 }

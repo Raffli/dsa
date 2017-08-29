@@ -4,6 +4,6 @@
 export class TalentData {
   id : number;
   name: string;
-  komplexitaet: string;
+  komplexitaet: number;
   kategorie: string;
 }

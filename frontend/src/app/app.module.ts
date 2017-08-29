@@ -20,6 +20,8 @@ import {MenuModule, MenubarModule, DataTableModule, SharedModule} from 'primeng/
 import {TalentService} from "./service/talent.service";
 import {TabViewModule} from "primeng/components/tabview/tabview";
 import { SheetOverviewComponent } from './held/sheet-overview/sheet-overview.component';
+import {RestService} from "./service/rest.service";
+import {FormsModule} from "@angular/forms";
 
 const appRoutes: Routes = [
   {
@@ -45,13 +47,13 @@ const appRoutes: Routes = [
     SheetOverviewComponent
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule, MenuModule, MenubarModule, DataTableModule, SharedModule, HttpModule, TabViewModule,
+    BrowserModule, FormsModule, BrowserAnimationsModule, MenuModule, MenubarModule, DataTableModule, SharedModule, HttpModule, TabViewModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }
     )
   ],
-  providers: [AttributService, HeldenService, TalentService],
+  providers: [AttributService, HeldenService, TalentService, RestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
