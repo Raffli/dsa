@@ -6,6 +6,7 @@ import {Aussehen} from "./aussehen";
 import {Monate} from "./monate";
 import {SprachTalent} from "./sprachtalent";
 import {Talente} from "./talente";
+import {Ausruestung} from "./ausruestung/Ausruestung";
 /**
  * Created by Patrick on 11.07.2017.
  */
@@ -20,7 +21,7 @@ export class Held {
               public name: string, public attribute: Attribut[], public vorteile: Vorteil[],
               public sonderfertigkeiten: Sonderfertigkeit[], public kultur: string,
               public groesse: number, public gewicht: number, public aussehen: Aussehen,
-              public talente: Talente) {
+              public talente: Talente, public ausruestung: Ausruestung) {
   }
 
   public getGeburtstag(): string {

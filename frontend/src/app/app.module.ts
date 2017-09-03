@@ -11,17 +11,18 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HeldenbogenComponent } from './heldenbogen/heldenbogen.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { HeldDetailComponent } from './held-detail/held-detail.component';
-import {AttributService} from "./service/attribut.service";
-import {HeldenService} from "./service/helden.service";
+import { HeldDetailComponent } from './heldenbogen/held-detail/held-detail.component';
+import {AttributService} from './service/attribut.service';
+import {HeldenService} from './service/helden.service';
 
 
 import {MenuModule, MenubarModule, DataTableModule, SharedModule} from 'primeng/primeng';
 import {TalentService} from "./service/talent.service";
 import {TabViewModule} from "primeng/components/tabview/tabview";
-import { SheetOverviewComponent } from './held/sheet-overview/sheet-overview.component';
+import { SheetOverviewComponent } from './heldenbogen/sheet-overview/sheet-overview.component';
 import {RestService} from "./service/rest.service";
 import {FormsModule} from "@angular/forms";
+import { KampfbogenComponent } from './heldenbogen/kampfbogen/kampfbogen/kampfbogen.component';
 
 const appRoutes: Routes = [
   {
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
     HomeComponent,
     PageNotFoundComponent,
     HeldDetailComponent,
-    SheetOverviewComponent
+    SheetOverviewComponent,
+    KampfbogenComponent
   ],
   imports: [
     BrowserModule, FormsModule, BrowserAnimationsModule, MenuModule, MenubarModule, DataTableModule, SharedModule, HttpModule, TabViewModule,

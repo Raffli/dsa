@@ -1,0 +1,25 @@
+
+table {
+  border-collapse: collapse;
+  width:100%;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+td {
+  height: 40px;
+  text-align: center;
+  min-width: 10px;
+
+}
+td.noborder {
+  border:none !important;
+}
+
+td.noheight {
+  height: 0px !important;
+}
+
+

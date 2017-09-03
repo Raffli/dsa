@@ -256,3 +256,8 @@ INSERT INTO schriften (name, komplexitaet, lernkomplexitaet) VALUES
 	('Ur-Tulamidya ', 8, 'A'),	
 	('Zhayad', 8, 'A');
 	
+	create table helden(
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	xml TEXT NOT NULL,
+	name varchar(50) UNIQUE NOT NULL
+);

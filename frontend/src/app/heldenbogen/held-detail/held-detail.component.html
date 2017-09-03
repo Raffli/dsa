@@ -8,14 +8,11 @@
 
 <div *ngIf="held!==undefined" class="bordered">
   <p-tabView>
-    <p-tabPanel header="Übersicht">
-
-      <app-sheet-overview [held]="held"></app-sheet-overview>
-
-
-    </p-tabPanel>
     <p-tabPanel header="Kampfbogen">
-      FIGHT
+      <app-kampfbogen [held]="held"></app-kampfbogen>
+    </p-tabPanel>
+    <p-tabPanel header="Übersicht">
+      <app-sheet-overview [held]="held"></app-sheet-overview>
     </p-tabPanel>
 
   </p-tabView>

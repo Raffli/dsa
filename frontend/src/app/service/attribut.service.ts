@@ -18,11 +18,18 @@ export class AttributService {
     this.mappings["Charisma"] ="CH";
     this.mappings["Konstitution"] ="KO";
     this.mappings["Magieresistenz"] ="MR";
+    this.mappings["at"] ="Attacke-Basiswert";
+    this.mappings["pa"] ="Parade-Basiswert";
+    this.mappings["ini"] ="Initiative-Basiswert";
+    this.mappings["fk"] ="Fernkampf-Basiswert";
+
+
 
   }
 
 
   getAttributShortcut(name: string){
+
     return this.mappings[name];
   }
 }

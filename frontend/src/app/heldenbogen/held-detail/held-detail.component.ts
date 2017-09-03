@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {Held} from "../data/held";
-import {HeldenService} from "../service/helden.service";
-import {Attribut} from "../data/attribut";
+import {Held} from "../../data/held";
+import {HeldenService} from "../../service/helden.service";
+import {Attribut} from "../../data/attribut";
 
 @Component({
   selector: 'held-detail',

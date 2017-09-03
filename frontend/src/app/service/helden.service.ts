@@ -13,6 +13,8 @@ import {Aussehen} from "../data/aussehen";
 import {SprachTalent} from "../data/sprachtalent";
 import {KampfTalent} from "../data/kampftalent";
 import {Talente} from "../data/talente";
+import {AtPaPair} from "../data/AtPaPair";
+import {Ausruestung} from "../data/ausruestung/Ausruestung";
 
 @Injectable()
 export class HeldenService {
@@ -37,25 +39,25 @@ export class HeldenService {
   loadHeld(xml : string, callback : (held:Held) => void):void {
 
 
-    let parser = new DOMParser();
-    let xmlDoc = parser.parseFromString(xml, 'text/xml');
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xml, 'text/xml');
 
-    let profession = this.extractProfession(xmlDoc);
-    let rasse = this.extractRasse(xmlDoc);
-    let geschlecht = this.extractGeschlecht(xmlDoc);
-    let alter = this.extractAlter(xmlDoc);
-    let apTotal = this.extractApTotal(xmlDoc);
-    let apFree = this.extractApFree(xmlDoc);
-    let name = this.extractName(xmlDoc);
-    let attribute = this.extractAttribute(xmlDoc);
-    let vorteile = this.extractVorteile(xmlDoc);
-    let sonderfertigkeiten = this.extractSonderfertigkeiten(xmlDoc);
-    let kultur = this.extractKultur(xmlDoc);
-    let groesseGewicht = this.extractGewichtGroesse(xmlDoc);
-    let aussehen = this.extractAussehen(xmlDoc);
-
-    this.extractTalente(xmlDoc, (talente: Talente) => {
-      let hero = new Held(rasse, geschlecht, profession, apTotal, apFree, name, attribute, vorteile, sonderfertigkeiten, kultur, groesseGewicht.groesse, groesseGewicht.gewicht, aussehen, talente);
+    const profession = this.extractProfession(xmlDoc);
+    const rasse = this.extractRasse(xmlDoc);
+    const geschlecht = this.extractGeschlecht(xmlDoc);
+    const alter = this.extractAlter(xmlDoc);
+    const apTotal = this.extractApTotal(xmlDoc);
+    const apFree = this.extractApFree(xmlDoc);
+    const name = this.extractName(xmlDoc);
+    const attribute = this.extractAttribute(xmlDoc);
+    const vorteile = this.extractVorteile(xmlDoc);
+    const sonderfertigkeiten = this.extractSonderfertigkeiten(xmlDoc);
+    const kultur = this.extractKultur(xmlDoc);
+    const groesseGewicht = this.extractGewichtGroesse(xmlDoc);
+    const aussehen = this.extractAussehen(xmlDoc);
+    const ausruestung = this.extractAusruestung(xmlDoc);
+    this.extractTalente(xmlDoc, attribute[17].value, (talente: Talente) => {
+      const hero = new Held(rasse, geschlecht, profession, apTotal, apFree, name, attribute, vorteile, sonderfertigkeiten, kultur, groesseGewicht.groesse, groesseGewicht.gewicht, aussehen, talente, ausruestung);
       callback(hero);
     });
 
@@ -163,6 +165,14 @@ export class HeldenService {
     return attribute;
   }
 
+  private extractAusruestung(xmlDoc: Document): Ausruestung {
+
+    const nodes = xmlDoc.getElementsByTagName('heldenausruestung');
+    
+
+    return null;
+  }
+
   private extractVorteile(xmlDoc: Document) : Vorteil[] {
     let nodes = xmlDoc.getElementsByTagName('vorteil')
     let vorteile = [];
@@ -197,15 +207,16 @@ export class HeldenService {
     return sonderfertigkeiten;
   }
 
-  private extractTalente(xmlDoc: Document, callback: (talente: Talente) => void) : Talent[] {
+  private extractTalente(xmlDoc: Document, fkBasis: number, callback: (talente: Talente) => void) : Talent[] {
     let nodes = xmlDoc.getElementsByTagName('talent')
     let talente = [];
     let schriftTalente: SprachTalent[] = [];
-    let sprachtalente : SprachTalent[] = [];
-    let kampftalente : KampfTalent[] = [];
-    let observableBatch : Observable<TalentData>[] = [];
-    const talentData : Talente = new Talente(sprachtalente, schriftTalente, talente, kampftalente)
-    for(let i=0; i<nodes.length;i++) {
+    let sprachtalente: SprachTalent[] = [];
+    let kampftalente: KampfTalent[] = [];
+    let observableBatch: Observable<TalentData>[] = [];
+    const kampfMeta = this.buildKampfTalente(xmlDoc);
+    const talentData: Talente = new Talente(sprachtalente, schriftTalente, talente, kampftalente)
+    for (let i = 0; i < nodes.length; i++) {
       let node = nodes[i];
       let lernmethode = node.getAttribute('lernmethode');
       let name = node.getAttribute('name');
@@ -218,14 +229,20 @@ export class HeldenService {
       obs.subscribe(
         (data: TalentData) => {
           if(data.kategorie === 'Kampf') {
-            const talent = new KampfTalent(name, lernmethode, value, be, value, value)
+            const atpa = kampfMeta[name];
+            let talent: KampfTalent;
+            if (atpa === undefined) {
+              // Fernkampf Talent
+              talent = new KampfTalent(name, lernmethode, value, be, fkBasis + value, null)
+            } else {
+              talent = new KampfTalent(name, lernmethode, value, be, atpa.at, atpa.pa)
+            }
 
             kampftalente.push(talent);
           } else if(data.kategorie === 'Sprachen') {
             const talent: SprachTalent =  data as SprachTalent;
             talent.value = value;
             sprachtalente.push(talent);
-
 
           } else if(data.kategorie == 'Schrift') {
             const talent: SprachTalent =  data as SprachTalent;
@@ -262,6 +279,20 @@ export class HeldenService {
     }
 
     return talente;
+  }
+
+  private buildKampfTalente(xml: Document): {[key:string]: AtPaPair} {
+    const values = {};
+    const nodes = xml.getElementsByTagName('kampfwerte')
+    for (let i = 0 ; i < nodes.length; i++) {
+      const node = nodes[i];
+      const name = node.getAttribute('name');
+      const at = parseInt(node.childNodes[0].attributes.getNamedItem('value').value);
+      const pa = parseInt(node.childNodes[1].attributes.getNamedItem('value').value);
+      values[name] = new AtPaPair(at, pa);
+
+    }
+    return values;
   }
 
 

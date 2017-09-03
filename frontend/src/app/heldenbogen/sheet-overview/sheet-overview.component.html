@@ -1,3 +1,4 @@
+
 <table>
   <tr>
     <td *ngFor="let attribut of getMainAttributes()">
@@ -37,32 +38,81 @@
   </tr>
 
 </table>
-{{filter}}
+<input type="text" [(ngModel)]="filter" (ngModelChange)="filterChanged()"/>
 
 <div class="col-sm-12 col-lg-6">
-  <h5>Kampftalente</h5>
-  <table>
-    <tr *ngFor="let talent of held.talente.kampftalente">
-      <td>{{talent.name}}</td>
-      <td>{{talent.be}}</td>
-      <td>{{talent.at}}</td>
-      <td>{{talent.pa}}</td>
-    </tr>
-  </table>
+  <div *ngIf="filteredTalente.kampftalente.length>0">
+    <h5>Kampftalente</h5>
+    <table>
+      <tr>
+        <td>Name</td>
+        <td>BE</td>
+        <td>AT</td>
+        <td>PA</td>
+      </tr>
+      <tr *ngFor="let talent of filteredTalente.kampftalente">
+        <td>{{talent.name}}</td>
+        <td>{{talent.be}}</td>
+        <td>{{talent.at}}</td>
+        <td>{{talent.pa}}</td>
+      </tr>
+    </table>
+
+  </div>
+  <div *ngIf="filteredTalente.sprachen.length>0">
+    <h5>Sprachen</h5>
+    <table>
+      <tr>
+        <td>Name</td>
+        <td>Komplexität</td>
+        <td>Wert</td>
+      </tr>
+      <tr *ngFor="let talent of filteredTalente.sprachen">
+        <td>{{talent.name}}</td>
+        <td>{{talent.komplexitaet}}</td>
+        <td>{{talent.value}}</td>
+      </tr>
+    </table>
+
+  </div>
+  <div *ngIf="filteredTalente.schriften.length>0">
+    <h5>Schriften</h5>
+    <table>
+      <tr>
+        <td>Name</td>
+        <td>Komplexität</td>
+        <td>Wert</td>
+      </tr>
+      <tr *ngFor="let talent of filteredTalente.schriften">
+        <td>{{talent.name}}</td>
+        <td>{{talent.komplexitaet}}</td>
+        <td>{{talent.value}}</td>
+      </tr>
+    </table>
+
+  </div>
 
 </div>
-<div class="col-sm-12 col-lg-6">
-  <h5>Sprachen</h5>
+<div class="col-sm-12 col-lg-6" *ngIf="filteredTalente.talente.length>0">
+  <h5>Talente</h5>
   <table>
-    <tr *ngFor="let talent of held.talente.sprachen">
+    <tr>
+      <td>Name</td>
+      <td>Kategorie</td>
+      <td>Behinderung</td>
+      <td>Probe</td>
+      <td>Wert</td>
+    </tr>
+    <tr *ngFor="let talent of filteredTalente.talente">
       <td>{{talent.name}}</td>
-      <td>{{talent.komplexitaet}}</td>
+      <td>{{talent.kategorie}}</td>
+      <td>{{talent.be}}</td>
+      <td>{{talent.probe}}</td>
       <td>{{talent.value}}</td>
     </tr>
-  </table>
 
+  </table>
 </div>
-<input type="text" [(ngModel)]="filter" />
 
 <p-dataTable [value]="held.talente.kampftalente">
   <p-column field="name" header="Name" ></p-column>
