@@ -5,7 +5,4 @@ export class TpKK {
   public minKK: number;
   public mod: number;
 
-  public toString(): string {
-    return this.minKK + '/' + this.mod
-  }
 }

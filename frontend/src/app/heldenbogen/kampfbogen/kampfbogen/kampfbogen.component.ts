@@ -1,6 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Held} from "../../../data/held";
 import {Attribut} from "../../../data/attribut";
+import {AusruestungsSet} from "../../../data/ausruestung/AusruestungsSet";
+import {Waffe} from "../../../data/ausruestung/Waffe";
+import {TpKK} from "../../../data/ausruestung/tpkk";
 
 @Component({
   selector: 'app-kampfbogen',
@@ -26,4 +29,7 @@ export class KampfbogenComponent implements OnInit {
     return ret;
   }
 
+  public getPrimaryAusruestungsSet(): AusruestungsSet {
+    return this.held.ausruestung.sets[0];
+  }
 }

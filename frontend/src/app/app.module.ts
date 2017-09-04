@@ -23,6 +23,7 @@ import { SheetOverviewComponent } from './heldenbogen/sheet-overview/sheet-overv
 import {RestService} from "./service/rest.service";
 import {FormsModule} from "@angular/forms";
 import { KampfbogenComponent } from './heldenbogen/kampfbogen/kampfbogen/kampfbogen.component';
+import {AusruestungService} from "./service/ausruestung.service";
 
 const appRoutes: Routes = [
   {
@@ -55,7 +56,7 @@ const appRoutes: Routes = [
       { enableTracing: false }
     )
   ],
-  providers: [AttributService, HeldenService, TalentService, RestService],
+  providers: [AttributService, HeldenService, TalentService, RestService, AusruestungService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

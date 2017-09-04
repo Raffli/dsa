@@ -5,3 +5,17 @@
     </td>
   </tr>
 </table>
+
+<table>
+  <tr *ngFor="let waffe of getPrimaryAusruestungsSet().waffen">
+    <td>{{waffe.name}}</td>
+    <td>{{waffe.typ}}/BE{{waffe.be}}</td>
+    <td>{{waffe.distanzklasse}}</td>
+    <td>{{waffe.schaden.w6}}W+{{waffe.schaden.fix}}</td>
+    <td>{{(waffe.tpKK.minKK)}}/{{waffe.tpKK.mod}}</td>
+    <td>{{waffe.ini}}</td>
+    <td>{{waffe.wm.at}} / {{waffe.wm.pa}}</td>
+    <td>{{waffe.totalSchaden.w6}}W+{{waffe.totalSchaden.fix}}</td>
+
+  </tr>
+</table>

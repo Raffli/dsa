@@ -246,7 +246,7 @@ INSERT INTO schriften (name, komplexitaet, lernkomplexitaet) VALUES
 	('Gjalskisch', 8, 'A'),
 	('Hjaldingsche Runen', 8, 'A'),
 	('Imperiale Zeichen', 8, 'A'),
-	('Isdira / Asdharia', 8, 'A'),
+	('Isdira/Asdharia', 8, 'A'),
 	('Kusliker Zeichen', 8, 'A'),	
 	('Mahrische Glyphen', 8, 'B'),	
 	('Nanduria', 8, 'A'),	
