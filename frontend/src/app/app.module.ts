@@ -24,6 +24,7 @@ import {RestService} from "./service/rest.service";
 import {FormsModule} from "@angular/forms";
 import { KampfbogenComponent } from './heldenbogen/kampfbogen/kampfbogen/kampfbogen.component';
 import {AusruestungService} from "./service/ausruestung.service";
+import {KampfTalentService} from "./service/kampf-talent.service";
 
 const appRoutes: Routes = [
   {
@@ -56,7 +57,7 @@ const appRoutes: Routes = [
       { enableTracing: false }
     )
   ],
-  providers: [AttributService, HeldenService, TalentService, RestService, AusruestungService],
+  providers: [AttributService, HeldenService, TalentService, RestService, AusruestungService, KampfTalentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
