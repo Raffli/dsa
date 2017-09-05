@@ -22,7 +22,9 @@ td.noheight {
   height: 0px !important;
 }
 
-
+.bottomDistanced {
+  margin-bottom: 10px;
+}
 
 /* CSS FOR ROUND EDGES */
 table {

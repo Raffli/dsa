@@ -26,6 +26,8 @@ public class TalentEntity{
 	
 	private String komplexitaet;
 	
+	private String be;
+	
 	@ManyToOne
 	@JoinColumn(name = "kategorie_id")
 	@JsonSerialize(using = TalentSerializer.class)

@@ -8,4 +8,5 @@ export class SprachTalent {
   lernkomplexitaet: number;
   name: string;
   value: number;
+  be: string;
 }

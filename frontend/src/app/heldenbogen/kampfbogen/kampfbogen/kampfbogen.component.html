@@ -1,4 +1,4 @@
-<table>
+<table class="bottomDistanced">
   <tr>
     <td *ngFor="let attribut of getCombatAttributes()">
       {{attribut.shortcut}} {{attribut.value}}
@@ -6,7 +6,7 @@
   </tr>
 </table>
 
-<table>
+<table class="bottomDistanced">
   <tr>
     <td>Name</td>
     <td>Typ /BE</td>
@@ -32,4 +32,31 @@
     <td>{{waffe.totalSchaden.w6}}W+{{waffe.totalSchaden.fix}}</td>
 
   </tr>
+</table>
+
+
+<table>
+  <tr>
+    <td>Fernkampfwaffe</td>
+    <td>TYP/eBE</td>
+    <td>TP</td>
+    <td>Entfernung</td>
+    <td>TP/Entfernung</td>
+    <td>FK</td>
+    <td>Anzahl Geschosse</td>
+  </tr>
+
+  <tr *ngFor="let waffe of getPrimaryAusruestungsSet().fernkampfWafffen">
+    <td>{{waffe.name}}</td>
+    <td>{{waffe.typ}} / {{waffe.be}}</td>
+    <td>{{waffe.schaden.w6}}W+{{waffe.schaden.fix}}</td>
+    <td>{{waffe.entfernung}}</td>
+    <td>{{waffe.tpentfernung}}</td>
+    <td>{{waffe.fk}}</td>
+    <td>---</td>
+
+
+
+  </tr>
+
 </table>

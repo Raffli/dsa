@@ -9,115 +9,116 @@ create table talente(
 	name varchar(40) NOT NULL UNIQUE,
 	kategorie_id BIGINT NOT NULL,
 	komplexitaet varchar(5) NOT NULL,
+	be varchar(5),
     PRIMARY KEY(id)
 );
 
 
 INSERT INTO talent_kategorien VALUES(0, 'Körperlich');
 
-INSERT INTO talente (name, kategorie_id, komplexitaet) VALUES 
-	('Akrobatik', 0, 'D'),
-	('Athletik', 0, 'D'),
-	('Fliegen', 0, 'D'),
-	('Gaukeleien', 0, 'D'),
-	('Klettern', 0, 'D'),
-	('Körperbeherrschung', 0, 'D'),
-	('Reiten', 0, 'D'),
-	('Schleichen', 0, 'D'),
-	('Schwimmen', 0, 'D'),
-	('Selbstbeherrschung', 0, 'D'),
-	('Sich verstecken', 0, 'D'),
-	('Singen', 0, 'D'),
-	('Sinnenschärfe', 0, 'D'),
-	('Skifahren', 0, 'D'),
-	('Stimmen Imitieren', 0, 'D'),
-	('Tanzen', 0, 'D'),
-	('Taschendiebstahl', 0, 'D'),
-	('Zechen', 0, 'D');
+INSERT INTO talente (name, kategorie_id, komplexitaet, be) VALUES 
+	('Akrobatik', 0, 'D', 'BEx2'),
+	('Athletik', 0, 'D', 'BEx2'),
+	('Fliegen', 0, 'D', 'BE'),
+	('Gaukeleien', 0, 'D', 'BEx2'),
+	('Klettern', 0, 'D', 'BEx2'),
+	('Körperbeherrschung', 0, 'D', 'BEx2'),
+	('Reiten', 0, 'D', ' BE-2'),
+	('Schleichen', 0, 'D', 'BE'),
+	('Schwimmen', 0, 'D', 'BEx2'),
+	('Selbstbeherrschung', 0, 'D', ''),
+	('Sich verstecken', 0, 'D', 'BE-2'),
+	('Singen', 0, 'D', 'BE-3'),
+	('Sinnenschärfe', 0, 'D', ''),
+	('Skifahren', 0, 'D', 'BE-2'),
+	('Stimmen Imitieren', 0, 'D', 'BE-4'),
+	('Tanzen', 0, 'D', 'BEx2'),
+	('Taschendiebstahl', 0, 'D', 'BEx2'),
+	('Zechen', 0, 'D', '');
 
 INSERT INTO talent_kategorien VALUES(1, 'Gesellschaftlich');
 
-INSERT INTO talente (name, kategorie_id, komplexitaet) VALUES 
-	('Betören', 1, 'B'),
-	('Etikette', 1, 'B'),
-	('Gassenwissen', 1, 'B'),
-	('Lehren', 1, 'B'),
-	('Menschenkenntnis', 1, 'B'),
-	('Schauspielerei', 1, 'B'),
-	('Schriftlicher Ausdruck', 1, 'B'),
-	('Sich Verkleiden', 1, 'B'),
-	('Überreden', 1, 'B'),
-	('Überzeugen', 1, 'B');
+INSERT INTO talente (name, kategorie_id, komplexitaet, be) VALUES 
+	('Betören', 1, 'B', 'BE-2'),
+	('Etikette', 1, 'B', 'BE-2'),
+	('Gassenwissen', 1, 'B', 'BE-4'),
+	('Lehren', 1, 'B', ''),
+	('Menschenkenntnis', 1, 'B', ''),
+	('Schauspielerei', 1, 'B', ''),
+	('Schriftlicher Ausdruck', 1, 'B', ''),
+	('Sich Verkleiden', 1, 'B', ''),
+	('Überreden', 1, 'B', ''),
+	('Überzeugen', 1, 'B', '');
 
 INSERT INTO talent_kategorien VALUES(2, 'Natur');
 
-INSERT INTO talente (name, kategorie_id, komplexitaet) VALUES 
-	('Fährtensuchen', 2, 'B'),
-	('Fallenstellen', 2, 'B'),
-	('Fesseln/Entfesseln', 2, 'B'),
-	('Fischen/Angeln', 2, 'B'),
-	('Orientierung', 2, 'B'),
-	('Wettervorhersage', 2, 'B'),
-	('Wildnisleben', 2, 'B');
+INSERT INTO talente (name, kategorie_id, komplexitaet, be) VALUES 
+	('Fährtensuchen', 2, 'B', ''),
+	('Fallenstellen', 2, 'B', ''),
+	('Fesseln/Entfesseln', 2, 'B', ''),
+	('Fischen/Angeln', 2, 'B', ''),
+	('Orientierung', 2, 'B', ''),
+	('Wettervorhersage', 2, 'B', ''),
+	('Wildnisleben', 2, 'B', '');
 
 	
 INSERT INTO talent_kategorien VALUES(3, 'Wissen');
 
-INSERT INTO talente (name, kategorie_id, komplexitaet) VALUES
-	('Anatomie', 3, 'B'),
-	('Baukunst', 3, 'B'),
-	('Brett-/Kartenspiel', 3, 'B'),
-	('Geografie', 3, 'B'),
-	('Geschichtswissen', 3, 'B'),
-	('Gesteinskunde', 3, 'B'),
-	('Götter und Kulte', 3, 'B'),
-	('Heraldik', 3, 'B'),
-	('Hüttenkunde', 3, 'B'),
-	('Kriegskunst', 3, 'B'),
-	('Kryptographie', 3, 'B'),
-	('Magiekunde', 3, 'B'),
-	('Mechanik', 3, 'B'),
-	('Pflanzenkunde', 3, 'B'),
-	('Philosophie', 3, 'B'),
-	('Rechnen', 3, 'B'),
-	('Rechtskunde', 3, 'B'),
-	('Sagen und Legenden', 3, 'B'),
-	('Schätzen', 3, 'B'),
-	('Sprachenkunde', 3, 'B'),
-	('Staatskunst', 3, 'B'),
-	('Sternkunde', 3, 'B'),
-	('Tierkunde', 3, 'B');
+INSERT INTO talente (name, kategorie_id, komplexitaet, be) VALUES
+	('Anatomie', 3, 'B', ''),
+	('Baukunst', 3, 'B', ''),
+	('Brett-/Kartenspiel', 3, 'B', ''),
+	('Geografie', 3, 'B', ''),
+	('Geschichtswissen', 3, 'B', ''),
+	('Gesteinskunde', 3, 'B', ''),
+	('Götter und Kulte', 3, 'B', ''),
+	('Heraldik', 3, 'B', ''),
+	('Hüttenkunde', 3, 'B', ''),
+	('Kriegskunst', 3, 'B', ''),
+	('Kryptographie', 3, 'B', ''),
+	('Magiekunde', 3, 'B', ''),
+	('Mechanik', 3, 'B', ''),
+	('Pflanzenkunde', 3, 'B', ''),
+	('Philosophie', 3, 'B', ''),
+	('Rechnen', 3, 'B', ''),
+	('Rechtskunde', 3, 'B', ''),
+	('Sagen und Legenden', 3, 'B', ''),
+	('Schätzen', 3, 'B', ''),
+	('Sprachenkunde', 3, 'B', ''),
+	('Staatskunst', 3, 'B', ''),
+	('Sternkunde', 3, 'B', ''),
+	('Tierkunde', 3, 'B', '');
 	
 INSERT INTO talent_kategorien VALUES(4, 'Kampf');
 
-INSERT INTO talente (name, kategorie_id, komplexitaet) VALUES
-	('Anderthalbhänder', 4, 'E'),
-	('Armbrust', 4, 'C'),
-	('Belagerungswaffen', 4, 'D'),
-	('Blasrohr', 4, 'D'),
-	('Bogen', 4, 'E'),
-	('Diskus', 4, 'D'),
-	('Dolche', 4, 'D'),
-	('Fechtwaffen', 4, 'E'),
-	('Hiebwaffen', 4, 'D'),
-	('Infanteriewaffen', 4, 'D'),
-	('Kettenstäbe', 4, 'E'),
-	('Kettenwaffen', 4, 'D'),
-	('Lanzenreiten', 4, 'E'),
-	('Peitsche', 4, 'E'),
-	('Raufen', 4, 'C'),
-	('Ringen', 4, 'D'),
-	('Säbel', 4, 'D'),
-	('Schleuder', 4, 'E'),
-	('Schwerter', 4, 'E'),
-	('Speere', 4, 'D'),
-	('Stäbe', 4, 'D'),
-	('Wurfbeile', 4, 'D'),
-	('Wurfmesser', 4, 'C'),
-	('Wurfspeere', 4, 'C'),
-	('Zweihandflegel', 4, 'D'),
-	('Zweihand-Hiebwaffen', 4, 'D'),
-	('Zweihandschwerter/-säbel', 4, 'D');
+INSERT INTO talente (name, kategorie_id, komplexitaet,be) VALUES
+	('Anderthalbhänder', 4, 'E', 'BE-2'),
+	('Armbrust', 4, 'C', 'BE-5'),
+	('Belagerungswaffen', 4, 'D', ''),
+	('Blasrohr', 4, 'D', 'BE-5'),
+	('Bogen', 4, 'E', 'BE-3'),
+	('Diskus', 4, 'D', 'BE-2'),
+	('Dolche', 4, 'D', 'BE-1'),
+	('Fechtwaffen', 4, 'E', 'BE-1'),
+	('Hiebwaffen', 4, 'D', 'BE-4'),
+	('Infanteriewaffen', 4, 'D', 'BE-3'),
+	('Kettenstäbe', 4, 'E', 'BE-1'),
+	('Kettenwaffen', 4, 'D', 'BE-3'),
+	('Lanzenreiten', 4, 'E', null),
+	('Peitsche', 4, 'E', 'BE-1'),
+	('Raufen', 4, 'C', 'BE'),
+	('Ringen', 4, 'D', 'BE'),
+	('Säbel', 4, 'D', 'BE-2'),
+	('Schleuder', 4, 'E', 'BE-2'),
+	('Schwerter', 4, 'E', 'BE-2'),
+	('Speere', 4, 'D', 'BE-3'),
+	('Stäbe', 4, 'D', 'BE-2'),
+	('Wurfbeile', 4, 'D', 'BE-2'),
+	('Wurfmesser', 4, 'C', 'BE-3'),
+	('Wurfspeere', 4, 'C', 'BE-2'),
+	('Zweihandflegel', 4, 'D', 'BE-3'),
+	('Zweihand-Hiebwaffen', 4, 'D', 'BE-3'),
+	('Zweihandschwerter/-säbel', 4, 'D', 'BE-2');
 	
 INSERT INTO talent_kategorien VALUES(5, 'Handwerk');
 

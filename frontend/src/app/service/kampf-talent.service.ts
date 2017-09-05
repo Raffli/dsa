@@ -7,7 +7,8 @@ export class KampfTalentService {
   private mapping: {[key: string]: string} = {};
 
   constructor() {
-    this.mapping['Hi'] = 'Hiebwaffen'
+    this.mapping['Hi'] = 'Hiebwaffen';
+    this.mapping['Wb'] = 'Wurfbeile';
   }
 
   public extractKampftalentByShort(short: string, kampftalente: KampfTalent[]) : KampfTalent {

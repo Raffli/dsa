@@ -10,7 +10,7 @@ export class Talent {
   public komplexitaet: number;
   public kategorie: string;
 
-  constructor(public lernmethode: string, public name: string, public probe: string, value: number, be: string) {
+  constructor(public lernmethode: string, public name: string, public probe: string, public value: number, public be: string) {
 
   }
 

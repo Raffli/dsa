@@ -1,6 +1,5 @@
 package de.busybeever.dsa.data.entities;
 
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,33 +12,22 @@ import de.busybeever.dsa.data.entities.embeddable.WM;
 import lombok.Data;
 
 @Data
-@Table(name = "waffen")
+@Table(name = "fkwaffen")
 @Entity
-public class WaffenEntity {
+public class FkWaffenEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Embedded
-	private Schaden schaden;
-	
-	@Embedded
-	private TpKK tpKK;
-	
-	@Embedded
-	private WM wm;
-	
 	private String name;
-	
-	private int ini;
-	
-	private int bf;
 	
 	private String typ;
 	
-	private char distanzklasse;
+	private Schaden schaden;
 	
+	private String entfernung;
 	
+	private String tpentfernung;
 	
 }

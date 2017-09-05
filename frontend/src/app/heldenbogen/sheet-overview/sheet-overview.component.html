@@ -38,8 +38,9 @@
   </tr>
 
 </table>
-<input type="text" [(ngModel)]="filter" (ngModelChange)="filterChanged()"/>
 
+<input type="text" [(ngModel)]="filter" (ngModelChange)="filterChanged()"/>
+<div class="row"></div>
 <div class="col-sm-12 col-lg-6">
   <div *ngIf="filteredTalente.kampftalente.length>0">
     <h5>Kampftalente</h5>
@@ -55,6 +56,7 @@
         <td>{{talent.be}}</td>
         <td>{{talent.at}}</td>
         <td>{{talent.pa}}</td>
+
       </tr>
     </table>
 
@@ -113,7 +115,7 @@
 
   </table>
 </div>
-
+<!--
 <p-dataTable [value]="held.talente.kampftalente">
   <p-column field="name" header="Name" ></p-column>
   <p-column field="be" header="BE" [style]="{width:'100px'}"></p-column>
@@ -142,3 +144,4 @@
   <p-column field="value" header="Wert" [style]="{width:'50px'}"></p-column>
 </p-dataTable>
 
+-->
