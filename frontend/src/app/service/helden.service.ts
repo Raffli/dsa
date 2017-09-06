@@ -21,6 +21,8 @@ import {Hand} from "../data/ausruestung/Hand";
 import {AusruestungsSet} from "../data/ausruestung/AusruestungsSet";
 import {KampfTalentService} from "./kampf-talent.service";
 import {FernkampfWaffe} from "../data/ausruestung/FernkampfWaffe";
+import {Schild} from "../data/ausruestung/Schild";
+import {Ruestung} from "../data/ausruestung/Ruestung";
 
 @Injectable()
 export class HeldenService {
@@ -228,27 +230,58 @@ export class HeldenService {
           }
         )
       } else if(type.startsWith('fkwaffe')) {
-        console.log(node)
         const name = node.getAttribute('waffenname');
         this.ausruetungsService.getFkWaffeByName(name).subscribe(
           (waffe: FernkampfWaffe) => {
-            console.log(waffe)
             const kampfTalent = this.kampftalentService.extractKampftalentByShort(waffe.typ, kampftalente);
             waffe.fk = kampfTalent.value + fkBasis;
-            console.log(kampfTalent.be)
             waffe.be =  parseInt(kampfTalent.be.substr(2, kampfTalent.be.length));
             ausruestungen[set].fernkampfWafffen.push(waffe);
 
           })
 
-      } else if(type.startsWith('schild')) {
+      } else if (type.startsWith('schild')) {
+        console.log('TODO: parierwaffen')
+        const name = node.getAttribute('schildname');
+        this.ausruetungsService.getSchildByName(name).subscribe(
+          (data: Schild) => {
+            let bonusPa = 0;
 
-      } else if(type.startsWith('ruestung')) {
+            ausruestungen[set].schilde.push(data);
+            if (this.hasSonderfertigkeit('Linkhand', sonderfertigkeiten)) {
+              bonusPa++;
+              if (this.hasSonderfertigkeit('Schildkampf 1', sonderfertigkeiten)) {
+                bonusPa += 2;
+              }
+              if (this.hasSonderfertigkeit('Schildkampf 2', sonderfertigkeiten)) {
+                bonusPa +=3;
+              }
+            }
+            data.pa = paBasis + bonusPa +  data.wm.pa;
+          }
+          )
+      } else if (type.startsWith('ruestung')) {
+        console.log(node)
+        const name = node.getAttribute('ruestungsname');
+        this.ausruetungsService.getRuestungByName(name).subscribe(
+          (data: Ruestung) => {
+            console.log(data)
+          }
+          )
 
       }
     }
 
     return ret;
+  }
+
+  private hasSonderfertigkeit(name: string, sonderfertigkeiten: Sonderfertigkeit[]) : boolean {
+    for (let i = 0; i < sonderfertigkeiten.length; i++) {
+      if(sonderfertigkeiten[i].name === name) {
+        return true;
+      }
+    }
+    return true;
   }
 
   private extractVorteile(xmlDoc: Document) : Vorteil[] {

@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.busybeever.dsa.data.entities.FkWaffenEntity;
+import de.busybeever.dsa.data.entities.RuestungEntity;
+import de.busybeever.dsa.data.entities.SchildEntity;
 import de.busybeever.dsa.data.entities.WaffenEntity;
 import de.busybeever.dsa.data.repository.FkWaffenRepository;
+import de.busybeever.dsa.data.repository.RuestungRepository;
+import de.busybeever.dsa.data.repository.SchildRepository;
 import de.busybeever.dsa.data.repository.WaffenRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,6 +28,14 @@ public class AusruestungsController {
 	
 	@Autowired
 	private FkWaffenRepository fkWaffenRepository;
+	
+	@Autowired
+	private SchildRepository schildRepository;
+	
+	@Autowired
+	private RuestungRepository ruestungRepository; 
+	
+	
 	
 	
 	
@@ -41,6 +53,28 @@ public class AusruestungsController {
 	@GetMapping("fkwaffe/byname")
 	public ResponseEntity<?> findByFkName(@RequestParam("name")String name) {
 		FkWaffenEntity entity = this.fkWaffenRepository.findByName(name);
+		if(entity == null) {
+			log.error("No mapping found for waffe:" +name);
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(entity);
+		
+	}
+	
+	@GetMapping("schild/byname")
+	public ResponseEntity<?> findSchildName(@RequestParam("name")String name) {
+		SchildEntity entity = this.schildRepository.findByName(name);
+		if(entity == null) {
+			log.error("No mapping found for waffe:" +name);
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(entity);
+		
+	}
+	
+	@GetMapping("ruestung/byname")
+	public ResponseEntity<?> findRuestungName(@RequestParam("name")String name) {
+		RuestungEntity entity = this.ruestungRepository.findByName(name);
 		if(entity == null) {
 			log.error("No mapping found for waffe:" +name);
 			return ResponseEntity.notFound().build();

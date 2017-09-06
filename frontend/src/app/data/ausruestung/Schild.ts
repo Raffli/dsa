@@ -6,4 +6,6 @@ export class Schild {
   public name: string;
   public bf: number;
   public wm: WM;
+  public ini: number;
+  public pa: number;
 }

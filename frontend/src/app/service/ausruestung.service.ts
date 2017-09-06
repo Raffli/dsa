@@ -9,6 +9,8 @@ import {Http, Response} from "@angular/http"
 import {RestService} from "./rest.service";
 import {Waffe} from "../data/ausruestung/Waffe";
 import {FernkampfWaffe} from "../data/ausruestung/FernkampfWaffe";
+import {Schild} from "../data/ausruestung/Schild";
+import {Ruestung} from "../data/ausruestung/Ruestung";
 
 @Injectable()
 export class AusruestungService {
@@ -22,6 +24,16 @@ export class AusruestungService {
 
   public getFkWaffeByName(name: string): Observable<FernkampfWaffe> {
     return this.rest.get('/api/ausruestung/fkwaffe/byname?name=' + name).map((res:Response) =>res.json())
+      .catch((error:any) => Observable.throw(error))
+  }
+
+  public getSchildByName(name: string): Observable<Schild> {
+    return this.rest.get('/api/ausruestung/schild/byname?name=' + name).map((res:Response) =>res.json())
+      .catch((error:any) => Observable.throw(error))
+  }
+
+  public getRuestungByName(name: string): Observable<Ruestung> {
+    return this.rest.get('/api/ausruestung/ruestung/byname?name=' + name).map((res:Response) =>res.json())
       .catch((error:any) => Observable.throw(error))
   }
 

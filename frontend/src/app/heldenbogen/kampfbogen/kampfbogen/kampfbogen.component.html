@@ -79,3 +79,23 @@
   </tr>
 
 </table>
+
+<table class="bottomDistanced">
+
+  <tr>
+    <td>Schild</td>
+    <td>Typ</td>
+    <td>INI</td>
+    <td>WM</td>
+    <td>PA</td>
+    <td>BF</td>
+  </tr>
+  <tr *ngFor="let schild of getPrimaryAusruestungsSet().schilde">
+    <td>{{schild.name}}</td>
+    <td>Schild</td>
+    <td>{{schild.ini}}</td>
+    <td>{{schild.wm.at}} / {{schild.wm.pa}}</td>
+    <td>{{schild.pa}}</td>
+    <td>{{schild.bf}}</td>
+  </tr>
+</table>
