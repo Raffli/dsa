@@ -1,0 +1,36 @@
+pipeline:
+  frontend:
+    image: plugins/docker
+    repo: failender/dronebay-frontend
+    tags: latest
+    dockerfile: frontend/Dockerfile
+    context: frontend
+    secrets: [ docker_username, docker_password ]
+  backend:
+    image: plugins/docker  
+    repo: failender/dronebay-backend
+    tags: latest
+    dockerfile: backend/Dockerfile
+    context: backend
+    secrets: [ docker_username, docker_password ]
+  
+#  deploy:
+    image: appleboy/drone-ssh
+    host: 94.130.99.166
+    username: drone
+    password: drone
+    port: 22
+    secrets: [password]
+    script:
+    #deploy frontend
+        - docker stop dronebay-frontend || true
+        - docker rm dronebay-frontend || true
+        - docker pull failender/dronebay-frontend
+        - docker run -p 80:80 -d --name dronebay-frontend failender/dronebay-frontend
+    #deploy backend
+        - docker stop dronebay-backend || true
+        - docker rm dronebay-backend || true
+        - docker pull failender/dronebay-backend
+        - docker run -p 80:80 -d --name dronebay-backend failender/dronebay-backend
+    when:
+      status: success 

@@ -99,3 +99,32 @@
     <td>{{schild.bf}}</td>
   </tr>
 </table>
+
+<div>
+  <div class="col-sm-2">
+    Initiative {{held.attribute[14].value }}
+  </div>
+  <div class="col-sm-2">
+    INI-Basis-BE = {{held.attribute[14].value}}
+  </div>
+</div>
+
+<table class="bottomDistanced">
+
+  <tr>
+    <td>Rüstungsstück</td>
+    <td>RS</td>
+    <td>BE</td>
+  </tr>
+  <tr *ngFor="let ruestung of getPrimaryAusruestungsSet().ruestungen">
+    <td>{{ruestung.name}}</td>
+    <td>{{ruestung.rs}}</td>
+    <td>{{ruestung.be}}</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>{{totalRuestung()}}</td>
+    <td>{{totalBe()}}</td>
+  </tr>
+
+</table>

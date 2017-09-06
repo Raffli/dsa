@@ -265,7 +265,7 @@ export class HeldenService {
         const name = node.getAttribute('ruestungsname');
         this.ausruetungsService.getRuestungByName(name).subscribe(
           (data: Ruestung) => {
-            console.log(data)
+            ausruestungen[set].ruestungen.push(data);
           }
           )
 

@@ -55,4 +55,8 @@ create table ruestungen(
 );
 
 INSERT INTO ruestungen(name, be, rs)
-	VALUES('Gambeson', 1.5, 1.5);
+	VALUES('Gambeson', 1.5, 1.5),
+	('Dicke Kleidung', 0.9, 0.9),
+	('Wattierte Kappe', 0.1, 0.1);
+	
+	

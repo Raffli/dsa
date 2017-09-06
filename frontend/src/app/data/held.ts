@@ -14,7 +14,7 @@ import {KampfTalent} from "./kampftalent";
 export class Held {
 
 
-
+public be: number = 0;
 
 
   constructor(public  rasse: string, public geschlecht: string, public profession: string,
