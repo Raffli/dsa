@@ -35,7 +35,7 @@
 </table>
 
 
-<table>
+<table class="bottomDistanced">
   <tr>
     <td>Fernkampfwaffe</td>
     <td>TYP/eBE</td>
@@ -48,14 +48,33 @@
 
   <tr *ngFor="let waffe of getPrimaryAusruestungsSet().fernkampfWafffen">
     <td>{{waffe.name}}</td>
-    <td>{{waffe.typ}} / {{waffe.be}}</td>
+    <td>{{waffe.typ}} / BE{{waffe.be}}</td>
     <td>{{waffe.schaden.w6}}W+{{waffe.schaden.fix}}</td>
     <td>{{waffe.entfernung}}</td>
     <td>{{waffe.tpentfernung}}</td>
     <td>{{waffe.fk}}</td>
     <td>---</td>
+  </tr>
 
+</table>
 
+<table class="bottomDistanced">
+  <tr>
+    <td>Waffenloser Kampf</td>
+    <td>TP/KK</td>
+    <td>INI</td>
+    <td>AT</td>
+    <td>PA</td>
+    <td>TP(A)</td>
+  </tr>
+
+  <tr *ngFor="let talent of held.getRingenRaufen()">
+    <td>{{talent.name}}</td>
+    <td>10/3</td>
+    <td>TODO</td>
+    <td>{{talent.at}}</td>
+    <td>{{talent.pa}}</td>
+    <td>1W+{{getBonusDmgWaffenlos()}}</td>
 
   </tr>
 

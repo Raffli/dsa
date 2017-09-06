@@ -7,6 +7,7 @@ import {Monate} from "./monate";
 import {SprachTalent} from "./sprachtalent";
 import {Talente} from "./talente";
 import {Ausruestung} from "./ausruestung/Ausruestung";
+import {KampfTalent} from "./kampftalent";
 /**
  * Created by Patrick on 11.07.2017.
  */
@@ -26,5 +27,20 @@ export class Held {
 
   public getGeburtstag(): string {
     return this.aussehen.gbtag+ '. '+Monate.VALUES[this.aussehen.gbmonat] + ' '+this.aussehen.gbjahr+ ' BF    '+this.aussehen.alter + ' Jahre';
+  }
+
+
+  public getRingenRaufen(): KampfTalent[] {
+    let ret = [];
+    for (let i = 0; i < this.talente.kampftalente.length; i++) {
+      if (this.talente.kampftalente[i].name == 'Raufen') {
+        ret.push(this.talente.kampftalente[i]);
+      } else if(this.talente.kampftalente[i].name == 'Ringen') {
+        ret.push(this.talente.kampftalente[i]);
+        return ret;
+      }
+    }
+
+    return null;
   }
 }

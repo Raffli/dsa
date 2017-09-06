@@ -235,6 +235,8 @@ export class HeldenService {
             console.log(waffe)
             const kampfTalent = this.kampftalentService.extractKampftalentByShort(waffe.typ, kampftalente);
             waffe.fk = kampfTalent.value + fkBasis;
+            console.log(kampfTalent.be)
+            waffe.be =  parseInt(kampfTalent.be.substr(2, kampfTalent.be.length));
             ausruestungen[set].fernkampfWafffen.push(waffe);
 
           })

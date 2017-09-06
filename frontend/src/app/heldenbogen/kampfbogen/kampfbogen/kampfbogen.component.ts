@@ -32,4 +32,8 @@ export class KampfbogenComponent implements OnInit {
   public getPrimaryAusruestungsSet(): AusruestungsSet {
     return this.held.ausruestung.sets[0];
   }
+
+  public getBonusDmgWaffenlos() {
+    return Math.floor((this.held.attribute[7].value-10)/3)
+  }
 }
