@@ -10,7 +10,7 @@ import {Held} from "../data/held";
 })
 export class HeldenbogenComponent implements OnInit {
 
-  constructor(private heldenService:HeldenService) { }
+  constructor(public heldenService:HeldenService) { }
 
   ngOnInit() {
   }

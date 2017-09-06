@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  rest : 'http://failender.de:8080/'
 };
