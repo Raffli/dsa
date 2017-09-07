@@ -1,11 +1,11 @@
 pipeline:
-  frontend:
-    image: plugins/docker
-    repo: failender/dsa-frontend
-    tags: latest
-    dockerfile: frontend/Dockerfile
-    context: frontend
-    secrets: [ docker_username, docker_password ]
+#  frontend:
+#    image: plugins/docker
+#    repo: failender/dsa-frontend
+#    tags: latest
+#    dockerfile: frontend/Dockerfile
+#    context: frontend
+#    secrets: [ docker_username, docker_password ]
   backend:
     image: plugins/docker  
     repo: failender/dsa-backend
