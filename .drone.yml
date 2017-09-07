@@ -13,7 +13,7 @@ pipeline:
     dockerfile: backend/Dockerfile
     context: backend
     secrets: [ docker_username, docker_password ]
-   deploy:
+  deploy:
     image: plugins/docker
     command:
         - docker service update --image failender/dsa-frontend:latest dsa --detach=false
