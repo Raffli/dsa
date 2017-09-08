@@ -18,22 +18,22 @@ export class AusruestungService {
   constructor(private rest: RestService) { }
 
   public getWaffeByName(name: string): Observable<Waffe> {
-    return this.rest.get('/api/ausruestung/waffe/byname?name=' + name).map((res:Response) =>res.json())
+    return this.rest.get('ausruestung/waffe/byname?name=' + name).map((res:Response) =>res.json())
       .catch((error:any) => Observable.throw(error))
   }
 
   public getFkWaffeByName(name: string): Observable<FernkampfWaffe> {
-    return this.rest.get('/api/ausruestung/fkwaffe/byname?name=' + name).map((res:Response) =>res.json())
+    return this.rest.get('ausruestung/fkwaffe/byname?name=' + name).map((res:Response) =>res.json())
       .catch((error:any) => Observable.throw(error))
   }
 
   public getSchildByName(name: string): Observable<Schild> {
-    return this.rest.get('/api/ausruestung/schild/byname?name=' + name).map((res:Response) =>res.json())
+    return this.rest.get('ausruestung/schild/byname?name=' + name).map((res:Response) =>res.json())
       .catch((error:any) => Observable.throw(error))
   }
 
   public getRuestungByName(name: string): Observable<Ruestung> {
-    return this.rest.get('/api/ausruestung/ruestung/byname?name=' + name).map((res:Response) =>res.json())
+    return this.rest.get('ausruestung/ruestung/byname?name=' + name).map((res:Response) =>res.json())
       .catch((error:any) => Observable.throw(error))
   }
 

@@ -49,7 +49,7 @@ INSERT INTO schilde(name, wm_at, wm_pa, bf, ini) VALUES
 	
 create table ruestungen(
 	id BIGINT NOT NULL AUTO_INCREMENT,
-	name varchar(15) NOT NULL,
+	name varchar(25) NOT NULL,
 	be FLOAT NOT NULL,
 	rs FLOAT NOT NULL	
 );
@@ -57,6 +57,8 @@ create table ruestungen(
 INSERT INTO ruestungen(name, be, rs)
 	VALUES('Gambeson', 1.5, 1.5),
 	('Dicke Kleidung', 0.9, 0.9),
+	('Kettenhemd, Lang', 2.1, 3.1),
+	('Drachenhelm', 0.5, 0.5),
 	('Wattierte Kappe', 0.1, 0.1);
 	
 	

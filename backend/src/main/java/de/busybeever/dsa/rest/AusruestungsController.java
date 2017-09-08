@@ -65,7 +65,7 @@ public class AusruestungsController {
 	public ResponseEntity<?> findSchildName(@RequestParam("name")String name) {
 		SchildEntity entity = this.schildRepository.findByName(name);
 		if(entity == null) {
-			log.error("No mapping found for waffe:" +name);
+			log.error("No mapping found for schild:" +name);
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(entity);
@@ -76,7 +76,7 @@ public class AusruestungsController {
 	public ResponseEntity<?> findRuestungName(@RequestParam("name")String name) {
 		RuestungEntity entity = this.ruestungRepository.findByName(name);
 		if(entity == null) {
-			log.error("No mapping found for waffe:" +name);
+			log.error("No mapping found for ruestung:" +name);
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(entity);

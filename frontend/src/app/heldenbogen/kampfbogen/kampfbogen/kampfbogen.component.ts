@@ -47,8 +47,9 @@ export class KampfbogenComponent implements OnInit {
 
   public totalBe() {
     let ret = 0;
+    //TODO: RGW 2 / 3
     this.getPrimaryAusruestungsSet().ruestungen.forEach(ruestung => {
-      ret += ruestung.be;
+      ret += ruestung.eBe;
     })
     return ret;
   }

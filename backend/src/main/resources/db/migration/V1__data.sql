@@ -54,7 +54,7 @@ INSERT INTO talent_kategorien VALUES(2, 'Natur');
 
 INSERT INTO talente (name, kategorie_id, komplexitaet, be) VALUES 
 	('Fährtensuchen', 2, 'B', ''),
-	('Fallenstellen', 2, 'B', ''),
+	('Fallen stellen', 2, 'B', ''),
 	('Fesseln/Entfesseln', 2, 'B', ''),
 	('Fischen/Angeln', 2, 'B', ''),
 	('Orientierung', 2, 'B', ''),
@@ -193,7 +193,7 @@ INSERT INTO sprachen (name, komplexitaet, lernkomplexitaet) VALUES
 	('Aureliani', 7, 'A'),
 	('Zyklopisch', 7, 'A'),
 	('Tulamidya', 7, 'A'),
-	('Ur-Tulamidya', 7, 'A'),
+	('Urtulamidya', 7, 'A'),
 	('Zelemja', 7, 'A'),
 	('Alaani', 7, 'A'),
 	('Zhulchammaqra', 7, 'A'),
@@ -222,6 +222,7 @@ INSERT INTO sprachen (name, komplexitaet, lernkomplexitaet) VALUES
 	('Koboldisch', 7, 'A'),
 	('Zhayad', 7, 'A'),
 	('Atak', 7, 'A'),
+	('Alt-Imperial/Aureliani', 7, 'A'),
 	('Füchsisch', 7, 'A');
 
 create table schriften(
@@ -246,7 +247,7 @@ INSERT INTO schriften (name, komplexitaet, lernkomplexitaet) VALUES
 	('Gimaril', 8, 'A'),
 	('Gjalskisch', 8, 'A'),
 	('Hjaldingsche Runen', 8, 'A'),
-	('Imperiale Zeichen', 8, 'A'),
+	('(Alt-)Imperiale Zeichen', 8, 'A'),
 	('Isdira/Asdharia', 8, 'A'),
 	('Kusliker Zeichen', 8, 'A'),	
 	('Mahrische Glyphen', 8, 'B'),	
@@ -254,7 +255,7 @@ INSERT INTO schriften (name, komplexitaet, lernkomplexitaet) VALUES
 	('Rogolan', 8, 'A'),	
 	('Trollische Raumbilderschrift', 8, 'C'),	
 	('Tulamidya', 8, 'A'),	
-	('Ur-Tulamidya ', 8, 'A'),	
+	('Urtulamidya', 8, 'A'),	
 	('Zhayad', 8, 'A');
 	
 	create table helden(

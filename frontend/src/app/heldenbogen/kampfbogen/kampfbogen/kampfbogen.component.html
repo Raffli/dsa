@@ -101,12 +101,8 @@
 </table>
 
 <div>
-  <div class="col-sm-2">
-    Initiative {{held.attribute[14].value }}
-  </div>
-  <div class="col-sm-2">
-    INI-Basis-BE = {{held.attribute[14].value}}
-  </div>
+    Initiative {{held.attribute[14].value }} |  INI-Basis-BE = {{held.attribute[14].value}}
+
 </div>
 
 <table class="bottomDistanced">
@@ -119,7 +115,7 @@
   <tr *ngFor="let ruestung of getPrimaryAusruestungsSet().ruestungen">
     <td>{{ruestung.name}}</td>
     <td>{{ruestung.rs}}</td>
-    <td>{{ruestung.be}}</td>
+    <td>{{ruestung.eBe}}</td>
   </tr>
   <tr>
     <td></td>

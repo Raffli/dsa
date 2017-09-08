@@ -15,7 +15,7 @@ export class TalentService {
   constructor(private rest: RestService) { }
 
    public getTalentByName(name: string): Observable<TalentData> {
-    return this.rest.get('/api/talente/byname?name=' + name).map((res:Response) =>res.json())
+    return this.rest.get('talente/byname?name=' + name).map((res:Response) =>res.json())
       .catch((error:any) => Observable.throw(error))
   }
 }

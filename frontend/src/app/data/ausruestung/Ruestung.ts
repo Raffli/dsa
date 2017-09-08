@@ -6,5 +6,6 @@ export class Ruestung {
   public name: string;
   public be: number;
   public rs: number;
+  public eBe: number;
 
 }
