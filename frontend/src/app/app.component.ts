@@ -19,6 +19,10 @@ export class AppComponent {
     {
       label: 'Held',
       routerLink:'heldenbogen'
+    },
+    {
+      label: 'Held laden',
+      routerLink:'laden'
     }
   ];
 

@@ -25,6 +25,7 @@ import {FormsModule} from "@angular/forms";
 import { KampfbogenComponent } from './heldenbogen/kampfbogen/kampfbogen/kampfbogen.component';
 import {AusruestungService} from "./service/ausruestung.service";
 import {KampfTalentService} from "./service/kampf-talent.service";
+import { HeldLadenComponent } from './held-laden/held-laden.component';
 
 const appRoutes: Routes = [
   {
@@ -37,6 +38,8 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   { path: 'heldenbogen', component: HeldenbogenComponent },
+  { path: 'laden', component: HeldLadenComponent },
+
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -48,7 +51,8 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     HeldDetailComponent,
     SheetOverviewComponent,
-    KampfbogenComponent
+    KampfbogenComponent,
+    HeldLadenComponent
   ],
   imports: [
     BrowserModule, FormsModule, BrowserAnimationsModule, MenuModule, MenubarModule, DataTableModule, SharedModule, HttpModule, TabViewModule,

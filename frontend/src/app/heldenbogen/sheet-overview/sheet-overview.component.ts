@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, ElementRef} from '@angular/core';
 import {Held} from "../../data/held";
 import {Attribut} from "../../data/attribut";
 import {Talente} from "../../data/talente";
@@ -65,6 +65,11 @@ export class SheetOverviewComponent implements OnInit {
         kampfTalente.push(talent);
       }
     })
+  }
+
+  onEnter() {
+
+
   }
 
 }

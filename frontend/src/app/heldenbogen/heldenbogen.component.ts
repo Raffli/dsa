@@ -6,17 +6,13 @@ import {Held} from "../data/held";
   selector: 'app-heldenbogen',
   templateUrl: './heldenbogen.component.html',
   styleUrls: ['./heldenbogen.component.css'],
-  providers: [HeldenService]
+  providers: []
 })
 export class HeldenbogenComponent implements OnInit {
 
   constructor(public heldenService:HeldenService) { }
 
   ngOnInit() {
-  }
-
-  heldChanged(held: Held) {
-    this.heldenService.setHeld(held);
   }
 
 

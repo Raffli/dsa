@@ -39,7 +39,7 @@
 
 </table>
 
-<input type="text" [(ngModel)]="filter" (ngModelChange)="filterChanged()"/>
+<input type="text" [(ngModel)]="filter" (ngModelChange)="filterChanged()" (keyup.enter)="onEnter()" #input/>
 <div class="row"></div>
 <div class="col-sm-12 col-lg-6">
   <div *ngIf="filteredTalente.kampftalente.length>0">
@@ -50,12 +50,14 @@
         <td>BE</td>
         <td>AT</td>
         <td>PA</td>
+        <td>TAW</td>
       </tr>
       <tr *ngFor="let talent of filteredTalente.kampftalente">
         <td>{{talent.name}}</td>
         <td>{{talent.be}}</td>
         <td>{{talent.at}}</td>
         <td>{{talent.pa}}</td>
+        <td>{{talent.taw}}</td>
 
       </tr>
     </table>

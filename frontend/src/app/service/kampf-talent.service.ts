@@ -11,12 +11,9 @@ export class KampfTalentService {
     this.mapping['Wb'] = 'Wurfbeile';
   }
 
-  public extractKampftalentByShort(short: string, kampftalente: KampfTalent[]) : KampfTalent {
-    const name = this.mapping[short];
-    if (name === undefined) {
-      console.error('Unmapped short: ' + short);
-      return null;
-    }
+  public extractKampftalent(name: string, kampftalente: KampfTalent[]) : KampfTalent {
+
+
     for (let i = 0; i < kampftalente.length; i++) {
       if (kampftalente[i].name === name) {
         return kampftalente[i];

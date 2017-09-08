@@ -17,8 +17,6 @@ export class HeldDetailComponent implements OnInit {
   @Input()
   held: Held;
 
-  @Output()
-  heldChanged = new EventEmitter<Held>();
 
   ngOnInit() {
   }
@@ -32,11 +30,7 @@ export class HeldDetailComponent implements OnInit {
     reader.onload = file => {
       var contents: any = file.target;
       let text = contents.result;
-      this.heldenService.loadHeld(text, (held:Held) => {
-        if(held != null) {
-          this.heldChanged.emit(held);
-        }
-      });
+      this.heldenService.loadHeldByXML(text);
       }
 
 

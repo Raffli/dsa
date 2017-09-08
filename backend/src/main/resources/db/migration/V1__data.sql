@@ -46,7 +46,7 @@ INSERT INTO talente (name, kategorie_id, komplexitaet, be) VALUES
 	('Menschenkenntnis', 1, 'B', ''),
 	('Schauspielerei', 1, 'B', ''),
 	('Schriftlicher Ausdruck', 1, 'B', ''),
-	('Sich Verkleiden', 1, 'B', ''),
+	('Sich verkleiden', 1, 'B', ''),
 	('Überreden', 1, 'B', ''),
 	('Überzeugen', 1, 'B', '');
 
@@ -130,7 +130,7 @@ INSERT INTO talente (name, kategorie_id, komplexitaet) VALUES
 	('Bogenbau', 5, 'B'),
 	('Boote fahren', 5, 'B'),
 	('Drucker', 5, 'B'),
-	('Fahrzeug Lenken', 5, 'B'),
+	('Fahrzeug lenken', 5, 'B'),
 	('Falschspiel', 5, 'B'),
 	('Feinmechanik', 5, 'B'),
 	('Feuersteinbearbeitung', 5, 'B'),
@@ -258,8 +258,3 @@ INSERT INTO schriften (name, komplexitaet, lernkomplexitaet) VALUES
 	('Urtulamidya', 8, 'A'),	
 	('Zhayad', 8, 'A');
 	
-	create table helden(
-	id BIGINT NOT NULL AUTO_INCREMENT,
-	xml TEXT NOT NULL,
-	name varchar(50) UNIQUE NOT NULL
-);

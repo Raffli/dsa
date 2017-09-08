@@ -1,4 +1,9 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http'
+
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/catch'
+import {Response} from "@angular/http"
 import {Held} from "../data/held";
 import {Attribut} from "../data/attribut";
 import {Vorteil} from "../data/vorteil";
@@ -24,19 +29,31 @@ import {FernkampfWaffe} from "../data/ausruestung/FernkampfWaffe";
 import {Schild} from "../data/ausruestung/Schild";
 import {Ruestung} from "../data/ausruestung/Ruestung";
 import {environment} from "../../environments/environment";
+import {RestService} from "./rest.service";
+import {Heldendata} from "../data/heldendata";
 
 @Injectable()
 export class HeldenService {
 
   private _held: Held
 
-  constructor(private attributService: AttributService, private talentService: TalentService, private ausruetungsService: AusruestungService, private kampftalentService: KampfTalentService) {
-    if (!environment.production) {
-      this.loadHeld(this.testHeld, (held: Held) => {
-        this._held = held;
-      })
+  public heldLoaded: EventEmitter<Held> = new EventEmitter();
+
+  constructor(private attributService: AttributService, private talentService: TalentService, private ausruetungsService: AusruestungService, private kampftalentService: KampfTalentService, private restService:RestService) {
+    if (environment.production) {
+      this.loadHeldByXML(this.testHeld);
     }
 
+  }
+
+  public getHeldenNamen() : Observable<String[]> {
+    return this.restService.get('held/names').map((response: Response) => response.json())
+      .catch((error:any) => Observable.throw(error))
+  }
+
+  public getHeldByName(name: string): Observable<Heldendata> {
+    return this.restService.get('held/byname/?name=' + name).map((response: Response) => response.json())
+      .catch((error:any) => Observable.throw(error))
   }
 
   getHeld(): Held {
@@ -48,7 +65,15 @@ export class HeldenService {
     this._held = value;
   }
 
-  loadHeld(xml : string, callback : (held:Held) => void):void {
+
+  public loadHeldByXML(xml) {
+    this.loadHeld(xml, (held: Held) => {
+      this._held = held;
+      this.heldLoaded.emit(held);
+    })
+  }
+
+  private loadHeld(xml : string, callback : (held:Held) => void):void {
 
 
     const parser = new DOMParser();
@@ -203,15 +228,16 @@ export class HeldenService {
             } else {
               waffe.hand = Hand.rechts
             }
-            const kampfTalent = this.kampftalentService.extractKampftalentByShort(waffe.typ, kampftalente);
+            const talentName = node.getAttribute('talent');
+            const kampfTalent = this.kampftalentService.extractKampftalent(talentName, kampftalente);
             waffe.be = parseInt(kampfTalent.be.substr(2, kampfTalent.be.length));
             if (kampfTalent === null) {
               console.log('unlearned talent: ' + waffe.typ)
               waffe.at = atBasis + waffe.wm.at;
               waffe.pa = paBasis + waffe.wm.pa;
             } else {
-              waffe.at = kampfTalent.at - waffe.wm.at;
-              waffe.pa = kampfTalent.pa - waffe.wm.pa;
+              waffe.at = kampfTalent.at + waffe.wm.at;
+              waffe.pa = kampfTalent.pa + waffe.wm.pa;
 
               if (kampfTalent.hasSfFor(waffe.name)) {
                 waffe.at ++;
@@ -237,7 +263,8 @@ export class HeldenService {
         const name = node.getAttribute('waffenname');
         this.ausruetungsService.getFkWaffeByName(name).subscribe(
           (waffe: FernkampfWaffe) => {
-            const kampfTalent = this.kampftalentService.extractKampftalentByShort(waffe.typ, kampftalente);
+            const talentName = node.getAttribute('talent');
+            const kampfTalent = this.kampftalentService.extractKampftalent(talentName, kampftalente);
             ausruestungen[set].fernkampfWafffen.push(waffe);
             if (kampfTalent === null) {
               console.log('TODO: GET BE FROM BACKEND')
@@ -393,9 +420,9 @@ export class HeldenService {
             let talent: KampfTalent;
             if (atpa === undefined) {
               // Fernkampf Talent
-              talent = new KampfTalent(name, lernmethode, value, data.be, fkBasis + value, null)
+              talent = new KampfTalent(name, lernmethode, value, data.be, fkBasis + value, null, value)
             } else {
-              talent = new KampfTalent(name, lernmethode, value, data.be, atpa.at, atpa.pa)
+              talent = new KampfTalent(name, lernmethode, value, data.be, atpa.at, atpa.pa, value)
             }
 
             kampftalente.push(talent);

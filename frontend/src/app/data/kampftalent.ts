@@ -6,7 +6,7 @@ import {Sonderfertigkeit} from "./sonderfertigkeit";
 export class KampfTalent {
 
   constructor(public name: string, public lernmethode: string, public value: number, public be: string,
-              public at: number, public  pa: number) {}
+              public at: number, public  pa: number, public taw: number) {}
 
 
   private sonderfertigkeiten: Sonderfertigkeit[] = [];
