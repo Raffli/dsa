@@ -8,6 +8,7 @@ import {SprachTalent} from "./sprachtalent";
 import {Talente} from "./talente";
 import {Ausruestung} from "./ausruestung/Ausruestung";
 import {KampfTalent} from "./kampftalent";
+import {Sonderfertigkeiten} from "./Sonderfertigkeiten";
 /**
  * Created by Patrick on 11.07.2017.
  */
@@ -20,7 +21,7 @@ public be: number = 0;
   constructor(public  rasse: string, public geschlecht: string, public profession: string,
               public abenteuerPunkteTotal: number, public abenteuerPunkteFrei: number,
               public name: string, public attribute: Attribut[], public vorteile: Vorteil[],
-              public sonderfertigkeiten: Sonderfertigkeit[], public kultur: string,
+              public sonderfertigkeiten: Sonderfertigkeiten, public kultur: string,
               public groesse: number, public gewicht: number, public aussehen: Aussehen,
               public talente: Talente, public ausruestung: Ausruestung) {
   }
