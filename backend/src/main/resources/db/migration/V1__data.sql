@@ -172,8 +172,8 @@ INSERT INTO talente (name, kategorie_id, komplexitaet) VALUES
 INSERT INTO talent_kategorien VALUES(6, 'Gaben');	
 
 INSERT INTO talente (name, kategorie_id, komplexitaet) VALUES
-	('Ritualkenntnis: Gildenmagie', 6, 'E');
-
+	('Ritualkenntnis: Gildenmagie', 6, 'E'),
+	('Gefahreninstinkt');
 
 	
 	
