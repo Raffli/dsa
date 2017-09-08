@@ -16,7 +16,7 @@ pipeline:
   deploy:
     image: plugins/docker
     commands:
-        - docker service update --image failender/dsa-frontend:latest dsa-frontend --detach=false
-        - docker service update --image failender/dsa-backend:latest dsa-backend --detach=false      
+#        - docker service update --image failender/dsa-frontend:latest dsa-frontend --detach=false
+#        - docker service update --image failender/dsa-backend:latest dsa-backend --detach=false      
     when:
       status: success
