@@ -40,7 +40,7 @@ export class HeldenService {
   public heldLoaded: EventEmitter<Held> = new EventEmitter();
 
   constructor(private attributService: AttributService, private talentService: TalentService, private ausruetungsService: AusruestungService, private kampftalentService: KampfTalentService, private restService:RestService) {
-    if (environment.production) {
+    if (!environment.production) {
       this.loadHeldByXML(this.testHeld);
     }
 
