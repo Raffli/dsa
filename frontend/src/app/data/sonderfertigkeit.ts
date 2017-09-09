@@ -3,7 +3,8 @@
  */
 export class Sonderfertigkeit {
 
+  public typ: string;
+  public name: string;
+  public kosten: number;
 
-  constructor(public name: string, public info: string, public spezialisierung: string) {
-  }
 }

@@ -1,4 +1,4 @@
-package de.busybeever.dsa.data.entities;
+package de.busybeever.dsa.data.entities.talente;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

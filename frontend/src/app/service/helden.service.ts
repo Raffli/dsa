@@ -33,6 +33,7 @@ import {RestService} from "./rest.service";
 import {Heldendata} from "../data/heldendata";
 import {Sonderfertigkeiten} from "../data/Sonderfertigkeiten";
 import {Spezialisierung} from "../data/Spezialisierung";
+import {SonderfertigkeitenService} from "./sonderfertigkeiten.service";
 
 @Injectable()
 export class HeldenService {
@@ -41,7 +42,8 @@ export class HeldenService {
 
   public heldLoaded: EventEmitter<Held> = new EventEmitter();
 
-  constructor(private attributService: AttributService, private talentService: TalentService, private ausruetungsService: AusruestungService, private kampftalentService: KampfTalentService, private restService:RestService) {
+  constructor(private attributService: AttributService, private talentService: TalentService, private ausruetungsService: AusruestungService,
+              private kampftalentService: KampfTalentService, private restService:RestService, private sonderfertigkeitenService: SonderfertigkeitenService) {
     if (!environment.production) {
       this.loadHeldByXML(this.testHeld);
     }
@@ -97,10 +99,13 @@ export class HeldenService {
     this.extractTalente(xmlDoc, attribute[17].value, (talente: Talente) => {
 
 
-      const sonderfertigkeiten = this.extractSonderfertigkeiten(xmlDoc, talente);
-      const ausruestung = this.extractAusruestung(xmlDoc, attribute[7].value, talente.kampftalente, attribute[15].value, attribute[16].value, attribute[17].value, sonderfertigkeiten);
-      const hero = new Held(rasse, geschlecht, profession, apTotal, apFree, name, attribute, vorteile, sonderfertigkeiten, kultur, groesseGewicht.groesse, groesseGewicht.gewicht, aussehen, talente, ausruestung);
-      callback(hero);
+     this.extractSonderfertigkeiten(xmlDoc, talente, (sonderfertigkeiten: Sonderfertigkeiten) => {
+       const ausruestung = this.extractAusruestung(xmlDoc, attribute[7].value, talente.kampftalente, attribute[15].value, attribute[16].value, attribute[17].value, sonderfertigkeiten);
+       const hero = new Held(rasse, geschlecht, profession, apTotal, apFree, name, attribute, vorteile, sonderfertigkeiten, kultur, groesseGewicht.groesse, groesseGewicht.gewicht, aussehen, talente, ausruestung);
+       callback(hero);
+     })
+
+
     });
 
   }
@@ -241,7 +246,7 @@ export class HeldenService {
               waffe.at = kampfTalent.at + waffe.wm.at;
               waffe.pa = kampfTalent.pa + waffe.wm.pa;
 
-              if (kampfTalent.hasSfFor(waffe.name)) {
+              if (kampfTalent.hasSpezialisierungFor(waffe.name)) {
                 waffe.at ++;
                 waffe.pa ++;
               }
@@ -314,7 +319,7 @@ export class HeldenService {
         this.ausruetungsService.getRuestungByName(name).subscribe(
           (data: Ruestung) => {
             ausruestungen[set].ruestungen.push(data);
-            if (this.hasSonderfertigkeit('Rüstungsgewöhnung I', sonderfertigkeiten.kampf, data.name)) {
+            if (this.hasSpezialisierung('Rüstungsgewöhnung I', sonderfertigkeiten.andereSpezialisierungen, data.name)) {
               Math.max(0, data.eBe = data.be - 1);
             } else {
               data.eBe = data.be;
@@ -327,17 +332,22 @@ export class HeldenService {
     return ret;
   }
 
-  private hasSonderfertigkeit(name: string, sonderfertigkeiten: Sonderfertigkeit[], gegenstandName?: string ): boolean {
+  private hasSpezialisierung(talent: string, spezialisierungen: Spezialisierung[], name: string, representation?: string ): boolean {
+    for (let i = 0; i < spezialisierungen.length; i++) {
+      if(spezialisierungen[i].talent === talent && spezialisierungen[i].name === name) {
+        if(representation === undefined)
+        return true;
+      } else if(representation === spezialisierungen[i].representation) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private hasSonderfertigkeit(name: string, sonderfertigkeiten: Sonderfertigkeit[]): boolean {
     for (let i = 0; i < sonderfertigkeiten.length; i++) {
       if (sonderfertigkeiten[i].name === name) {
-        if (gegenstandName !== undefined) {
-          console.log(sonderfertigkeiten[i])
-          if (gegenstandName === sonderfertigkeiten[i].info) {
-            return true;
-          }
-        } else {
-          return true;
-        }
+        return true;
 
       }
     }
@@ -359,39 +369,75 @@ export class HeldenService {
     return vorteile;
   }
 
-  private extractSonderfertigkeiten(xmlDoc: Document, talente: Talente) : Sonderfertigkeiten {
+  private extractSonderfertigkeiten(xmlDoc: Document, talente: Talente,  callback : (sonderfertigkeiten: Sonderfertigkeiten) => void ) {
     const nodes = xmlDoc.getElementsByTagName('sonderfertigkeit')
     const profane: Sonderfertigkeit[] = [];
     const magische: Sonderfertigkeit[] = [];
     const kampf: Sonderfertigkeit[] = [];
     const talentSpezialisierungen: Spezialisierung[] = [];
     const zauberSpezialisierungen: Spezialisierung[] = [];
-    const andereSpezialisierungen: Spezialisierung[] = [];
+    const andereSpezialisierungen: Spezialisierung[] = []; //Kulturkunde Rüstung etc
+
 
     const sonderfertigkeiten = new Sonderfertigkeiten(kampf, magische, profane, zauberSpezialisierungen, talentSpezialisierungen, andereSpezialisierungen);
+
+    const requestData = [];
     for (let i = 0; i < nodes.length ; i++) {
       const node = nodes.item(i);
       const name = node.getAttribute('name');
-
-
-      if (node.childNodes.length === 1) {
-        // Rüstungsgewöhnung oder Kulturkunde
-
-
-      } else if (node.childNodes.length === 2) {
+      //console.log(name)
+      if(name.indexOf('(') !== -1) {
+        //Talent / Zauberspezialisierung
         const type = node.childNodes[0].nodeName;
         if(type === 'zauber') {
-          
+          const zauberName = name.substring(22, name.indexOf('[')- 1);
+          const representation = name.substring(name.indexOf('[') + 1, name.indexOf(']'));
+          const spezialisierung = name.substring(name.indexOf('(') + 1, name.indexOf(')'));
+          //TODO: Append zs to zauber
+          const zs = new Spezialisierung(zauberName, spezialisierung, representation);
+         // talente.findZauberByName(zauberName).attachSpezialisierung(zs);
+          zauberSpezialisierungen.push(zs)
+        } else if( type === 'talent') {
+          const talentName = name.substring(22, name.indexOf('(')- 1);
+          const spezialisierung = name.substring(name.indexOf('(') + 1, name.indexOf(')'));
+          const ts = new Spezialisierung(talentName, spezialisierung);
+          talentSpezialisierungen.push(ts);
+          talente.findTalentByName(talentName).attachSpezialisierung(ts);
+
+        } else {
+          window.alert('Paddi hat einen Fall vergessen! Fallname: ' + name);
         }
-        console.log(type);
-        //Zauber oder Talent Spezialisierung
-        console.log(node);
+      } else if (node.childNodes.length === 1) {
+        //Rüstungsgewöhnung oder Kulturkunde
+        const spezialisierung = node.firstChild.attributes.getNamedItem('name').value;
+        andereSpezialisierungen.push(new Spezialisierung(name, spezialisierung));
+
       } else {
-        //Keine Spezialisierung
+        requestData.push(name);
+
+
       }
 
+
     }
-    return sonderfertigkeiten;
+    this.sonderfertigkeitenService.getSfsByName(requestData).subscribe(
+      (sfs: Sonderfertigkeit[]) => {
+
+        for( let i = 0; i< sfs.length; i++) {
+          const data = sfs[i];
+          if(data.typ === 'magisch') {
+            magische.push(data);
+          } else if(data.typ === 'profan') {
+            profane.push(data)
+          } else {
+            kampf.push(data);
+          }
+        }
+        callback(sonderfertigkeiten);
+      }
+
+
+    )
   }
 
   private extractTalente(xmlDoc: Document, fkBasis: number, callback: (talente: Talente) => void) : Talent[] {

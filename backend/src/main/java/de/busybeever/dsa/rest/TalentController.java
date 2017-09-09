@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.busybeever.dsa.data.entities.TalentEntity;
+import de.busybeever.dsa.data.entities.talente.TalentEntity;
 import de.busybeever.dsa.data.repository.SchriftRepository;
 import de.busybeever.dsa.data.repository.SprachRepository;
 import de.busybeever.dsa.data.repository.TalentRepository;

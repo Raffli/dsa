@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
-import de.busybeever.dsa.data.entities.TalentCategoryEntity;
+import de.busybeever.dsa.data.entities.talente.TalentCategoryEntity;
 
 public class TalentSerializer extends JsonSerializer<TalentCategoryEntity>{
 

@@ -26,6 +26,7 @@ import { KampfbogenComponent } from './heldenbogen/kampfbogen/kampfbogen/kampfbo
 import {AusruestungService} from "./service/ausruestung.service";
 import {KampfTalentService} from "./service/kampf-talent.service";
 import { HeldLadenComponent } from './held-laden/held-laden.component';
+import {SonderfertigkeitenService} from "./service/sonderfertigkeiten.service";
 
 const appRoutes: Routes = [
   {
@@ -61,7 +62,7 @@ const appRoutes: Routes = [
       { enableTracing: false }
     )
   ],
-  providers: [AttributService, HeldenService, TalentService, RestService, AusruestungService, KampfTalentService],
+  providers: [AttributService, HeldenService, TalentService, RestService, AusruestungService, KampfTalentService, SonderfertigkeitenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

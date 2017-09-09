@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.busybeever.dsa.data.entities.FkWaffenEntity;
-import de.busybeever.dsa.data.entities.RuestungEntity;
-import de.busybeever.dsa.data.entities.SchildEntity;
-import de.busybeever.dsa.data.entities.WaffenEntity;
+import de.busybeever.dsa.data.entities.ausruestung.FkWaffenEntity;
+import de.busybeever.dsa.data.entities.ausruestung.RuestungEntity;
+import de.busybeever.dsa.data.entities.ausruestung.SchildEntity;
+import de.busybeever.dsa.data.entities.ausruestung.WaffenEntity;
 import de.busybeever.dsa.data.repository.FkWaffenRepository;
 import de.busybeever.dsa.data.repository.RuestungRepository;
 import de.busybeever.dsa.data.repository.SchildRepository;

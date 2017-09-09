@@ -1,4 +1,4 @@
-package de.busybeever.dsa.data.entities;
+package de.busybeever.dsa.data.entities.ausruestung;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,13 +6,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import de.busybeever.dsa.data.entities.embeddable.Schaden;
+import de.busybeever.dsa.data.entities.embeddable.TpKK;
 import de.busybeever.dsa.data.entities.embeddable.WM;
 import lombok.Data;
 
-@Entity
-@Table(name = "schilde")
 @Data
-public class SchildEntity {
+@Table(name = "fkwaffen")
+@Entity
+public class FkWaffenEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +22,12 @@ public class SchildEntity {
 	
 	private String name;
 	
-	private WM wm;
+	private String typ;
 	
-	private int bf;
+	private Schaden schaden;
 	
-	private int ini;
+	private String entfernung;
+	
+	private String tpentfernung;
 	
 }

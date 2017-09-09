@@ -1,4 +1,4 @@
-package de.busybeever.dsa.data.entities;
+package de.busybeever.dsa.data.entities.talente;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,18 +8,14 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
-@Entity
-@Table(name = "ruestungen")
+@Table(name="talent_kategorien")
 @Data
-public class RuestungEntity {
+@Entity
+public class TalentCategoryEntity{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String name;
-	
-	private float be;
-	
-	private float rs;
 }

@@ -10,4 +10,26 @@ export class Talente {
               public kampftalente: KampfTalent[]){
 
   }
+
+  public findTalentByName(name: string) {
+    for (let i = 0; i < this.talente.length; i++) {
+      if(this.talente[i].name === name) {
+        return this.talente[i];
+      }
+    }
+    for (let i = 0; i < this.kampftalente.length; i++) {
+      if(this.kampftalente[i].name === name) {
+        return this.kampftalente[i];
+      }
+    }
+  }
+
+  //TODO
+  public findZauberByName(name: string) {
+    for (let i = 0; i < this.talente.length; i++) {
+      if(this.talente[i].name === name) {
+        return this.talente[i];
+      }
+    }
+  }
 }
