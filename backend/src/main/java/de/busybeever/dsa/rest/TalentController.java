@@ -43,6 +43,29 @@ public class TalentController {
 			return buildEntity(this.schriftRepository.findByName(name), "Unmapped lettering: "+name);		
 		}
 		return buildEntity(this.talentRepository.findByName(name), "Unmapped talent: "+name);
+	}
+	
+	@GetMapping("bynames")
+	public Object[] findByNames(@RequestParam String[] names) {
+		Object[] ret = new Object[names.length];
+		
+		for (int i = 0; i < ret.length; i++) {
+			String name = names[i];
+			if(name.startsWith("Sprachen kennen ")) {
+				name = name.substring(16);
+				
+				ret[i] = this.sprachRepository.findByName(name);
+				
+			} else if(name.startsWith("Lesen/Schreiben ")){
+				name = name.substring(16);
+				ret[i] = this.schriftRepository.findByName(name);	
+			} else {
+				ret[i] = this.talentRepository.findByName(name);
+			}
+			
+		}
+		
+		return ret;
 		
 	}
 	

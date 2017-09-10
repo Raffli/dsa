@@ -1,8 +1,8 @@
 
 
 <div class="container">
-  <div *ngFor="let held of heldenNamen" (click)="loadHeld(held)" class="spaced">
+  <button *ngFor="let held of heldenNamen" (click)="loadHeld(held)" class="loadButton">
     {{held}}
-  </div>
+  </button>
 
 </div>

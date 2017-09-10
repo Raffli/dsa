@@ -440,7 +440,7 @@ export class HeldenService {
     )
   }
 
-  private extractTalente(xmlDoc: Document, fkBasis: number, callback: (talente: Talente) => void) : Talent[] {
+  private extractTalente(xmlDoc: Document, fkBasis: number, callback: (talente: Talente) => void) {
     const nodes = xmlDoc.getElementsByTagName('talent')
     const talente = [];
     const schriftTalente: SprachTalent[] = [];
@@ -449,18 +449,28 @@ export class HeldenService {
     const observableBatch: Observable<TalentData>[] = [];
     const kampfMeta = this.buildKampfTalente(xmlDoc);
     const talentData: Talente = new Talente(sprachtalente, schriftTalente, talente, kampftalente)
-    for (let i = 0; i < nodes.length; i++) {
-      const node = nodes[i];
-      const lernmethode = node.getAttribute('lernmethode');
-      const name = node.getAttribute('name');
-      const probe = node.getAttribute('probe');
-      const value = parseInt(node.getAttribute('value'));
+    const requestData = [];
 
-      const obs = this.talentService.getTalentByName(name);
-      observableBatch.push(obs);
-      obs.subscribe(
-        (data: TalentData) => {
-          if(data.kategorie === 'Kampf') {
+    for ( let i = 0; i < nodes.length; i++) {
+      const node = nodes[i];
+      const name = node.getAttribute('name');
+      requestData.push(name);
+    }
+    this.talentService.getTalenteByName(requestData).subscribe(
+      (dataArr: TalentData[]) => {
+        for (let i = 0; i < nodes.length; i++) {
+          const node = nodes[i];
+          const name = node.getAttribute('name');
+          const data = dataArr[i];
+          if (data === null) {
+            window.alert('Talent nicht in der Datenbank gefunden. Bitte kontaktieren sie ihren lokale vertrauenswürdigen Entwickler ' + name)
+            continue;
+          }
+          const lernmethode = node.getAttribute('lernmethode');
+          const probe = node.getAttribute('probe');
+          const value = parseInt(node.getAttribute('value'));i
+
+          if (data.kategorie === 'Kampf') {
             const atpa = kampfMeta[name];
             let talent: KampfTalent;
             if (atpa === undefined) {
@@ -471,12 +481,12 @@ export class HeldenService {
             }
 
             kampftalente.push(talent);
-          } else if(data.kategorie === 'Sprachen') {
+          } else if (data.kategorie === 'Sprachen') {
             const talent: SprachTalent =  data as SprachTalent;
             talent.value = value;
             sprachtalente.push(talent);
 
-          } else if(data.kategorie == 'Schrift') {
+          } else if(data.kategorie === 'Schrift') {
             const talent: SprachTalent =  data as SprachTalent;
             talent.value = value;
             schriftTalente.push(talent);
@@ -487,31 +497,18 @@ export class HeldenService {
             talente.push(talent);
 
           }
-          if (i === nodes.length -1) {
-            callback(talentData);
+
+
 
           }
-        }, (error:any) => {
-          console.log(error)
-          console.log(name)
-        }
-      )
-
-      let zipped = Observable.zip(observableBatch);
-      zipped.subscribe(
-        () => {
-          console.log("all finished")
-        }
-      )
+        callback(talentData);
+        })
 
 
 
 
 
     }
-
-    return talente;
-  }
 
   private buildKampfTalente(xml: Document): {[key:string]: AtPaPair} {
     const values = {};

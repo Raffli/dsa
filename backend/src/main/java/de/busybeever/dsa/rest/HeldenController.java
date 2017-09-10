@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("api/held")
 @Slf4j
-public class HeldenRest {
+public class HeldenController {
 
 	@Autowired
 	private HeldRepository heldRepository;

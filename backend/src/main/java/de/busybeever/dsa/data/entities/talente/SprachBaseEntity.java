@@ -18,4 +18,6 @@ public abstract class SprachBaseEntity {
 	private String name;
 	private char lernkomplexitaet;
 	private Integer komplexitaet;
+	
+	private transient String kategorie;
 }

@@ -1,3 +1,4 @@
-.spaced {
-  margin-bottom:10px;
+.loadButton{
+  min-width: 100px;
+  min-height: 50px;
 }

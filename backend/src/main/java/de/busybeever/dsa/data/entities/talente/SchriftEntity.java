@@ -7,7 +7,7 @@ import javax.persistence.Table;
 @Table(name="schriften")
 public class SchriftEntity extends SprachBaseEntity{
 
-	public String getKategorie() {
-		return "Schrift";
+	{
+		this.setKategorie("Schrift");
 	}
 }

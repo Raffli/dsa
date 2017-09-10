@@ -33,7 +33,6 @@ public class SonderfertigkeitController {
 	public SonderfertigkeitEntity[] findByNames(@RequestParam String[] names) {
 		SonderfertigkeitEntity[] rEntities = new SonderfertigkeitEntity[names.length];
 		for (int i = 0; i < rEntities.length; i++) {
-			System.out.println(rEntities[i]);
 			rEntities[i] = this.sonderfertigkeitRepository.findByName(names[i]);
 		}
 		return rEntities;
