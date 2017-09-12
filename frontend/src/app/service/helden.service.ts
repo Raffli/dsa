@@ -220,6 +220,9 @@ export class HeldenService {
     ausruestungen.push(new AusruestungsSet());
     ausruestungen.push(new AusruestungsSet());
     const ret = new Ausruestung(ausruestungen);
+    const hasRgw3 = this.hasSonderfertigkeit('Rüstungsgewöhnung III', sonderfertigkeiten.kampf);
+    const hasRgw2 = this.hasSonderfertigkeit('Rüstungsgewöhnung II', sonderfertigkeiten.kampf);
+ 
     for (let i = 0; i < nodes.length; i++) {
       const node = nodes[i];
 
@@ -264,6 +267,8 @@ export class HeldenService {
             }
 
             ausruestungen[set].waffen.push(waffe);
+          }, (error: any) => {
+            window.alert('Waffe fehlt in der Datenbank: ' + name);
           }
         )
       } else if(type.startsWith('fkwaffe')) {
@@ -284,6 +289,8 @@ export class HeldenService {
             }
 
 
+          }, (error: any) => {
+            window.alert('Waffe fehlt in der Datenbank: ' + name);
           })
 
       } else if (type.startsWith('schild')) {
@@ -307,7 +314,9 @@ export class HeldenService {
               }
               data.pa = paBasis + bonusPa +  data.wm.pa;
             }
-          )
+          ), (error: any) => {
+            window.alert('Schild / Parierwaffe fehlt in der Datenbank: ' + name);
+          }
         } else {
           console.log('TODO: parierwaffen')
           console.log(node)
@@ -319,15 +328,41 @@ export class HeldenService {
         this.ausruetungsService.getRuestungByName(name).subscribe(
           (data: Ruestung) => {
             ausruestungen[set].ruestungen.push(data);
-            if (this.hasSpezialisierung('Rüstungsgewöhnung I', sonderfertigkeiten.andereSpezialisierungen, data.name)) {
-              Math.max(0, data.eBe = data.be - 1);
+            if (!hasRgw2 && this.hasSpezialisierung('Rüstungsgewöhnung I', sonderfertigkeiten.andereSpezialisierungen, data.name)) {
+              Math.max(0, data.stats.ebe = data.stats.be - 1);
             } else {
-              data.eBe = data.be;
+              data.stats.ebe = data.stats.be;
             }
-          })
+          }, (error: any) => {
+            window.alert('Rüstung fehlt in der Datenbank: ' + name); } )
 
       }
     }
+
+    for (let i = 0; i < ausruestungen.length; i++) {
+      let totalRs = 0;
+      let totalBe = 0;
+      let eBe = 0;
+      ausruestungen[i].ruestungen.forEach(ruestung => {
+        totalRs += ruestung.stats.rs;
+        totalBe += ruestung.stats.ebe;
+      })
+      if (hasRgw3) {
+        eBe = Math.max(0, totalBe - 2);
+      } else if (hasRgw2) {
+        eBe = Math.max(0, totalBe - 1);
+      } else {
+        eBe = totalBe;
+      }
+
+      ausruestungen[i].ruestungsStats = {
+        rs: totalRs,
+        eBe: eBe,
+        be: totalBe
+      }
+      console.log(ausruestungen[i].ruestungsStats)
+    }
+
 
     return ret;
   }
@@ -398,7 +433,7 @@ export class HeldenService {
          // talente.findZauberByName(zauberName).attachSpezialisierung(zs);
           zauberSpezialisierungen.push(zs)
         } else if( type === 'talent') {
-          const talentName = name.substring(22, name.indexOf('(')- 1);
+          const talentName = name.substring(22, name.indexOf('(') - 1);
           const spezialisierung = name.substring(name.indexOf('(') + 1, name.indexOf(')'));
           const ts = new Spezialisierung(talentName, spezialisierung);
           talentSpezialisierungen.push(ts);
@@ -408,7 +443,7 @@ export class HeldenService {
           window.alert('Paddi hat einen Fall vergessen! Fallname: ' + name);
         }
       } else if (node.childNodes.length === 1) {
-        //Rüstungsgewöhnung oder Kulturkunde
+        // Rüstungsgewöhnung oder Kulturkunde
         const spezialisierung = node.firstChild.attributes.getNamedItem('name').value;
         andereSpezialisierungen.push(new Spezialisierung(name, spezialisierung));
 
@@ -423,11 +458,15 @@ export class HeldenService {
     this.sonderfertigkeitenService.getSfsByName(requestData).subscribe(
       (sfs: Sonderfertigkeit[]) => {
 
-        for( let i = 0; i< sfs.length; i++) {
+        for ( let i = 0; i < sfs.length; i++) {
           const data = sfs[i];
-          if(data.typ === 'magisch') {
+          if (data === null) {
+            window.alert('Sonderfertigkeit nicht in der Datenbank vorhanden: ' + requestData[i]);
+            continue;
+          }
+          if (data.typ === 'magisch') {
             magische.push(data);
-          } else if(data.typ === 'profan') {
+          } else if (data.typ === 'profan') {
             profane.push(data)
           } else {
             kampf.push(data);
@@ -442,6 +481,7 @@ export class HeldenService {
 
   private extractTalente(xmlDoc: Document, fkBasis: number, callback: (talente: Talente) => void) {
     const nodes = xmlDoc.getElementsByTagName('talent')
+    // TODO : Talentspezialisiunergen tragen den Tag talent. der fall muss abgefangen werden
     const talente = [];
     const schriftTalente: SprachTalent[] = [];
     const sprachtalente: SprachTalent[] = [];
@@ -454,6 +494,9 @@ export class HeldenService {
     for ( let i = 0; i < nodes.length; i++) {
       const node = nodes[i];
       const name = node.getAttribute('name');
+      if (name.startsWith('Steinschneider')) {
+        console.log(node)
+      }
       requestData.push(name);
     }
     this.talentService.getTalenteByName(requestData).subscribe(
@@ -463,7 +506,8 @@ export class HeldenService {
           const name = node.getAttribute('name');
           const data = dataArr[i];
           if (data === null) {
-            window.alert('Talent nicht in der Datenbank gefunden. Bitte kontaktieren sie ihren lokale vertrauenswürdigen Entwickler ' + name)
+            window.alert('Talent nicht in der Datenbank gefunden. Bitte kontaktieren sie ' +
+              'ihren lokale vertrauenswürdigen Entwickler ' + name)
             continue;
           }
           const lernmethode = node.getAttribute('lernmethode');
@@ -486,7 +530,7 @@ export class HeldenService {
             talent.value = value;
             sprachtalente.push(talent);
 
-          } else if(data.kategorie === 'Schrift') {
+          } else if (data.kategorie === 'Schrift') {
             const talent: SprachTalent =  data as SprachTalent;
             talent.value = value;
             schriftTalente.push(talent);
@@ -498,16 +542,9 @@ export class HeldenService {
 
           }
 
-
-
           }
         callback(talentData);
         })
-
-
-
-
-
     }
 
   private buildKampfTalente(xml: Document): {[key:string]: AtPaPair} {

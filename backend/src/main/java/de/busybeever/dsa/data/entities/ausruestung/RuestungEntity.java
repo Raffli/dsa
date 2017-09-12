@@ -1,11 +1,13 @@
 package de.busybeever.dsa.data.entities.ausruestung;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import de.busybeever.dsa.data.entities.embeddable.RuestungStats;
 import lombok.Data;
 
 @Entity
@@ -19,7 +21,6 @@ public class RuestungEntity {
 	
 	private String name;
 	
-	private float be;
-	
-	private float rs;
+	@Embedded
+	private RuestungStats stats;
 }

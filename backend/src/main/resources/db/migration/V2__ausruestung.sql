@@ -51,18 +51,22 @@ INSERT INTO schilde(name, wm_at, wm_pa, bf, ini) VALUES
 create table ruestungen(
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	name varchar(35) NOT NULL,
-	be FLOAT NOT NULL,
-	rs FLOAT NOT NULL	
+	stats_be FLOAT NOT NULL,
+	stats_rs FLOAT NOT NULL,
+	stats_kopf FLOAT NOT NULL,
+  	stats_brust FLOAT NOT NULL,
+  	stats_ruecken FLOAT NOT NULL,
+  	stats_bauch FLOAT NOT NULL,
+  	stats_linkerarm FLOAT NOT NULL,
+  	stats_rechterarm FLOAT NOT NULL,
+  	stats_linkesbein FLOAT NOT NULL,
+  	stats_rechtsbein FLOAT NOT NULL
 );
 
-INSERT INTO ruestungen(name, be, rs)
-	VALUES('Gambeson', 1.5, 1.5),
-	('Dicke Kleidung', 0.9, 0.9),
-	('Kettenhemd, Lang', 2.1, 3.1),
-	('Beinschienen (Paar), Leder', 0.2, 0.2),
-	('Lederweste', 0.8, 0.8),
-	('Drachenhelm', 0.5, 0.5),
-	
-	('Wattierte Kappe', 0.1, 0.1);
+INSERT INTO ruestungen(name, stats_be, stats_rs, stats_kopf,stats_brust, stats_ruecken, stats_bauch, stats_linkerarm, stats_rechterarm,
+	stats_linkesbein, stats_rechtsbein) VALUES
+	('Gambeson', 1.5, 1.5, 0, 2, 2,2,1,1,1,1),
+	('Drachenhelm', 0.5, 0.5, 3,0,1,0,0,0,0,0),
+	('Kettenhemd, Lang', 3.1,2.1, 0,4,4,4,3,3,2,2);
 	
 	

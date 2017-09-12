@@ -14,15 +14,19 @@ export class AppComponent {
   items: MenuItem[] = [
     {
       label: 'Home',
-      routerLink:'home'
+      routerLink: 'home'
     },
     {
       label: 'Held',
-      routerLink:'heldenbogen'
+      routerLink: 'heldenbogen'
     },
     {
       label: 'Held laden',
-      routerLink:'laden'
+      routerLink: 'laden'
+    },
+    {
+      label: 'Kampf-Tool',
+      routerLink:'tools/kampf'
     }
   ];
 
