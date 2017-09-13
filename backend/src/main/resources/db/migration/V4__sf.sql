@@ -18,6 +18,8 @@ INSERT INTO SONDERFERTIGKEITEN (name, kosten, typ) VALUES
 	('Repräsentation: Magier', 100, 1),
 	('Ritualkenntnis: Gildenmagie', 100, 1),
 	('Rüstungsgewöhnung II', 100, 2),
+	('Schildkampf I', 100, 2),
+	('Schildkampf II', 100, 2),
 	('Stabzauber: Bindung', 100, 1);
 	
 	

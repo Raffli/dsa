@@ -42,6 +42,7 @@ export class KampfbogenComponent implements OnInit {
   }
 
   public totalBe() {
+
     return this.getPrimaryAusruestungsSet().ruestungsStats.ebe;
   }
 }

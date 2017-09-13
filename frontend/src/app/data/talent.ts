@@ -11,7 +11,7 @@ export class Talent extends TalentBase{
 
   public komplexitaet: number;
   public kategorie: string;
-
+  public eTaw: number;
   constructor(public lernmethode: string, public name: string, public probe: string, public value: number, public be: string) {
     super();
   }

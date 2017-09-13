@@ -1,4 +1,4 @@
-package de.busybeever.dsa.rest;
+package de.busybeever.dsa.rest.helden;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

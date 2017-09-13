@@ -6,6 +6,8 @@ import {TalentBase} from "./TalentBase";
  */
 export class KampfTalent extends TalentBase {
 
+  public eTaw: number;
+
   constructor(public name: string, public lernmethode: string, public value: number, public be: string,
               public at: number, public  pa: number, public taw: number) {
     super();

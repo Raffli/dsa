@@ -20,8 +20,6 @@ export class SonderfertigkeitenService {
 
   public getSfsByName(names: string[]): Observable<Sonderfertigkeit[]> {
 
-    const params = new URLSearchParams(JSON.stringify(names));
-
     const options: RequestOptionsArgs = {
       params: {
         names: names

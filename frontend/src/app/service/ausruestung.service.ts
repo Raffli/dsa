@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Rx'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 
-import {Response} from "@angular/http"
+import {RequestOptionsArgs, Response} from "@angular/http"
 import {RestService} from "./rest.service";
 import {Waffe} from "../data/ausruestung/Waffe";
 import {FernkampfWaffe} from "../data/ausruestung/FernkampfWaffe";
@@ -35,6 +35,16 @@ export class AusruestungService {
   public getRuestungByName(name: string): Observable<Ruestung> {
     return this.rest.get('ausruestung/ruestung/byname?name=' + name).map((res:Response) =>res.json())
       .catch((error:any) => Observable.throw(error))
+  }
+
+  public getEquipmentByNameAndType(data: any[]): Observable<any[]> {
+    const options: RequestOptionsArgs = {
+      params: {
+        data: data
+      }
+    }
+    return this.rest.getWithOptions('ausruestung/bynames', options).map((res:Response) =>res.json())
+      .catch((error: any) => Observable.throw(error))
   }
 
 }

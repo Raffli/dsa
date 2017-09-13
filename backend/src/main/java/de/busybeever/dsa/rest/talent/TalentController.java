@@ -1,4 +1,4 @@
-package de.busybeever.dsa.rest;
+package de.busybeever.dsa.rest.talent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

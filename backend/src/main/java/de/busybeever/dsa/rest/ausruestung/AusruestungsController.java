@@ -1,4 +1,6 @@
-package de.busybeever.dsa.rest;
+package de.busybeever.dsa.rest.ausruestung;
+
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,6 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.busybeever.dsa.data.entities.ausruestung.FkWaffenEntity;
 import de.busybeever.dsa.data.entities.ausruestung.RuestungEntity;
@@ -35,9 +41,34 @@ public class AusruestungsController {
 	@Autowired
 	private RuestungRepository ruestungRepository; 
 	
+	@Autowired
+	private ObjectMapper jacksonObjectMapper;
 	
-	
-	
+	@GetMapping("bynames") 
+	public Object[] getAusruestungByNamesAndTypes(@RequestParam String[] data) throws JsonParseException, JsonMappingException, IOException {
+		Object[] ret = new Object[data.length];
+		for (int i = 0; i < data.length; i++) {
+			AusruestungInfo info = jacksonObjectMapper.readValue(data[i], AusruestungInfo.class);
+			if(info.getType() == 0 ) {
+				ret[i] = this.waffenRepository.findByName(info.getName());
+			} else if(info.getType() == 1) {
+				//Fkwaffe
+				ret[i] = this.fkWaffenRepository.findByName(info.getName());
+			} else if(info.getType() == 2) {
+				//Schild
+				ret[i] = this.schildRepository.findByName(info.getName());
+			} else {
+				//Ruestung
+				ret[i] = this.ruestungRepository.findByName(info.getName());
+			}
+			
+			if(ret[i] == null ){
+				log.error("Unmapped equipment: " + info.getName());
+			}
+		}
+			
+		return ret;
+	}
 	
 	@GetMapping("waffe/byname")
 	public ResponseEntity<?> findByWaffeName(@RequestParam("name")String name) {
