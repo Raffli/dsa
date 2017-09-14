@@ -15,10 +15,6 @@ export class KampfTalent extends TalentBase {
     this.calculateEtaw(eBe);
     if (this.eTaw < this.value) {
       const diff = this.value - this.eTaw;
-      console.log(diff)
-      console.log(Math.ceil(diff/2))
-      console.log(Math.floor(diff/2))
-
       this.at -= Math.ceil(diff / 2);
       this.pa -= Math.floor(diff / 2);
     }
