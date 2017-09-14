@@ -51,6 +51,7 @@
         <td>AT</td>
         <td>PA</td>
         <td>TAW</td>
+        <td>eTaw</td>
       </tr>
       <tr *ngFor="let talent of filteredTalente.kampftalente">
         <td>{{talent.name}}</td>
@@ -58,7 +59,7 @@
         <td>{{talent.at}}</td>
         <td>{{talent.pa}}</td>
         <td>{{talent.taw}}</td>
-
+        <td>{{talent.eTaw}}</td>
       </tr>
     </table>
 
@@ -106,6 +107,7 @@
       <td>Behinderung</td>
       <td>Probe</td>
       <td>Wert</td>
+      <td>ETaw</td>
     </tr>
     <tr *ngFor="let talent of filteredTalente.talente">
       <td>{{talent.name}}</td>
@@ -113,6 +115,7 @@
       <td>{{talent.be}}</td>
       <td>{{talent.probe}}</td>
       <td>{{talent.value}}</td>
+      <td>{{talent.eTaw}}</td>
     </tr>
 
   </table>

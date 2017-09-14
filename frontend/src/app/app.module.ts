@@ -30,6 +30,7 @@ import { KampfToolComponent } from './meistertools/kampf-tool/kampf-tool.compone
 import { CreateKampfComponent } from './meistertools/kampf-tool/create-kampf/create-kampf.component';
 import { LoadKampfComponent } from './meistertools/kampf-tool/load-kampf/load-kampf.component';
 import { DisplayKampfComponent } from './meistertools/kampf-tool/display-kampf/display-kampf.component';
+import {LoggingService} from "./service/logging.service";
 
 const appRoutes: Routes = [
   {
@@ -70,7 +71,7 @@ const appRoutes: Routes = [
       { enableTracing: false }
     )
   ],
-  providers: [AttributService, HeldenService, TalentService, RestService, AusruestungService, KampfTalentService, SonderfertigkeitenService],
+  providers: [AttributService, HeldenService, TalentService, RestService, AusruestungService, KampfTalentService, SonderfertigkeitenService, LoggingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,11 +6,22 @@ import {TalentBase} from "./TalentBase";
  */
 export class KampfTalent extends TalentBase {
 
-  public eTaw: number;
-
-  constructor(public name: string, public lernmethode: string, public value: number, public be: string,
+  constructor(public name: string, public lernmethode: string, value: number, be: string,
               public at: number, public  pa: number, public taw: number) {
-    super();
+    super(be, value);
+  }
+
+  public calculateEtawWithATPA(eBe: number) {
+    this.calculateEtaw(eBe);
+    if (this.eTaw < this.value) {
+      const diff = this.value - this.eTaw;
+      console.log(diff)
+      console.log(Math.ceil(diff/2))
+      console.log(Math.floor(diff/2))
+
+      this.at -= Math.ceil(diff / 2);
+      this.pa -= Math.floor(diff / 2);
+    }
   }
 
 }
