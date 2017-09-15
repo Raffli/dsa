@@ -117,7 +117,7 @@ INSERT INTO talente (name, kategorie_id, komplexitaet,be) VALUES
 	('Wurfmesser', 4, 'C', 'BE-3'),
 	('Wurfspeere', 4, 'C', 'BE-2'),
 	('Zweihandflegel', 4, 'D', 'BE-3'),
-	('Zweihand-Hiebwaffen', 4, 'D', 'BE-3'),
+	('Zweihandhiebwaffen', 4, 'D', 'BE-3'),
 	('Zweihandschwerter/-säbel', 4, 'D', 'BE-2');
 	
 INSERT INTO talent_kategorien VALUES(5, 'Handwerk');

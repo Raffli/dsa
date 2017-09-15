@@ -101,12 +101,12 @@ export class HeldenService {
     const aussehen = this.extractAussehen(xmlDoc);
     this.extractTalente(xmlDoc, attribute[17].value, (talente: Talente) => {
 
-
      this.extractSonderfertigkeiten(xmlDoc, talente, (sonderfertigkeiten: Sonderfertigkeiten) => {
        this.extractAusruestung(xmlDoc, attribute[7].value, talente.kampftalente, attribute[15].value, attribute[16].value,
          attribute[17].value, sonderfertigkeiten, (ausruestung => {
+           const ausweichen = this.extractAusweichen(attribute[16].value, ausruestung.sets[0],  sonderfertigkeiten.kampf);
          const hero = new Held(rasse, geschlecht, profession, apTotal, apFree, name, attribute, vorteile, sonderfertigkeiten, kultur,
-           groesseGewicht.groesse, groesseGewicht.gewicht, aussehen, talente, ausruestung);
+           groesseGewicht.groesse, groesseGewicht.gewicht, aussehen, talente, ausruestung, ausweichen);
          talente.processBe(ausruestung.sets[0]);
          callback(hero);
        }));
@@ -116,6 +116,21 @@ export class HeldenService {
 
     });
 
+  }
+
+  private extractAusweichen(paBasis: number, ausruestung: AusruestungsSet, kampfSonderfertigkeiten: Sonderfertigkeit[]) : number {
+    let ausweichen = paBasis - ausruestung.ruestungsStats.ebe;
+    if(this.hasSonderfertigkeit('Ausweichen I', kampfSonderfertigkeiten)) {
+      ausweichen += 3;
+      if(this.hasSonderfertigkeit('Ausweichen II', kampfSonderfertigkeiten)) {
+        ausweichen += 3;
+        if(this.hasSonderfertigkeit('Ausweichen III', kampfSonderfertigkeiten)) {
+          ausweichen += 3;
+        }
+      }
+    }
+
+    return Math.floor(ausweichen);
   }
 
   private extractGewichtGroesse(xmlDoc : Document) : any {
@@ -231,6 +246,7 @@ export class HeldenService {
     const hasRgw3 = this.hasSonderfertigkeit('Rüstungsgewöhnung III', sonderfertigkeiten.kampf);
     const hasRgw2 = this.hasSonderfertigkeit('Rüstungsgewöhnung II', sonderfertigkeiten.kampf);
 
+
     const ausruestungBatch = [];
     for (let i = 0; i < nodes.length ; i++) {
       const node = nodes[i];
@@ -280,7 +296,7 @@ export class HeldenService {
             continue;
           }
           if (data[i] === null) {
-            this.log.error('Unable to extract equipment with name: ' + ausruestungBatch[i].name);
+            this.log.error('Unable to extract equipment with name: ' + ausruestungBatch[i].name, 'heldenservice.extractAusruestung');
             continue;
           }
           if (ausruestungBatch[i].type === 0 ) {
@@ -413,7 +429,7 @@ export class HeldenService {
   private extractRuestung(data: any, hasRgw2: boolean, andereSpezialisierungen: Spezialisierung[]): Ruestung {
     const ruestung = data as Ruestung;
     if (!hasRgw2 && this.hasSpezialisierung('Rüstungsgewöhnung I', andereSpezialisierungen, ruestung.name)) {
-      Math.max(0, ruestung.stats.ebe = ruestung.stats.be - 1);
+      ruestung.stats.ebe = Math.max(0, ruestung.stats.ebe = ruestung.stats.be - 1);
     } else {
       ruestung.stats.ebe = ruestung.stats.be;
     }
@@ -422,11 +438,14 @@ export class HeldenService {
 
   private hasSpezialisierung(talent: string, spezialisierungen: Spezialisierung[], name: string, representation?: string ): boolean {
     for (let i = 0; i < spezialisierungen.length; i++) {
+
       if (spezialisierungen[i].talent === talent && spezialisierungen[i].name === name) {
-        if (representation === undefined)
-        return true;
-      } else if(representation === spezialisierungen[i].representation) {
-        return true;
+        if (representation === undefined) {
+          return true;
+        } else if(representation === spezialisierungen[i].representation) {
+          return true;
+        }
+
       }
     }
     return false;

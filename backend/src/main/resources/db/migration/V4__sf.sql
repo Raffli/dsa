@@ -18,8 +18,25 @@ INSERT INTO SONDERFERTIGKEITEN (name, kosten, typ) VALUES
 	('Repräsentation: Magier', 100, 1),
 	('Ritualkenntnis: Gildenmagie', 100, 1),
 	('Rüstungsgewöhnung II', 100, 2),
+	('Rüstungsgewöhnung I', 100, 2),
 	('Schildkampf I', 100, 2),
 	('Schildkampf II', 100, 2),
-	('Stabzauber: Bindung', 100, 1);
+	('Stabzauber: Bindung', 100, 1),
+	('Ausweichen I', 100, 2),
+	('Standfest', 100, 0),
+	('Auspendeln', 100, 2),
+	('Block', 100, 2),
+	('Doppelschlag', 100, 2),
+	('Eisenarm', 100, 2),
+	('Gerade', 100, 2),
+	('Handkante', 100, 2),
+	('Kreuzblock', 100, 2),
+	('Meereskundig', 100, 0),
+	('Schmetterschlag', 100, 2),
+	('Schwinger', 100, 2),
+	('Waffenloser Kampfstil: Hammerfaust', 100, 2),
+	('Wuchtschlag', 100, 2),
+	('Tanz der Mada', 100, 0);
+	
 	
 	

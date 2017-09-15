@@ -4,6 +4,7 @@ import {Heldendata} from "../data/heldendata";
 import {isUndefined} from "util";
 import {Held} from "../data/held";
 import {Router} from "@angular/router";
+import {SessionStoreService} from "../service/session-store.service";
 
 @Component({
   selector: 'app-held-laden',
@@ -15,7 +16,7 @@ export class HeldLadenComponent implements OnInit {
 
   public heldenNamen: string[] = [];
 
-  constructor(private heldenService: HeldenService, private router: Router) { }
+  constructor(private heldenService: HeldenService, private router: Router, private sessionStore: SessionStoreService) { }
 
   ngOnInit() {
 
@@ -33,6 +34,7 @@ export class HeldLadenComponent implements OnInit {
     this.heldenService.getHeldByName(name).subscribe(
       (data: Heldendata) => {
         if(data.xml !== undefined) {
+          this.sessionStore.setAutoloadHeld(name);
           this.heldenService.loadHeldByXML(data.xml);
         }
       }

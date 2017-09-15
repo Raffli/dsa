@@ -31,6 +31,7 @@ import { CreateKampfComponent } from './meistertools/kampf-tool/create-kampf/cre
 import { LoadKampfComponent } from './meistertools/kampf-tool/load-kampf/load-kampf.component';
 import { DisplayKampfComponent } from './meistertools/kampf-tool/display-kampf/display-kampf.component';
 import {LoggingService} from "./service/logging.service";
+import {SessionStoreService} from "./service/session-store.service";
 
 const appRoutes: Routes = [
   {
@@ -62,7 +63,7 @@ const appRoutes: Routes = [
     KampfToolComponent,
     CreateKampfComponent,
     LoadKampfComponent,
-    DisplayKampfComponent
+    DisplayKampfComponent,
   ],
   imports: [
     BrowserModule, FormsModule, BrowserAnimationsModule, MenuModule, MenubarModule, DialogModule, DataTableModule, SharedModule, HttpModule, TabViewModule,
@@ -71,7 +72,7 @@ const appRoutes: Routes = [
       { enableTracing: false }
     )
   ],
-  providers: [AttributService, HeldenService, TalentService, RestService, AusruestungService, KampfTalentService, SonderfertigkeitenService, LoggingService],
+  providers: [AttributService, HeldenService, TalentService, RestService, AusruestungService, KampfTalentService, SonderfertigkeitenService, LoggingService, SessionStoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

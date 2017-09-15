@@ -6,15 +6,12 @@ export class LoggingService {
 
   constructor() { }
 
-  public info(message: string) {
-    console.log(message);
-  }
+  public error(message: string,methodname: string) {
 
-  public error(message: string) {
     if (environment.production) {
       window.alert(message);
     } else {
-      console.error(message);
+      console.error(methodname + ':' + message);
     }
   }
 }

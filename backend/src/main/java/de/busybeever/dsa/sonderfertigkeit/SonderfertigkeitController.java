@@ -34,6 +34,9 @@ public class SonderfertigkeitController {
 		SonderfertigkeitEntity[] rEntities = new SonderfertigkeitEntity[names.length];
 		for (int i = 0; i < rEntities.length; i++) {
 			rEntities[i] = this.sonderfertigkeitRepository.findByName(names[i]);
+			if(rEntities[i] == null) {
+				log.error("No mapping found for sf:" + names[i]);
+			}
 		}
 		return rEntities;
 	}

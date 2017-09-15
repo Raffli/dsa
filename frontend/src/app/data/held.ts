@@ -14,16 +14,12 @@ import {Sonderfertigkeiten} from "./Sonderfertigkeiten";
  */
 export class Held {
 
-
-public be: number = 0;
-
-
   constructor(public  rasse: string, public geschlecht: string, public profession: string,
               public abenteuerPunkteTotal: number, public abenteuerPunkteFrei: number,
               public name: string, public attribute: Attribut[], public vorteile: Vorteil[],
               public sonderfertigkeiten: Sonderfertigkeiten, public kultur: string,
               public groesse: number, public gewicht: number, public aussehen: Aussehen,
-              public talente: Talente, public ausruestung: Ausruestung) {
+              public talente: Talente, public ausruestung: Ausruestung, public ausweichen: number) {
   }
 
   public getGeburtstag(): string {
