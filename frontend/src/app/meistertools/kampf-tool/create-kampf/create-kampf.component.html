@@ -1,8 +1,10 @@
 
 
-<div *ngIf="visible">
-  <div *ngFor="let member of teilnehmer">
-
-
+<div *ngIf="visible" class="container">
+  <div >
+      <app-display-kampf-member *ngFor="let member of teilnehmer" [teilnehmer]="member"></app-display-kampf-member>
+  </div>
+  <div>
+    <app-create-kampf-member (memberCreated)="handleMemberCreated($event)"></app-create-kampf-member>
   </div>
 </div>

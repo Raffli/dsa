@@ -32,6 +32,8 @@ import { LoadKampfComponent } from './meistertools/kampf-tool/load-kampf/load-ka
 import { DisplayKampfComponent } from './meistertools/kampf-tool/display-kampf/display-kampf.component';
 import {LoggingService} from "./service/logging.service";
 import {SessionStoreService} from "./service/session-store.service";
+import { DisplayKampfMemberComponent } from './meistertools/kampf-tool/display-kampf-member/display-kampf-member.component';
+import { CreateKampfMemberComponent } from './meistertools/kampf-tool/create-kampf/create-kampf-member/create-kampf-member.component';
 
 const appRoutes: Routes = [
   {
@@ -64,6 +66,8 @@ const appRoutes: Routes = [
     CreateKampfComponent,
     LoadKampfComponent,
     DisplayKampfComponent,
+    DisplayKampfMemberComponent,
+    CreateKampfMemberComponent,
   ],
   imports: [
     BrowserModule, FormsModule, BrowserAnimationsModule, MenuModule, MenubarModule, DialogModule, DataTableModule, SharedModule, HttpModule, TabViewModule,

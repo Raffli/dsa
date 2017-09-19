@@ -1,0 +1,13 @@
+
+<div class="row">
+  <div class="col-md-4 pars">{{teilnehmer.name}}</div>
+  <div class="col-md-2 pars">{{teilnehmer.currentLep}} | {{teilnehmer.maxLep}}</div>
+  <div class="col-md-1 pars">{{teilnehmer.iniBase}}</div>
+  <div class="col-md-1 pars">{{teilnehmer.ruestung.rs}}</div>
+  <div class="col-md-1 pars">{{teilnehmer.ausweichen}}</div>
+</div>
+<div class="row" *ngFor="let attacke of teilnehmer.attacken">
+  <div class="col-md-4 pars">{{attacke.name}}</div>
+  <div class="col-md-1 pars">{{attacke.at}}</div>
+  <div class="col-md-4 pars">{{attacke.schaden.w6}}W+{{attacke.schaden.fix}}</div>
+</div>

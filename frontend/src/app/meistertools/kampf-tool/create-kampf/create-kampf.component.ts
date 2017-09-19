@@ -34,7 +34,11 @@ export class CreateKampfComponent implements OnInit {
       ebe: 1
     }
 
-    this.teilnehmer.push(new Kampfteilnehmer(attacken, 12, 14, rsStats, false, 31, 11));
+    this.teilnehmer.push(new Kampfteilnehmer('Test', attacken, 12, 14, rsStats, false, 31, 11));
+  }
+
+  handleMemberCreated(teilnehmer: Kampfteilnehmer) {
+    this.teilnehmer.push(teilnehmer);
   }
 
 }
