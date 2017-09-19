@@ -1,10 +1,196 @@
 
 
 <div *ngIf="visible" class="container">
-  <div >
-      <app-display-kampf-member *ngFor="let member of teilnehmer" [teilnehmer]="member"></app-display-kampf-member>
-  </div>
-  <div>
-    <app-create-kampf-member (memberCreated)="handleMemberCreated($event)"></app-create-kampf-member>
-  </div>
+
+  <form (ngSubmit)="onSubmit(form.value)">
+    <p-panel *ngFor="let teilnehmer of form.get('teilnehmer').controls; let i=index" [formGroup]="teilnehmer" [toggleable]="true">
+      <p-header>
+
+          Kampfteilnehmer: {{getName(i)}}
+          <button (click)="removeTeilnehmer(i)">remove</button>
+
+
+
+
+      </p-header>
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px" >
+        <div class="ui-grid-row" >
+          <div class="ui-grid-col-2">
+            Name *:
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText type="text" formControlName="name" placeholder="Required"/>
+          </div>
+          <div class="ui-grid-col-4">
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!teilnehmer.controls['name'].valid&&teilnehmer.controls['name'].dirty">
+              <i class="fa fa-close"></i>
+              Name is required
+            </div>
+          </div>
+        </div>
+
+        <div class="ui-grid-row" >
+          <div class="ui-grid-col-2">
+            Ini *:
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText type="number" formControlName="ini" placeholder="Required"/>
+          </div>
+          <div class="ui-grid-col-4">
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!teilnehmer.controls['ini'].valid&&teilnehmer.controls['ini'].dirty">
+              <i class="fa fa-close"></i>
+              Ini is required
+            </div>
+          </div>
+        </div>
+
+        <div class="ui-grid-row" >
+          <div class="ui-grid-col-2">
+            Max-Lep *:
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText type="number" formControlName="maxLep" placeholder="Required"/>
+          </div>
+          <div class="ui-grid-col-4">
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!teilnehmer.controls['maxLep'].valid&&teilnehmer.controls['maxLep'].dirty">
+              <i class="fa fa-close"></i>
+              MaxLep is required
+            </div>
+          </div>
+        </div>
+
+        <div class="ui-grid-row" >
+          <div class="ui-grid-col-2">
+            pa *:
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText type="number" formControlName="pa" placeholder="Required"/>
+          </div>
+          <div class="ui-grid-col-4">
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!teilnehmer.controls['pa'].valid&&teilnehmer.controls['pa'].dirty">
+              <i class="fa fa-close"></i>
+              pa is required
+            </div>
+          </div>
+        </div>
+
+        <div class="ui-grid-row" >
+          <div class="ui-grid-col-2">
+            ausweichen *:
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText type="number" formControlName="ausweichen" placeholder="Required"/>
+          </div>
+          <div class="ui-grid-col-4">
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!teilnehmer.controls['ausweichen'].valid&&teilnehmer.controls['ausweichen'].dirty">
+              <i class="fa fa-close"></i>
+              ausweichen is required
+            </div>
+          </div>
+        </div>
+
+        <div class="ui-grid-row" >
+          <div class="ui-grid-col-2">
+            ruestung *:
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText type="number" formControlName="ruestung" placeholder="Required"/>
+          </div>
+          <div class="ui-grid-col-4">
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!teilnehmer.controls['ruestung'].valid&&teilnehmer.controls['ruestung'].dirty">
+              <i class="fa fa-close"></i>
+              ruestung is required
+            </div>
+          </div>
+        </div>
+
+        <p-panel header="Attacken" [formGroup]="attacke" *ngFor="let attacke of teilnehmer.controls.attacken.controls;let j=index" [toggleable]="true">
+          <p-header>
+            <button (click)="removeAttacke(i,j)">löschen</button>
+          </p-header>
+          <div class="ui-grid-row" >
+            <div class="ui-grid-col-2">
+              Name *:
+            </div>
+            <div class="ui-grid-col-6">
+              <input pInputText type="text" formControlName="name" placeholder="Required"/>
+            </div>
+            <div class="ui-grid-col-4">
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!attacke.controls['name'].valid&&attacke.controls['name'].dirty">
+                <i class="fa fa-close"></i>
+                name is required
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-grid-row" >
+            <div class="ui-grid-col-2">
+              AT *:
+            </div>
+            <div class="ui-grid-col-6">
+              <input pInputText type="number" formControlName="at" placeholder="Required"/>
+            </div>
+            <div class="ui-grid-col-4">
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!attacke.controls['at'].valid&&attacke.controls['at'].dirty">
+                <i class="fa fa-close"></i>
+                AT is required
+              </div>
+            </div>
+          </div>
+
+          <div [formGroup]="attacke.controls.schaden">
+            <div class="ui-grid-row" >
+              <div class="ui-grid-col-2">
+                Fixer-Schaden *:
+              </div>
+              <div class="ui-grid-col-6">
+                <input pInputText type="number" formControlName="fix" placeholder="Required"/>
+              </div>
+              <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!attacke.controls.schaden.controls['fix'].valid&&attacke.controls.schaden.controls['fix'].dirty">
+                  <i class="fa fa-close"></i>
+                  Fixer-Schaden is required
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-grid-row" >
+              <div class="ui-grid-col-2">
+                W6-Schaden *:
+              </div>
+              <div class="ui-grid-col-6">
+                <input pInputText type="number" formControlName="w6" placeholder="Required"/>
+              </div>
+              <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!attacke.controls.schaden.controls['w6'].valid&&attacke.controls.schaden.controls['w6'].dirty">
+                  <i class="fa fa-close"></i>
+                  W6-Schaden is required
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </p-panel>
+        <button (click)="addAttacke(i)">Attacke hinzufügen</button>
+        <button (click)="saveToDatabase(i)">In Datenbank speichern</button>
+
+      </div>
+
+
+
+
+    </p-panel>
+    <div class="ui-grid-row" >
+      <button (click)="addTeilnehmer()">Teilnehmer hinzufügen</button>
+    </div>
+    <div class="ui-grid-row" >
+      <button type="submit" [disabled]="!form.valid">Erstellung beenden</button>
+    </div>
+
+
+
+  </form>
+
+
 </div>

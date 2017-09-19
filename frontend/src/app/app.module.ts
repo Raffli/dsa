@@ -20,7 +20,7 @@ import {TalentService} from "./service/talent.service";
 import {TabViewModule} from "primeng/components/tabview/tabview";
 import { SheetOverviewComponent } from './heldenbogen/sheet-overview/sheet-overview.component';
 import {RestService} from "./service/rest.service";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { KampfbogenComponent } from './heldenbogen/kampfbogen/kampfbogen/kampfbogen.component';
 import {AusruestungService} from "./service/ausruestung.service";
 import {KampfTalentService} from "./service/kampf-talent.service";
@@ -33,7 +33,9 @@ import { DisplayKampfComponent } from './meistertools/kampf-tool/display-kampf/d
 import {LoggingService} from "./service/logging.service";
 import {SessionStoreService} from "./service/session-store.service";
 import { DisplayKampfMemberComponent } from './meistertools/kampf-tool/display-kampf-member/display-kampf-member.component';
-import { CreateKampfMemberComponent } from './meistertools/kampf-tool/create-kampf/create-kampf-member/create-kampf-member.component';
+import {PanelModule} from "primeng/components/panel/panel";
+import {GrowlModule} from "primeng/components/growl/growl";
+import {KampfService} from "./service/kampf.service";
 
 const appRoutes: Routes = [
   {
@@ -67,16 +69,15 @@ const appRoutes: Routes = [
     LoadKampfComponent,
     DisplayKampfComponent,
     DisplayKampfMemberComponent,
-    CreateKampfMemberComponent,
   ],
   imports: [
-    BrowserModule, FormsModule, BrowserAnimationsModule, MenuModule, MenubarModule, DialogModule, DataTableModule, SharedModule, HttpModule, TabViewModule,
+    BrowserModule, FormsModule, BrowserAnimationsModule, MenuModule, MenubarModule, DialogModule, DataTableModule, SharedModule, HttpModule, TabViewModule, FormsModule, ReactiveFormsModule, PanelModule, GrowlModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }
     )
   ],
-  providers: [AttributService, HeldenService, TalentService, RestService, AusruestungService, KampfTalentService, SonderfertigkeitenService, LoggingService, SessionStoreService],
+  providers: [AttributService, HeldenService, TalentService, RestService, AusruestungService, KampfTalentService, SonderfertigkeitenService, LoggingService, SessionStoreService, KampfService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

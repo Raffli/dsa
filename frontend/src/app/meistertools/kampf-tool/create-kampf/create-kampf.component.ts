@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import {Kampfteilnehmer} from "../../../data/kampf/Kampfteilnehmer";
 import {Attacke} from "../../../data/kampf/Attacke";
 import {RuestungStats} from "../../../data/ausruestung/RuestungStats";
+import {FormGroup, FormBuilder, FormControl, Validators, FormArray} from "@angular/forms";
+import {KampfService} from "../../../service/kampf.service";
 
 @Component({
   selector: 'app-create-kampf',
@@ -15,30 +17,79 @@ export class CreateKampfComponent implements OnInit {
 
   public teilnehmer: Kampfteilnehmer[] = [];
 
-  constructor() { }
+  public form: FormGroup;
+
+  constructor(private fb: FormBuilder, private kampfservice: KampfService) { }
 
   ngOnInit() {
-//    teilnehmer.push()
-    const attacken = [new Attacke({w6: 1, fix: 3}, 12, 'Schwert') ]
-    const rsStats: RuestungStats = {
-      rs: 1,
-      kopf: 1,
-      brust: 1,
-      ruecken: 1,
-      bauch: 1,
-      linkerarm: 1,
-      rechterarm: 1,
-      linkesbein: 1,
-      rechtsbein: 1,
-      be: 1,
-      ebe: 1
-    }
+    this.form = new FormGroup({
+      teilnehmer: new FormArray([this.buildMember()])
+    })
 
-    this.teilnehmer.push(new Kampfteilnehmer('Test', attacken, 12, 14, rsStats, false, 31, 11));
+    console.log(this.form.get('teilnehmer'))
+
   }
 
-  handleMemberCreated(teilnehmer: Kampfteilnehmer) {
-    this.teilnehmer.push(teilnehmer);
+
+  private buildMember() {
+    return new FormGroup({
+      name: new FormControl('', Validators.required),
+      ini: new FormControl('', Validators.required),
+      maxLep: new FormControl('', Validators.required),
+      pa: new FormControl('', Validators.required),
+      ausweichen: new FormControl('', Validators.required),
+      ruestung: new FormControl('', Validators.required),
+      attacken: this.buildAttacken()
+    })
+  }
+
+  addTeilnehmer() {
+    (this.form.get('teilnehmer') as FormArray).push(this.buildMember())
+  }
+
+  buildAttacken() {
+    return new FormArray([this.buildAttacke()
+    ])
+  }
+
+  buildAttacke() {
+    return new FormGroup({
+      name: new FormControl('', Validators.required),
+      at: new FormControl('', Validators.required),
+      schaden: new FormGroup({
+        fix: new FormControl('', Validators.required),
+        w6: new FormControl('', Validators.required)
+      })
+    })
+  }
+
+  addAttacke(index: number) {
+
+    ((((this.form.get('teilnehmer') as FormArray).at(index)as any).controls.attacken) as FormArray).push(this.buildAttacke())
+    return false;
+  }
+
+  getName(index) {
+    return this.form.value.teilnehmer[index].name;
+  }
+
+  onSubmit(value: any) {
+    console.log(value.teilnehmer)
+  }
+
+  removeTeilnehmer(i: number) {
+    (this.form.get('teilnehmer') as FormArray).removeAt(i);
+    return false;
+  }
+
+  removeAttacke(i: number, j: number) {
+    ((((this.form.get('teilnehmer') as FormArray).at(i)as any).controls.attacken) as FormArray).removeAt(j);
+    return false;
+  }
+
+  saveToDatabase(i: number) {
+
+    return false;
   }
 
 }

@@ -6,7 +6,7 @@ export class Kampfteilnehmer {
   public currentLep: number;
   public ini: number;
 
-  constructor(public name: string, public attacken: Attacke[], pa: number, public ausweichen: number, public ruestung: RuestungStats,
+  constructor(public name: string, public attacken: Attacke[], pa: number, public ausweichen: number, public ruestung: number,
               public usesTrefferzonen: boolean, public maxLep: number, public iniBase: number) {
     this.currentLep = maxLep;
   }
