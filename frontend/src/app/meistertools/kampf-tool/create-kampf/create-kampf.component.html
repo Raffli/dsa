@@ -185,7 +185,7 @@
       <button (click)="addTeilnehmer()">Teilnehmer hinzufügen</button>
     </div>
     <div class="ui-grid-row" >
-      <button type="submit" [disabled]="!form.valid">Erstellung beenden</button>
+      <button type="submit" [disabled]="!form.valid" (click)="finishCreation()">Erstellung beenden</button>
     </div>
     <div class="ui-grid-row" >
       <button [disabled]="form.valid" (click)="saveKampf()">Kampf in Datenbank speicher</button>

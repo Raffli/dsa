@@ -1,4 +1,5 @@
 
-<div *ngIf="visible">
-  Load Kampf visible
-</div>
+
+<p-dialog [visible]="visible" header="Kampf laden" class="ui-button ui-button-success" (onHide)="onHide()">
+  <button pButton type="button" *ngFor="let name of kampfNamen" (click)="loadKampf(name)">{{name}}</button>
+</p-dialog>

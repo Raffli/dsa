@@ -1,10 +1,10 @@
 
 <div class="container">
-  <div *ngIf="kampfKonfiguriert">
+  <div *ngIf="kampf">
     <app-display-kampf></app-display-kampf>
   </div>
 
-  <div *ngIf="!kampfKonfiguriert">
+  <div *ngIf="!kampf">
     <h5>Es wurde noch kein Kampf konfiguriert.</h5>
     <div class="row">
       <button (click)="neuerKampf()" class="btn btn-success">Neuen Kampf erstellen</button>
@@ -18,7 +18,7 @@
   </div>
 
   <app-create-kampf [visible]="displayCreate"></app-create-kampf>
-  <app-load-kampf [visible]="displayLoad"></app-load-kampf>
+  <app-load-kampf [visible]="displayLoad" (dialogClosed)="loadKampfDialogClosed()" (kampfLoaded)="kampfLoaded($event)"></app-load-kampf>
 
 </div>
 

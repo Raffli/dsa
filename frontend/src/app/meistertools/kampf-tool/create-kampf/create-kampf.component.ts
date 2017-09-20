@@ -113,4 +113,8 @@ export class CreateKampfComponent implements OnInit {
     this.showSaveKampfDialog = false;
   }
 
+  finishCreation() {
+    console.log('finished creation')
+  }
+
 }

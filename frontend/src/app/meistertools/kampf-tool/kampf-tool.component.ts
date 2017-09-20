@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Kampf} from '../../data/kampf/Kampf';
+import {Kampfteilnehmer} from '../../data/kampf/Kampfteilnehmer';
 
 @Component({
   selector: 'app-kampf-tool',
@@ -7,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KampfToolComponent implements OnInit {
 
-  public kampfKonfiguriert = false;
+  public kampf: Kampfteilnehmer[];
+
   public displayLoad = false;
   public displayCreate = true;
   constructor() { }
@@ -16,13 +19,22 @@ export class KampfToolComponent implements OnInit {
   }
 
   public neuerKampf() {
-    this.displayLoad = false;
     this.displayCreate = true;
   }
 
   public kampfLaden() {
-    this.displayCreate = false;
     this.displayLoad = true;
+  }
+
+  public loadKampfDialogClosed() {
+    this.displayLoad = false;
+  }
+
+  public kampfLoaded(kampf: Kampfteilnehmer[]) {
+    this.kampf = kampf;
+    console.log(kampf[0])
+    this.displayLoad = false;
+    this.displayCreate = false;
   }
 
 }

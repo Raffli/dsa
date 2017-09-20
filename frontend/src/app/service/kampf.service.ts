@@ -41,6 +41,11 @@ export class KampfService {
       .catch((error: any) => Observable.throw(error))
   }
 
+  public getKampfnamen(): Observable<string[]> {
+      return this.rest.get('kampf/kampf').map((response: Response) => response.json())
+      .catch((error:any) => Observable.throw(error))
+  }
+
 
 
 

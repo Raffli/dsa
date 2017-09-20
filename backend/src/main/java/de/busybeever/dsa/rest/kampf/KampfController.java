@@ -64,6 +64,13 @@ public class KampfController {
 		return ResponseEntity.ok().build();
 	}
 	
+	@GetMapping("kampf")
+	public String[] getKampfNames() {
+		return this.kampfRepository.getAllNames();
+	}
+	
+	
+	
 	
 	
 	
