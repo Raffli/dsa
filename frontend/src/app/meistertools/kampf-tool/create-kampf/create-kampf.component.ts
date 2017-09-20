@@ -15,19 +15,16 @@ export class CreateKampfComponent implements OnInit {
   @Input()
   public visible: boolean;
 
-  public teilnehmer: Kampfteilnehmer[] = [];
-
   public form: FormGroup;
 
+  public showSaveKampfDialog = false;
+  public showSaveTeilnehmerDialog = false;
   constructor(private fb: FormBuilder, private kampfservice: KampfService) { }
 
   ngOnInit() {
     this.form = new FormGroup({
       teilnehmer: new FormArray([this.buildMember()])
     })
-
-    console.log(this.form.get('teilnehmer'))
-
   }
 
 
@@ -88,8 +85,32 @@ export class CreateKampfComponent implements OnInit {
   }
 
   saveToDatabase(i: number) {
-
+    const data: Kampfteilnehmer = this.teilnehmer[i];
+    this.showSaveTeilnehmerDialog = true;
+    this.kampfservice.getKampfteilnehmerByName(data.name).subscribe(
+      (teilnehmer: Kampfteilnehmer) => {
+        // Show decision dialog here
+        console.log("member already in db")
+      }, (error: any) => {
+        if (error.status === 404) {
+          this.kampfservice.saveTeilnehmnerToDatabase(data);
+        }
+      }
+    )
     return false;
+  }
+
+  saveKampf() {
+    this.showSaveKampfDialog = true;
+    return false;
+  }
+
+  get teilnehmer() {
+    return this.form.value.teilnehmer;
+  }
+
+  saveKampfFinished() {
+    this.showSaveKampfDialog = false;
   }
 
 }

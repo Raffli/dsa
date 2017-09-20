@@ -36,6 +36,8 @@ import { DisplayKampfMemberComponent } from './meistertools/kampf-tool/display-k
 import {PanelModule} from "primeng/components/panel/panel";
 import {GrowlModule} from "primeng/components/growl/growl";
 import {KampfService} from "./service/kampf.service";
+import { SaveKampfComponent } from './meistertools/kampf-tool/create-kampf/save-kampf/save-kampf.component';
+import { SaveKampfteilnehmerComponent } from './meistertools/kampf-tool/create-kampf/save-kampfteilnehmer/save-kampfteilnehmer.component';
 
 const appRoutes: Routes = [
   {
@@ -69,6 +71,8 @@ const appRoutes: Routes = [
     LoadKampfComponent,
     DisplayKampfComponent,
     DisplayKampfMemberComponent,
+    SaveKampfComponent,
+    SaveKampfteilnehmerComponent,
   ],
   imports: [
     BrowserModule, FormsModule, BrowserAnimationsModule, MenuModule, MenubarModule, DialogModule, DataTableModule, SharedModule, HttpModule, TabViewModule, FormsModule, ReactiveFormsModule, PanelModule, GrowlModule,

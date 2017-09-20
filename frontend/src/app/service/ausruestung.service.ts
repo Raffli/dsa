@@ -19,7 +19,7 @@ export class AusruestungService {
 
   public getWaffeByName(name: string): Observable<Waffe> {
     return this.rest.get('ausruestung/waffe/byname?name=' + name).map((res:Response) =>res.json())
-      .catch((error:any) => Observable.throw(error))
+      .catch((error: any) => Observable.throw(error))
   }
 
   public getFkWaffeByName(name: string): Observable<FernkampfWaffe> {

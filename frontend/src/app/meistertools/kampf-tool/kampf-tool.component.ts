@@ -16,10 +16,12 @@ export class KampfToolComponent implements OnInit {
   }
 
   public neuerKampf() {
+    this.displayLoad = false;
     this.displayCreate = true;
   }
 
   public kampfLaden() {
+    this.displayCreate = false;
     this.displayLoad = true;
   }
 

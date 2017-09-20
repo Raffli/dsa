@@ -173,7 +173,7 @@
 
         </p-panel>
         <button (click)="addAttacke(i)">Attacke hinzufügen</button>
-        <button (click)="saveToDatabase(i)">In Datenbank speichern</button>
+        <button (click)="saveToDatabase(i)" [disabled]="!form.valid">In Datenbank speichern</button>
 
       </div>
 
@@ -187,6 +187,10 @@
     <div class="ui-grid-row" >
       <button type="submit" [disabled]="!form.valid">Erstellung beenden</button>
     </div>
+    <div class="ui-grid-row" >
+      <button [disabled]="form.valid" (click)="saveKampf()">Kampf in Datenbank speicher</button>
+    </div>
+
 
 
 
@@ -194,3 +198,4 @@
 
 
 </div>
+<app-save-kampf [visible]="showSaveKampfDialog" [kampfteilnehmer]="teilnehmer" (saveFinished)="saveKampfFinished()"></app-save-kampf>

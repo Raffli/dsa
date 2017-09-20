@@ -1,0 +1,18 @@
+<p-dialog [modal]="true" [visible]="visible" header="Kampf speichern" (onHide)="onDialogHide()">
+  <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-4">
+        Kampfname:
+      </div>
+      <div class="ui-grid-col-8">
+        <input type="text" [(ngModel)]="kampfname" (keydown.enter)="saveKampf()">
+      </div>
+
+    </div>
+    <div class="ui-grid-row">
+      <button (click)="saveKampf()">Speichern</button>
+    </div>
+
+  </div>
+
+</p-dialog>
