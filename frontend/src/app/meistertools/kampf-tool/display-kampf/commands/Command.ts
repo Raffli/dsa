@@ -1,5 +1,6 @@
 import {Kampfteilnehmer} from '../../../../data/kampf/Kampfteilnehmer';
 import {Kampf} from '../../../../data/kampf/Kampf';
+import {KampfService} from '../../../../service/kampf.service';
 /**
  * Created by pahil on 21.09.2017.
  */
@@ -7,6 +8,11 @@ export abstract class Command {
   public abstract getName(): string;
   public abstract perform(params: string[], kampfteilnehmer: Kampfteilnehmer[]);
   public abstract autoComplete(string: string, params: string[], kampfteilnehmer: Kampfteilnehmer[]): string;
+
+
+  constructor(protected kampfService: KampfService){
+
+  }
 
   protected provideNameMatching(command: string, kampfteilnehmer: Kampfteilnehmer[]): string {
     const index = command.lastIndexOf(' ');

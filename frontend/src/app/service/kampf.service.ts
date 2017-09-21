@@ -46,6 +46,16 @@ export class KampfService {
       .catch((error:any) => Observable.throw(error))
   }
 
+  public reduceHealth(amount: number, teilnehmer: Kampfteilnehmer) {
+    console.log(teilnehmer.ruestung)
+
+    teilnehmer.currentLep -= (amount-teilnehmer.ruestung);
+  }
+
+  public reduceIni(amount: number, teilnehmer: Kampfteilnehmer) {
+    teilnehmer.ini-= amount;
+  }
+
 
 
 

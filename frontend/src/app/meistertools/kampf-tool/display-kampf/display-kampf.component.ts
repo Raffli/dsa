@@ -3,6 +3,7 @@ import {Kampfteilnehmer} from '../../../data/kampf/Kampfteilnehmer';
 import {Command} from './commands/Command';
 import {CommandDamage} from './commands/CommandDamage';
 import {CommandIni} from './commands/CommandIni';
+import {KampfService} from '../../../service/kampf.service';
 
 @Component({
   selector: 'app-display-kampf',
@@ -18,11 +19,11 @@ export class DisplayKampfComponent implements OnInit {
   @Input()
   public teilnehmer: Kampfteilnehmer[];
 
-  constructor() { }
+  constructor(private kampfService: KampfService) { }
 
   ngOnInit() {
-    this.addCommand(new CommandDamage());
-    this.addCommand(new CommandIni());
+    this.addCommand(new CommandDamage(this.kampfService));
+    this.addCommand(new CommandIni(this.kampfService));
   }
 
   private addCommand(command: Command) {
@@ -31,9 +32,7 @@ export class DisplayKampfComponent implements OnInit {
   }
 
   public onCommandEnter() {
-    this.teilnehmer[0].test = () => {
-      console.log('test');
-    }
+
     const splits = this.command.split(' ');
     const command = this.mapping[splits[0]];
     if (command !== null) {
@@ -66,7 +65,7 @@ export class DisplayKampfComponent implements OnInit {
   }
 
   sharedStart(array: Command[]): string {
-    
+
     const A = array.concat().sort(),
       a1 = A[0], a2 = A[A.length - 1], L =  a1.getName().length;
     let i = 0;

@@ -10,8 +10,4 @@ export class Kampfteilnehmer {
               public usesTrefferzonen: boolean, public maxLep: number, public iniBase: number) {
     this.currentLep = maxLep;
   }
-
-  test() {
-    console.log('test')
-  }
 }

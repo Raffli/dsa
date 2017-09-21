@@ -24,10 +24,11 @@ export class CommandIni extends Command {
       }
 
       const number = parseInt(params[2], 10);
-      if (number.toString() === 'NaN') {
+      if (Number.isNaN(number)) {
         return;
       }
-      teilnehmer.ini -= number;
+      this.kampfService.reduceIni(number, teilnehmer)
+
     }
   }
 }

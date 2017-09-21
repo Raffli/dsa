@@ -24,11 +24,10 @@ export class CommandDamage extends Command {
       }
 
       const number = parseInt(params[2], 10);
-      if (number.toString() === 'NaN') {
+      if (Number.isNaN(number)) {
         return;
       }
-      teilnehmer.test();
-      teilnehmer.currentLep -= number;
+      this.kampfService.reduceHealth(number, teilnehmer)
     }
   }
 }
