@@ -25,10 +25,11 @@ export class SaveKampfComponent implements OnInit {
   constructor(private kampfService: KampfService) { }
 
   saveKampf() {
+    this.kampfteilnehmer.forEach(val => {
+      val.currentLep = val.maxLep;
+    })
     this.kampfService.getKampfByName(this.kampfname).subscribe(
       (data: Kampf) => {
-        console.log(1)
-        console.log(data)
       }, (error: any) => {
         console.log(error.status)
         if (error.status === 404) {

@@ -31,15 +31,15 @@
 
         <div class="ui-grid-row" >
           <div class="ui-grid-col-2">
-            Ini *:
+            Ini-Basis *:
           </div>
           <div class="ui-grid-col-6">
-            <input pInputText type="number" formControlName="ini" placeholder="Required"/>
+            <input pInputText type="number" formControlName="iniBase" placeholder="Required"/>
           </div>
           <div class="ui-grid-col-4">
-            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!teilnehmer.controls['ini'].valid&&teilnehmer.controls['ini'].dirty">
+            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!teilnehmer.controls['iniBase'].valid&&teilnehmer.controls['iniBase'].dirty">
               <i class="fa fa-close"></i>
-              Ini is required
+              Ini-Basis is required
             </div>
           </div>
         </div>

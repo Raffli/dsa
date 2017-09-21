@@ -31,7 +31,7 @@ export class CreateKampfComponent implements OnInit {
   private buildMember() {
     return new FormGroup({
       name: new FormControl('', Validators.required),
-      ini: new FormControl('', Validators.required),
+      iniBase: new FormControl('', Validators.required),
       maxLep: new FormControl('', Validators.required),
       pa: new FormControl('', Validators.required),
       ausweichen: new FormControl('', Validators.required),
@@ -86,11 +86,12 @@ export class CreateKampfComponent implements OnInit {
 
   saveToDatabase(i: number) {
     const data: Kampfteilnehmer = this.teilnehmer[i];
+    data.currentLep = data.maxLep;
     this.showSaveTeilnehmerDialog = true;
     this.kampfservice.getKampfteilnehmerByName(data.name).subscribe(
       (teilnehmer: Kampfteilnehmer) => {
         // Show decision dialog here
-        console.log("member already in db")
+        console.log('member already in db')
       }, (error: any) => {
         if (error.status === 404) {
           this.kampfservice.saveTeilnehmnerToDatabase(data);

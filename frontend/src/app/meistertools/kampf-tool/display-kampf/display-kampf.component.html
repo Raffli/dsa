@@ -1,3 +1,21 @@
-<p>
-  display-kampf works!
-</p>
+
+<div class="row">
+  <div class="col-md-4 pars">name</div>
+  <div class="col-md-2 pars">Lep | maxLep</div>
+  <div class="col-md-1 pars">iniBase</div>
+  <div class="col-md-1 pars">rs</div>
+  <div class="col-md-2 pars">ausweichen</div>
+</div>
+<div class="row">
+  <div class="col-md-4 pars">Attacke-Name</div>
+  <div class="col-md-1 pars">AT</div>
+  <div class="col-md-4 pars">Schaden</div>
+</div>
+
+
+
+<app-display-kampf-member *ngFor="let member of teilnehmer" [teilnehmer]="member">
+
+</app-display-kampf-member>
+
+<input type="text" pInputText [(ngModel)]="command" (keydown.enter)="onCommandEnter()" (keydown.Tab)="onCommandTab()">

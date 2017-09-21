@@ -32,7 +32,6 @@ export class KampfToolComponent implements OnInit {
 
   public kampfLoaded(kampf: Kampfteilnehmer[]) {
     this.kampf = kampf;
-    console.log(kampf[0])
     this.displayLoad = false;
     this.displayCreate = false;
   }

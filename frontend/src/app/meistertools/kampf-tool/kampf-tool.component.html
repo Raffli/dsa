@@ -1,7 +1,7 @@
 
 <div class="container">
   <div *ngIf="kampf">
-    <app-display-kampf></app-display-kampf>
+    <app-display-kampf [teilnehmer]="kampf"></app-display-kampf>
   </div>
 
   <div *ngIf="!kampf">

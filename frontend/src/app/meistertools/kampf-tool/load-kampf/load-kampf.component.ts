@@ -2,6 +2,7 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {Kampf} from '../../../data/kampf/Kampf';
 import {KampfService} from '../../../service/kampf.service';
 import {Kampfteilnehmer} from '../../../data/kampf/Kampfteilnehmer';
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-load-kampf',
@@ -31,6 +32,14 @@ export class LoadKampfComponent implements OnInit {
 
       }
     )
+
+    if (!environment.production) {
+      this.kampfService.getKampfByName('Testkampf').subscribe(
+        (data: Kampf) => {
+          this.kampfLoaded.emit(data.json as any)
+        }
+      )
+    }
   }
 
   onHide() {
@@ -38,7 +47,6 @@ export class LoadKampfComponent implements OnInit {
   }
 
   loadKampf(name: string) {
-    console.log(name);
     this.kampfService.getKampfByName(name).subscribe(
       (data: Kampf) => {
         this.kampfLoaded.emit(data.json as any)
