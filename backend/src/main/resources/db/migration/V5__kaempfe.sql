@@ -10,4 +10,4 @@ create table gegner(
 	json text NOT NULL
 );
 
-INSERT INTO KAMPF VALUES(0, 'Testkampf', '[{"name":"Testname","iniBase":12,"maxLep":31, "currentLep":31, "pa":12,"ausweichen":12,"ruestung":3,"attacken":[{"name":"Schwert","at":12,"schaden":{"fix":3,"w6":1}}]}]')
+INSERT INTO KAMPF VALUES(0, 'Testkampf', '[{"name":"Goblin","iniBase":12,"maxLep":30,"pa":10,"ausweichen":10,"ruestung":3,"attacken":[{"name":"Langschwert","at":12,"schaden":{"fix":5,"w6":1}}],"currentLep":30},{"name":"Wache","iniBase":12,"maxLep":30,"pa":10,"ausweichen":10,"ruestung":4,"attacken":[{"name":"Langschwert","at":10,"schaden":{"fix":5,"w6":1}}],"currentLep":30}]')

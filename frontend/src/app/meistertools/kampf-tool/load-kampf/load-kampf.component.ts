@@ -32,7 +32,7 @@ export class LoadKampfComponent implements OnInit {
 
       }
     )
-
+    /*
     if (!environment.production) {
       this.kampfService.getKampfByName('Testkampf').subscribe(
         (data: Kampf) => {
@@ -40,6 +40,7 @@ export class LoadKampfComponent implements OnInit {
         }
       )
     }
+    */
   }
 
   onHide() {

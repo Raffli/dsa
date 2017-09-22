@@ -139,20 +139,6 @@
           </div>
 
           <div [formGroup]="attacke.controls.schaden">
-            <div class="ui-grid-row" >
-              <div class="ui-grid-col-2">
-                Fixer-Schaden *:
-              </div>
-              <div class="ui-grid-col-6">
-                <input pInputText type="number" formControlName="fix" placeholder="Required"/>
-              </div>
-              <div class="ui-grid-col-4">
-                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!attacke.controls.schaden.controls['fix'].valid&&attacke.controls.schaden.controls['fix'].dirty">
-                  <i class="fa fa-close"></i>
-                  Fixer-Schaden is required
-                </div>
-              </div>
-            </div>
 
             <div class="ui-grid-row" >
               <div class="ui-grid-col-2">
@@ -165,6 +151,21 @@
                 <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!attacke.controls.schaden.controls['w6'].valid&&attacke.controls.schaden.controls['w6'].dirty">
                   <i class="fa fa-close"></i>
                   W6-Schaden is required
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-grid-row" >
+              <div class="ui-grid-col-2">
+                Fixer-Schaden *:
+              </div>
+              <div class="ui-grid-col-6">
+                <input pInputText type="number" formControlName="fix" placeholder="Required"/>
+              </div>
+              <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!attacke.controls.schaden.controls['fix'].valid&&attacke.controls.schaden.controls['fix'].dirty">
+                  <i class="fa fa-close"></i>
+                  Fixer-Schaden is required
                 </div>
               </div>
             </div>
@@ -185,10 +186,10 @@
       <button (click)="addTeilnehmer()">Teilnehmer hinzufügen</button>
     </div>
     <div class="ui-grid-row" >
-      <button type="submit" [disabled]="!form.valid" (click)="finishCreation()">Erstellung beenden</button>
+      <button type="submit" [disabled]="!form.valid">Erstellung beenden</button>
     </div>
     <div class="ui-grid-row" >
-      <button [disabled]="form.valid" (click)="saveKampf()">Kampf in Datenbank speicher</button>
+      <button [disabled]="!form.valid" (click)="saveKampf()">Kampf in Datenbank speicher</button>
     </div>
 
 
@@ -199,3 +200,5 @@
 
 </div>
 <app-save-kampf [visible]="showSaveKampfDialog" [kampfteilnehmer]="teilnehmer" (saveFinished)="saveKampfFinished()"></app-save-kampf>
+<app-save-kampfteilnehmer [savingTeilnehmer]="savingTeilnehmer" [conflictingTeilnehmer]="conflictingTeilnehmer"></app-save-kampfteilnehmer>
+<p-growl [(value)]="messages" life="300"></p-growl>

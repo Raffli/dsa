@@ -36,4 +36,8 @@ export class KampfToolComponent implements OnInit {
     this.displayCreate = false;
   }
 
+  public kampfBeenden() {
+    this.kampf = null;
+  }
+
 }

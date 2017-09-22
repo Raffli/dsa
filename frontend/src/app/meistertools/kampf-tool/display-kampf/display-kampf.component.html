@@ -18,4 +18,4 @@
 
 </app-display-kampf-member>
 
-<input type="text" pInputText [(ngModel)]="command" (keydown.enter)="onCommandEnter()" (keydown.Tab)="onCommandTab()">
+<input type="text" *ngIf="!readonly" pInputText [(ngModel)]="command" (keydown.enter)="onCommandEnter()" (keydown.Tab)="onCommandTab()">

@@ -1,3 +1,13 @@
-<p>
-  save-kampfteilnehmer works!
-</p>
+<p-dialog *ngIf="conflictingTeilnehmer">
+  <app-display-kampf-member [teilnehmer]="savingTeilnehmer"></app-display-kampf-member>
+  <app-display-kampf-member [teilnehmer]="conflictingTeilnehmer"></app-display-kampf-member>
+  <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+    <div class="ui-grid-row">
+      <button pButton (click)="saveNew()">Datenbank Eintrag überschreiben</button>
+    </div>
+    <div class="ui-grid-row">
+      <button pButton (click)="keepOld()">Datenbank Eintrag beibehalten</button>
+    </div>
+
+  </div>
+</p-dialog>

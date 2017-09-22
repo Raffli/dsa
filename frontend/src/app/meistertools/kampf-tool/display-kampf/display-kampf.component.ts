@@ -19,6 +19,9 @@ export class DisplayKampfComponent implements OnInit {
   @Input()
   public teilnehmer: Kampfteilnehmer[];
 
+  @Input()
+  public readonly: boolean = false;
+
   constructor(private kampfService: KampfService) { }
 
   ngOnInit() {
