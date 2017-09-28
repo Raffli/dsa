@@ -1,8 +1,15 @@
 
 
 <div class="container">
-  <button *ngFor="let held of heldenNamen" (click)="loadHeld(held)" class="loadButton">
-    {{held}}
-  </button>
+  <p-panel [header]="gruppe" *ngFor="let gruppe of gruppenNamen; let i=index" [toggleable]="true">
+    <div class="">
+      <div class="ui-grid-row" *ngFor="let member of helden[i]">
+        <button (click)="loadHeld(member)">
+          {{member}}
+        </button>
+
+      </div>
+    </div>
+  </p-panel>
 
 </div>

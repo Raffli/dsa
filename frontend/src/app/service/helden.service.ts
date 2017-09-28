@@ -36,6 +36,7 @@ import {Spezialisierung} from "../data/Spezialisierung";
 import {SonderfertigkeitenService} from "./sonderfertigkeiten.service";
 import {isNullOrUndefined} from 'util';
 import {LoggingService} from "./logging.service";
+import {NameGroupPair} from '../data/NameGroupPair';
 
 @Injectable()
 export class HeldenService {
@@ -53,7 +54,7 @@ export class HeldenService {
 
   }
 
-  public getHeldenNamen() : Observable<String[]> {
+  public getHelden() : Observable<NameGroupPair[]> {
     return this.restService.get('held/names').map((response: Response) => response.json())
       .catch((error:any) => Observable.throw(error))
   }

@@ -5,6 +5,7 @@ import {isUndefined} from "util";
 import {Held} from "../data/held";
 import {Router} from "@angular/router";
 import {SessionStoreService} from "../service/session-store.service";
+import {NameGroupPair} from '../data/NameGroupPair';
 
 @Component({
   selector: 'app-held-laden',
@@ -14,7 +15,9 @@ import {SessionStoreService} from "../service/session-store.service";
 export class HeldLadenComponent implements OnInit {
 
 
-  public heldenNamen: string[] = [];
+  public helden: string[][] = [];
+  public gruppenNamen: string[] = [];
+
 
   constructor(private heldenService: HeldenService, private router: Router, private sessionStore: SessionStoreService) { }
 
@@ -23,9 +26,20 @@ export class HeldLadenComponent implements OnInit {
     this.heldenService.heldLoaded.subscribe((data: Held) => {
       this.router.navigateByUrl('/heldenbogen')
     })
-    this.heldenService.getHeldenNamen().subscribe(
-      (data: string[]) => {
-        this.heldenNamen = data;
+    this.heldenService.getHelden().subscribe(
+      (data: NameGroupPair[]) => {
+        const transformedData = {};
+        data.forEach(value => {
+          if (!transformedData[value.group]) {
+            transformedData[value.group] = [];
+          }
+          transformedData[value.group].push(value.name);
+        })
+        this.gruppenNamen = Object.keys(transformedData);
+        this.gruppenNamen.forEach(key => {
+          this.helden.push(transformedData[key])
+        })
+
       })
 
   }

@@ -28,6 +28,10 @@ export class AppComponent {
       routerLink: 'laden'
     },
     {
+      routerLink: 'upload',
+      label: 'Held hochladen'
+    },
+    {
       label: 'Kampf-Tool',
       routerLink: 'tools/kampf'
     }
