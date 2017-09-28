@@ -1,4 +1,4 @@
-create table talent_kategorien(
+create table IF NOT EXISTS talent_kategorien(
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	name varchar(25) NOT NULL,
     PRIMARY KEY(id)

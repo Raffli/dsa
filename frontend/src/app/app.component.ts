@@ -43,4 +43,8 @@ export class AppComponent {
     return this.messageService.messages;
   }
 
+  public set messages(value: Message[]){
+    this.messageService.messages = value;
+  }
+
 }
