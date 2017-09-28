@@ -186,6 +186,9 @@
       <button (click)="addTeilnehmer()">Teilnehmer hinzufügen</button>
     </div>
     <div class="ui-grid-row" >
+      <button (click)="loadTeilnehmer()">Teilnehmer aus Datenbank laden</button>
+    </div>
+    <div class="ui-grid-row" >
       <button type="submit" [disabled]="!form.valid">Erstellung beenden</button>
     </div>
     <div class="ui-grid-row" >
@@ -201,4 +204,3 @@
 </div>
 <app-save-kampf [visible]="showSaveKampfDialog" [kampfteilnehmer]="teilnehmer" (saveFinished)="saveKampfFinished()"></app-save-kampf>
 <app-save-kampfteilnehmer [savingTeilnehmer]="savingTeilnehmer" [conflictingTeilnehmer]="conflictingTeilnehmer"></app-save-kampfteilnehmer>
-<p-growl [(value)]="messages" life="300"></p-growl>

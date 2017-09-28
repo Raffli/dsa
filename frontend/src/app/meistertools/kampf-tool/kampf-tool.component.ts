@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Kampf} from '../../data/kampf/Kampf';
 import {Kampfteilnehmer} from '../../data/kampf/Kampfteilnehmer';
+import {KampfService} from '../../service/kampf.service';
 
 @Component({
   selector: 'app-kampf-tool',
@@ -13,7 +14,7 @@ export class KampfToolComponent implements OnInit {
 
   public displayLoad = false;
   public displayCreate = true;
-  constructor() { }
+  constructor(private kampfService: KampfService) { }
 
   ngOnInit() {
   }
@@ -31,6 +32,7 @@ export class KampfToolComponent implements OnInit {
   }
 
   public kampfLoaded(kampf: Kampfteilnehmer[]) {
+    this.kampfService.prepareKampf(kampf)
     this.kampf = kampf;
     this.displayLoad = false;
     this.displayCreate = false;

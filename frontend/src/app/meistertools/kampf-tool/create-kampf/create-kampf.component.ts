@@ -5,6 +5,7 @@ import {RuestungStats} from "../../../data/ausruestung/RuestungStats";
 import {FormGroup, FormBuilder, FormControl, Validators, FormArray} from "@angular/forms";
 import {KampfService} from "../../../service/kampf.service";
 import {Message} from 'primeng/primeng';
+import {MessageService} from '../../../service/message.service';
 
 @Component({
   selector: 'app-create-kampf',
@@ -21,13 +22,11 @@ export class CreateKampfComponent implements OnInit {
 
   public form: FormGroup;
 
-  public messages: Message[] = [];
-
   public showSaveKampfDialog = false;
   public savingTeilnehmer: Kampfteilnehmer;
   public conflictingTeilnehmer: Kampfteilnehmer;
 
-  constructor(private fb: FormBuilder, private kampfservice: KampfService) { }
+  constructor(private fb: FormBuilder, private kampfservice: KampfService, private messageService: MessageService) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -91,7 +90,6 @@ export class CreateKampfComponent implements OnInit {
 
   saveToDatabase(i: number) {
     const data: Kampfteilnehmer = this.teilnehmer[i];
-    data.currentLep = data.maxLep;
     this.kampfservice.getKampfteilnehmerByName(data.name).subscribe(
       (teilnehmer: Kampfteilnehmer) => {
         // Show decision dialog here
@@ -112,12 +110,12 @@ export class CreateKampfComponent implements OnInit {
   }
 
   private performNameValidation(): boolean {
-    this.messages = [];
     const teilnehmer = this.form.value.teilnehmer;
     const names = {};
     for (let i = 0; i < teilnehmer.length; i++) {
       if (names[teilnehmer[i].name]) {
-        this.messages.push({severity: 'error', summary: 'Doppelt vergebener Name'})
+
+        this.messageService.addMessage({severity: 'error', summary: 'Doppelt vergebener Name'})
         return false;
       }
       names[teilnehmer[i].name] = true;
@@ -127,7 +125,7 @@ export class CreateKampfComponent implements OnInit {
 
   saveKampf() {
     if (!this.performNameValidation()) {
-      return;
+      return false;
     }
     this.showSaveKampfDialog = true;
     return false;
@@ -147,6 +145,11 @@ export class CreateKampfComponent implements OnInit {
 
   saveKampfFinished() {
     this.showSaveKampfDialog = false;
+  }
+
+  loadTeilnehmer() {
+
+    return false;
   }
 
 
