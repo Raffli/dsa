@@ -39,7 +39,7 @@ export class AppComponent {
     return this.messageService.messages;
   }
 
-  get messages(): Message[] {
+  public get messages(): Message[] {
     return this.messageService.messages;
   }
 
