@@ -1,9 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {Kampfteilnehmer} from "../../../data/kampf/Kampfteilnehmer";
 import {Attacke} from "../../../data/kampf/Attacke";
 import {RuestungStats} from "../../../data/ausruestung/RuestungStats";
 import {FormGroup, FormBuilder, FormControl, Validators, FormArray} from "@angular/forms";
 import {KampfService} from "../../../service/kampf.service";
+import {Message} from 'primeng/primeng';
+import {MessageService} from '../../../service/message.service';
 
 @Component({
   selector: 'app-create-kampf',
@@ -15,11 +17,16 @@ export class CreateKampfComponent implements OnInit {
   @Input()
   public visible: boolean;
 
+  @Output()
+  public kampfLoaded = new EventEmitter<Kampfteilnehmer[]>()
+
   public form: FormGroup;
 
   public showSaveKampfDialog = false;
-  public showSaveTeilnehmerDialog = false;
-  constructor(private fb: FormBuilder, private kampfservice: KampfService) { }
+  public savingTeilnehmer: Kampfteilnehmer;
+  public conflictingTeilnehmer: Kampfteilnehmer;
+
+  constructor(private fb: FormBuilder, private kampfservice: KampfService, private messageService: MessageService) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -42,6 +49,7 @@ export class CreateKampfComponent implements OnInit {
 
   addTeilnehmer() {
     (this.form.get('teilnehmer') as FormArray).push(this.buildMember())
+    return false;
   }
 
   buildAttacken() {
@@ -70,10 +78,6 @@ export class CreateKampfComponent implements OnInit {
     return this.form.value.teilnehmer[index].name;
   }
 
-  onSubmit(value: any) {
-    console.log(value.teilnehmer)
-  }
-
   removeTeilnehmer(i: number) {
     (this.form.get('teilnehmer') as FormArray).removeAt(i);
     return false;
@@ -86,24 +90,53 @@ export class CreateKampfComponent implements OnInit {
 
   saveToDatabase(i: number) {
     const data: Kampfteilnehmer = this.teilnehmer[i];
-    data.currentLep = data.maxLep;
-    this.showSaveTeilnehmerDialog = true;
     this.kampfservice.getKampfteilnehmerByName(data.name).subscribe(
       (teilnehmer: Kampfteilnehmer) => {
         // Show decision dialog here
+        this.savingTeilnehmer = data;
+        this.conflictingTeilnehmer = teilnehmer;
         console.log('member already in db')
       }, (error: any) => {
         if (error.status === 404) {
-          this.kampfservice.saveTeilnehmnerToDatabase(data);
+          this.kampfservice.saveTeilnehmnerToDatabase(data).subscribe(
+            () => {
+              console.log('saved')
+            }
+          );
         }
       }
     )
     return false;
   }
 
+  private performNameValidation(): boolean {
+    const teilnehmer = this.form.value.teilnehmer;
+    const names = {};
+    for (let i = 0; i < teilnehmer.length; i++) {
+      if (names[teilnehmer[i].name]) {
+
+        this.messageService.addMessage({severity: 'error', summary: 'Doppelt vergebener Name'})
+        return false;
+      }
+      names[teilnehmer[i].name] = true;
+    }
+    return true;
+  }
+
   saveKampf() {
+    if (!this.performNameValidation()) {
+      return false;
+    }
     this.showSaveKampfDialog = true;
     return false;
+  }
+
+  onSubmit(value: any) {
+    if (!this.performNameValidation()) {
+      return;
+    }
+
+    this.kampfLoaded.emit(value.teilnehmer);
   }
 
   get teilnehmer() {
@@ -114,8 +147,10 @@ export class CreateKampfComponent implements OnInit {
     this.showSaveKampfDialog = false;
   }
 
-  finishCreation() {
-    console.log('finished creation')
+  loadTeilnehmer() {
+
+    return false;
   }
+
 
 }

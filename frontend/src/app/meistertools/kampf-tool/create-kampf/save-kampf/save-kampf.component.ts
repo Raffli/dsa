@@ -19,6 +19,8 @@ export class SaveKampfComponent implements OnInit {
   @Input()
   public kampfteilnehmer: Kampfteilnehmer[];
 
+  public conflictingKampfteilnehmer: Kampfteilnehmer[];
+
   public kampfname = '';
 
 
@@ -30,10 +32,9 @@ export class SaveKampfComponent implements OnInit {
     })
     this.kampfService.getKampfByName(this.kampfname).subscribe(
       (data: Kampf) => {
+        this.conflictingKampfteilnehmer = (data.json as any);
       }, (error: any) => {
-        console.log(error.status)
         if (error.status === 404) {
-
           this.kampfService.saveKampfToDatabase(this.kampfteilnehmer, this.kampfname).subscribe(
             () => {
               console.log('saved')

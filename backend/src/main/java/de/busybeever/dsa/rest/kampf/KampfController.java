@@ -27,6 +27,7 @@ public class KampfController {
 	
 	@GetMapping("gegner/byname")
 	public GegnerEntity findGegnerByName(@RequestParam String name) {
+		System.out.println("name is: "+name);
 		return ControllerUtils.returnIfNotNull(this.gegnerRepository.findByName(name));
 	}
 	
@@ -37,6 +38,7 @@ public class KampfController {
 	
 	@PostMapping("gegner")
 	public ResponseEntity<?> saveGegner(@RequestBody GegnerEntity entity) {
+		System.out.println("saving name is: "+entity.getName());
 		
 		GegnerEntity gegner = this.gegnerRepository.findByName(entity.getName());
 		if(gegner == null) {

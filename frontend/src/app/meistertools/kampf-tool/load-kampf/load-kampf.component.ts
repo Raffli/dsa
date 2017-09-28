@@ -40,6 +40,7 @@ export class LoadKampfComponent implements OnInit {
         }
       )
     }
+
   }
 
   onHide() {

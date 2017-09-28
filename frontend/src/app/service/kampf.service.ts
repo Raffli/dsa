@@ -28,8 +28,9 @@ export class KampfService {
   }
 
   public saveTeilnehmnerToDatabase(teilnehmer: Kampfteilnehmer): Observable<void> {
+    console.log('saving: ' + teilnehmer.name)
     const kampfteilnehmer = {
-      name: name,
+      name: teilnehmer.name,
       json: JSON.stringify(teilnehmer)
     }
     return this.rest.post('kampf/gegner', kampfteilnehmer)
@@ -37,6 +38,7 @@ export class KampfService {
   }
 
   public getKampfteilnehmerByName(name: string): Observable<Kampfteilnehmer> {
+    console.log('getting teilnehmer: ' + name)
     return this.rest.get('kampf/gegner/byname?name=' + name).map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error))
   }
@@ -46,14 +48,26 @@ export class KampfService {
       .catch((error:any) => Observable.throw(error))
   }
 
-  public reduceHealth(amount: number, teilnehmer: Kampfteilnehmer) {
-    console.log(teilnehmer.ruestung)
+  public prepareKampf(teilnehmer: Kampfteilnehmer[]) {
+    teilnehmer.forEach(member => {
+      member.currentLep = member.maxLep;
+      member.ini = member.iniBase + Math.floor(6 * Math.random())
+    })
+  }
 
-    teilnehmer.currentLep -= (amount-teilnehmer.ruestung);
+  public sortByIni(teilnehmer: Kampfteilnehmer[]): Kampfteilnehmer[] {
+
+
+    return teilnehmer;
+  }
+
+  public reduceHealth(amount: number, teilnehmer: Kampfteilnehmer) {
+
+    teilnehmer.currentLep -= (amount - teilnehmer.ruestung);
   }
 
   public reduceIni(amount: number, teilnehmer: Kampfteilnehmer) {
-    teilnehmer.ini-= amount;
+    teilnehmer.ini -= amount;
   }
 
 

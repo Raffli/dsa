@@ -38,6 +38,7 @@ import {GrowlModule} from "primeng/components/growl/growl";
 import {KampfService} from "./service/kampf.service";
 import { SaveKampfComponent } from './meistertools/kampf-tool/create-kampf/save-kampf/save-kampf.component';
 import { SaveKampfteilnehmerComponent } from './meistertools/kampf-tool/create-kampf/save-kampfteilnehmer/save-kampfteilnehmer.component';
+import {MessageService} from './service/message.service';
 
 const appRoutes: Routes = [
   {
@@ -81,7 +82,7 @@ const appRoutes: Routes = [
       { enableTracing: false }
     )
   ],
-  providers: [AttributService, HeldenService, TalentService, RestService, AusruestungService, KampfTalentService, SonderfertigkeitenService, LoggingService, SessionStoreService, KampfService],
+  providers: [AttributService, HeldenService, TalentService, RestService, AusruestungService, KampfTalentService, SonderfertigkeitenService, LoggingService, SessionStoreService, KampfService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,6 +2,9 @@
 <div class="container">
   <div *ngIf="kampf">
     <app-display-kampf [teilnehmer]="kampf"></app-display-kampf>
+    <div class="">
+      <button pButton (click)="kampfBeenden()">Kampf beenden</button>
+    </div>
   </div>
 
   <div *ngIf="!kampf">
@@ -17,7 +20,7 @@
 
   </div>
 
-  <app-create-kampf [visible]="displayCreate"></app-create-kampf>
+  <app-create-kampf [visible]="displayCreate" (kampfLoaded)="kampfLoaded($event)"></app-create-kampf>
   <app-load-kampf [visible]="displayLoad" (dialogClosed)="loadKampfDialogClosed()" (kampfLoaded)="kampfLoaded($event)"></app-load-kampf>
 
 </div>
