@@ -36,6 +36,14 @@ INSERT INTO SONDERFERTIGKEITEN (name, kosten, typ) VALUES
 	('Schwinger', 100, 2),
 	('Waffenloser Kampfstil: Hammerfaust', 100, 2),
 	('Wuchtschlag', 100, 2),
+	('Beidhändiger Kampf I', 100, 2),
+	('Beidhändiger Kampf II', 100, 2),
+	('Fernzauberei', 100, 1),
+	('Regeneration I', 100, 1),
+	('Merkmalskenntnis: Umwelt', 100, 1),
+	('Stabzauber: Fackel', 100, 1),
+	('Merkmalskenntnis: Elementar (Luft)', 100, 1),
+	
 	('Tanz der Mada', 100, 0);
 	
 	

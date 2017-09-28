@@ -15,7 +15,7 @@ import {AttributService} from './service/attribut.service';
 import {HeldenService} from './service/helden.service';
 
 
-import {MenuModule, MenubarModule, DataTableModule, SharedModule, DialogModule} from 'primeng/primeng';
+import {MenuModule, MenubarModule, DataTableModule, SharedModule, DialogModule, DropdownModule} from 'primeng/primeng';
 import {TalentService} from "./service/talent.service";
 import {TabViewModule} from "primeng/components/tabview/tabview";
 import { SheetOverviewComponent } from './heldenbogen/sheet-overview/sheet-overview.component';
@@ -40,6 +40,7 @@ import { SaveKampfComponent } from './meistertools/kampf-tool/create-kampf/save-
 import { SaveKampfteilnehmerComponent } from './meistertools/kampf-tool/create-kampf/save-kampfteilnehmer/save-kampfteilnehmer.component';
 import {MessageService} from './service/message.service';
 import { HeldSpeichernComponent } from './held-speichern/held-speichern.component';
+import { LoadKampfMemberComponent } from './meistertools/kampf-tool/load-kampf-member/load-kampf-member.component';
 
 const appRoutes: Routes = [
   {
@@ -77,9 +78,12 @@ const appRoutes: Routes = [
     SaveKampfComponent,
     SaveKampfteilnehmerComponent,
     HeldSpeichernComponent,
+    LoadKampfMemberComponent,
   ],
   imports: [
-    BrowserModule, FormsModule, BrowserAnimationsModule, MenuModule, MenubarModule, DialogModule, DataTableModule, SharedModule, HttpModule, TabViewModule, FormsModule, ReactiveFormsModule, PanelModule, GrowlModule,
+    BrowserModule, FormsModule, BrowserAnimationsModule, MenuModule, MenubarModule,
+    DialogModule, DataTableModule, SharedModule, HttpModule, TabViewModule,
+    FormsModule, ReactiveFormsModule, PanelModule, GrowlModule, DropdownModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }

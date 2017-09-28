@@ -1,0 +1,9 @@
+<p-dialog header="Kampfteilnehmer laden" [visible]="visible" (onHide)="onHide()" modal="true">
+
+  <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+   <div class="ui-grid-row" *ngFor="let gegner of gegnerNames">
+     <button pButton (click)="loadGegner(gegner)">{{gegner}}</button>
+
+   </div>
+  </div>
+</p-dialog>

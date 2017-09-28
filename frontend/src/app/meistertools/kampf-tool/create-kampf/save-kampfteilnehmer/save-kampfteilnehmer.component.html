@@ -1,4 +1,4 @@
-<p-dialog *ngIf="conflictingTeilnehmer">
+<p-dialog *ngIf="conflictingTeilnehmer" (onHide)="keepOld()">
   <app-display-kampf-member [teilnehmer]="savingTeilnehmer"></app-display-kampf-member>
   <app-display-kampf-member [teilnehmer]="conflictingTeilnehmer"></app-display-kampf-member>
   <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">

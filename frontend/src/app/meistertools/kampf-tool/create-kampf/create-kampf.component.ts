@@ -22,6 +22,7 @@ export class CreateKampfComponent implements OnInit {
 
   public form: FormGroup;
 
+  public showLoadKampfMember = false;
   public showSaveKampfDialog = false;
   public savingTeilnehmer: Kampfteilnehmer;
   public conflictingTeilnehmer: Kampfteilnehmer;
@@ -47,8 +48,11 @@ export class CreateKampfComponent implements OnInit {
     })
   }
 
-  addTeilnehmer() {
-    (this.form.get('teilnehmer') as FormArray).push(this.buildMember())
+  addTeilnehmer(member ?: FormGroup) {
+    if ( member === undefined) {
+      member = this.buildMember();
+    }
+    (this.form.get('teilnehmer') as FormArray).push(member)
     return false;
   }
 
@@ -148,8 +152,20 @@ export class CreateKampfComponent implements OnInit {
   }
 
   loadTeilnehmer() {
-
+    this.showLoadKampfMember = true;
     return false;
+  }
+
+  loadKampfmemberFinished(kampfteilnehmer: Kampfteilnehmer) {
+    if(kampfteilnehmer !== null) {
+      //TODO: Add to form
+
+      const member = this.buildMember();
+      member.patchValue(kampfteilnehmer);
+      this.addTeilnehmer(member);
+
+    }
+    this.showLoadKampfMember = false;
   }
 
 

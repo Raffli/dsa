@@ -44,15 +44,26 @@ export class HeldLadenComponent implements OnInit {
 
   }
 
-  loadHeld(name: string){
+  loadHeld(name: string) {
     this.heldenService.getHeldByName(name).subscribe(
       (data: Heldendata) => {
-        if(data.xml !== undefined) {
+        if (data.xml !== undefined) {
           this.sessionStore.setAutoloadHeld(name);
           this.heldenService.loadHeldByXML(data.xml);
         }
       }
     )
+  }
+
+  fileUploaded(event: any) {
+    const files = event.srcElement.files;
+    const reader = new FileReader();
+    reader.onload = file => {
+      const contents: any = file.target;
+      const text = contents.result;
+      this.heldenService.loadHeldByXML(text);
+    }
+    reader.readAsText(files[0]);
   }
 
 }

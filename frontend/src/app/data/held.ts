@@ -19,7 +19,7 @@ export class Held {
               public name: string, public attribute: Attribut[], public vorteile: Vorteil[],
               public sonderfertigkeiten: Sonderfertigkeiten, public kultur: string,
               public groesse: number, public gewicht: number, public aussehen: Aussehen,
-              public talente: Talente, public ausruestung: Ausruestung, public ausweichen: number) {
+              public talente: Talente, public ausruestung: Ausruestung, public ausweichen: number, public xml: string) {
   }
 
   public getGeburtstag(): string {

@@ -10,33 +10,12 @@ import {Attribut} from "../../data/attribut";
 })
 export class HeldDetailComponent implements OnInit {
 
-  constructor(private heldenService: HeldenService) { }
-
-  public data = [{title: 'asdasd'}];
-
   @Input()
   held: Held;
 
+  constructor() { }
 
   ngOnInit() {
   }
-
-  fileUploaded(event: any) {
-
-    var files = event.srcElement.files;
-
-
-    var reader = new FileReader();
-    reader.onload = file => {
-      var contents: any = file.target;
-      let text = contents.result;
-      this.heldenService.loadHeldByXML(text);
-      }
-
-
-    reader.readAsText(files[0]);
-  }
-
-
 
 }

@@ -9,8 +9,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import de.busybeever.dsa.config.jackson.GruppeDeserializer;
 import de.busybeever.dsa.config.jackson.GruppeSerializer;
 import de.busybeever.dsa.config.jackson.TalentSerializer;
 import lombok.AllArgsConstructor;
@@ -35,6 +37,7 @@ public class HeldEntity {
 	@ManyToOne
 	@JoinColumn(name="gruppeid")
 	@JsonSerialize(using = GruppeSerializer.class)
+	@JsonDeserialize(using = GruppeDeserializer.class)
 	private HeldenGruppeEntity gruppe;
 
 }

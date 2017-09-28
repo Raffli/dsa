@@ -71,6 +71,12 @@ public class KampfController {
 		return this.kampfRepository.getAllNames();
 	}
 	
+	@GetMapping("gegner")
+	public String[] getGegnerNames() {
+		return this.gegnerRepository.getAllNames();
+	}
+	
+	
 	
 	
 	

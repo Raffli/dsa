@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.busybeever.dsa.data.entities.HeldEntity;
+import de.busybeever.dsa.data.entities.HeldenGruppeEntity;
 import de.busybeever.dsa.data.repository.HeldRepository;
+import de.busybeever.dsa.data.repository.HeldenGruppeRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -23,9 +25,17 @@ public class HeldenController {
 	@Autowired
 	private HeldRepository heldRepository;
 	
+	@Autowired
+	private HeldenGruppeRepository heldenGruppeRepository;
+	
 	@GetMapping("names")
 	public List<NameGroupPair> getAllNames() {
 		return this.heldRepository.getAllNames();
+	}
+	
+	@GetMapping("groups")
+	public String[] getAllGroupNames() {
+		return this.heldenGruppeRepository.getAllNames();
 	}
 	
 	@GetMapping("byname")
@@ -35,6 +45,10 @@ public class HeldenController {
 	
 	@PostMapping("upload")
 	public ResponseEntity<?> uploadHeld(@RequestBody HeldEntity held) {
+		HeldEntity old = this.heldRepository.findByName(held.getName());
+		if(old != null) {
+			held.setId(old.getId());
+		}
 		this.heldRepository.save(held);
 		return ResponseEntity.ok().build();
 	}

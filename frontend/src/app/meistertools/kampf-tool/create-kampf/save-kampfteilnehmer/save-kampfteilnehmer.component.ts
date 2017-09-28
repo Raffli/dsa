@@ -36,6 +36,7 @@ export class SaveKampfteilnehmerComponent implements OnInit {
     this.conflictResolved.emit();
   }
 
+
   ngOnInit() {
   }
 

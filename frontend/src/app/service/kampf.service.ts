@@ -44,8 +44,13 @@ export class KampfService {
   }
 
   public getKampfnamen(): Observable<string[]> {
-      return this.rest.get('kampf/kampf').map((response: Response) => response.json())
-      .catch((error:any) => Observable.throw(error))
+    return this.rest.get('kampf/kampf').map((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error))
+  }
+
+  public getGegnernamen(): Observable<string[]> {
+    return this.rest.get('kampf/gegner').map((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error))
   }
 
   public prepareKampf(teilnehmer: Kampfteilnehmer[]) {
@@ -56,8 +61,6 @@ export class KampfService {
   }
 
   public sortByIni(teilnehmer: Kampfteilnehmer[]): Kampfteilnehmer[] {
-
-
     return teilnehmer;
   }
 
