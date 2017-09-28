@@ -28,8 +28,8 @@ export class AppComponent {
       routerLink: 'laden'
     },
     {
-      routerLink: 'upload',
-      label: 'Held hochladen'
+      routerLink: 'save',
+      label: 'Held speichern'
     },
     {
       label: 'Kampf-Tool',

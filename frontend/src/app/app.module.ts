@@ -39,7 +39,7 @@ import {KampfService} from "./service/kampf.service";
 import { SaveKampfComponent } from './meistertools/kampf-tool/create-kampf/save-kampf/save-kampf.component';
 import { SaveKampfteilnehmerComponent } from './meistertools/kampf-tool/create-kampf/save-kampfteilnehmer/save-kampfteilnehmer.component';
 import {MessageService} from './service/message.service';
-import { HeldHochladenComponent } from './held-hochladen/held-hochladen.component';
+import { HeldSpeichernComponent } from './held-speichern/held-speichern.component';
 
 const appRoutes: Routes = [
   {
@@ -54,7 +54,7 @@ const appRoutes: Routes = [
   { path: 'heldenbogen', component: HeldenbogenComponent },
   { path: 'laden', component: HeldLadenComponent },
   { path: 'tools/kampf', component: KampfToolComponent},
-  { path: 'upload', component: HeldHochladenComponent},
+  { path: 'save', component: HeldSpeichernComponent},
 
   { path: '**', component: PageNotFoundComponent }
 ];
@@ -76,7 +76,7 @@ const appRoutes: Routes = [
     DisplayKampfMemberComponent,
     SaveKampfComponent,
     SaveKampfteilnehmerComponent,
-    HeldHochladenComponent,
+    HeldSpeichernComponent,
   ],
   imports: [
     BrowserModule, FormsModule, BrowserAnimationsModule, MenuModule, MenubarModule, DialogModule, DataTableModule, SharedModule, HttpModule, TabViewModule, FormsModule, ReactiveFormsModule, PanelModule, GrowlModule,

@@ -1,0 +1,21 @@
+
+<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" *ngIf="held; else noHeld">
+  <div *ngIf="callTried">
+    <div *ngIf="gruppe; else noGruppe">
+      <div class="ui-grid-row">
+        Der Held {{held.name}} existiert bereits in der Datenbank. Er ist der Gruppe {{gruppe}} zugeordnet. Soll der Held überschrieben werden?
+      </div>
+
+    </div>
+    <ng-template #noGruppe>
+      Keine Gruppe
+    </ng-template>
+
+  </div>
+
+
+
+</div>
+<ng-template #noHeld>
+  Kein Held geladen. Bitte lade deinen Helden über Held laden
+</ng-template>
