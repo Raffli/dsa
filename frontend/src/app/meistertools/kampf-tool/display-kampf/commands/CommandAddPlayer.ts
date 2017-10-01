@@ -27,9 +27,11 @@ export class CommandAddPlayer extends Command {
       return true;
     }
 
-
-
-
     return false;
   }
+
+  public getDescription(): string {
+    return 'addplayer <name> <inibase> <ini>';
+  }
+
 }

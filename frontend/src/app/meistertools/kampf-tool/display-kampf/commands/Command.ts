@@ -9,7 +9,7 @@ export abstract class Command {
   public abstract getName(): string;
   public abstract perform(params: string[], data: Kampfdata): boolean;
   public abstract autoComplete(string: string, params: string[], data: Kampfdata): string;
-
+  public abstract getDescription(): string;
 
   constructor(protected kampfService: KampfService){
 

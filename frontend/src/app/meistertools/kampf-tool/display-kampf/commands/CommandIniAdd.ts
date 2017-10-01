@@ -28,4 +28,8 @@ export class CommandIniAdd extends Command {
 
     }
   }
+
+  public getDescription(): string {
+    return 'iniadd <teilnehmername> <amount>';
+  }
 }

@@ -32,4 +32,8 @@ export class CommandIni extends Command {
 
     }
   }
+
+  public getDescription(): string {
+    return 'iniloose <teilnehmername> <amount>';
+  }
 }

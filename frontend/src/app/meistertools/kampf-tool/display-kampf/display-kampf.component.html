@@ -21,3 +21,9 @@
 </app-display-kampf-member>
 
 <input type="text" *ngIf="!readonly" pInputText [(ngModel)]="command" (keydown.enter)="onCommandEnter()" (keydown.Tab)="onCommandTab()">
+
+<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+  <div class="ui-grid-row" *ngFor="let command of getCommands()">
+    {{command.getDescription()}}
+  </div>
+</div>

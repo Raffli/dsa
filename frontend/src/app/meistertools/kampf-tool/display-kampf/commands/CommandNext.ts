@@ -17,4 +17,8 @@ export class CommandNext extends Command {
     data.current = newValue;
     return newValue == 0;
   }
+
+  public getDescription(): string {
+    return 'next';
+  }
 }

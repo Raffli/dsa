@@ -29,4 +29,8 @@ export class CommandAddWound extends Command {
       this.kampfService.addWounds(amount, teilnehmer)
     }
   }
+
+  public getDescription(): string {
+    return 'addwound <teilnehmername> <amount>';
+  }
 }

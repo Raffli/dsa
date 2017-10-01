@@ -66,8 +66,8 @@ export class KampfService {
   }
 
   public reduceHealth(amount: number, teilnehmer: Kampfteilnehmer) {
-    const wunden = Math.floor(amount / teilnehmer.ws);
     amount -= teilnehmer.ruestung;
+    const wunden = Math.floor(amount / teilnehmer.ws);
     if ( wunden !== 0) {
 
       this.addWounds(wunden, teilnehmer);

@@ -31,4 +31,8 @@ export class CommandDamage extends Command {
       this.kampfService.reduceHealth(number, teilnehmer)
     }
   }
+
+  public getDescription(): string {
+    return 'damage <teilnehmername> <amount>';
+  }
 }

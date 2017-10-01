@@ -62,8 +62,8 @@ export class DisplayKampfComponent implements OnInit, OnChanges {
 
     const splits = this.command.split(' ');
     const command = this.mapping[splits[0]];
-    if (command !== null) {
-      if(command.perform(splits, this.data)) {
+    if (command !== undefined) {
+      if (command.perform(splits, this.data)) {
         this.sortTeilnehmer();
       }
     }
@@ -104,11 +104,15 @@ export class DisplayKampfComponent implements OnInit, OnChanges {
     return a1.getName().substring(0, i);
   }
 
+  public getCommands(): Command[] {
+    return this.commands;
+  }
+
   private sortTeilnehmer() {
     this.data.teilnehmer = this.data.teilnehmer.sort(
-      (a,b)=> {
-        if(a.ini == b.ini) {
-          if(a.iniBase == b.iniBase) {
+      (a, b) => {
+        if (a.ini === b.ini) {
+          if (a.iniBase === b.iniBase) {
 
           } else {
             return b.iniBase - a.iniBase;
@@ -117,8 +121,9 @@ export class DisplayKampfComponent implements OnInit, OnChanges {
           return b.ini - a.ini;
         }
         return 0;
-      }
-    )
+      })
   }
+
+
 
 }
