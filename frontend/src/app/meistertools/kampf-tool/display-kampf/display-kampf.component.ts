@@ -7,6 +7,7 @@ import {KampfService} from '../../../service/kampf.service';
 import {CommandNext} from "./commands/CommandNext";
 import {Kampfdata} from "../../../data/kampf/Kampfdata";
 import {CommandAddPlayer} from "./commands/CommandAddPlayer";
+import {CommandIniAdd} from "./commands/CommandIniAdd";
 
 @Component({
   selector: 'app-display-kampf',
@@ -36,8 +37,11 @@ export class DisplayKampfComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.addCommand(new CommandDamage(this.kampfService));
     this.addCommand(new CommandIni(this.kampfService));
+    this.addCommand(new CommandIniAdd(this.kampfService));
+
     this.addCommand(new CommandNext(this.kampfService));
     this.addCommand(new CommandAddPlayer(this.kampfService));
+
 
   }
 
@@ -78,7 +82,7 @@ export class DisplayKampfComponent implements OnInit, OnChanges {
       if (possibleMatches.length === 1) {
         const cmd = possibleMatches[0];
         this.command = cmd.getName() + ' ';
-      } else if (possibleMatches.length > 2){
+      } else if (possibleMatches.length > 1){
         this.command = this.sharedStart(possibleMatches)
       }
     } else {

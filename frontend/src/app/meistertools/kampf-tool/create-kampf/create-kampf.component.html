@@ -56,6 +56,21 @@
 
       <div class="ui-grid-row" >
         <div class="ui-grid-col-2">
+          Wundschwelle *:
+        </div>
+        <div class="ui-grid-col-6">
+          <input pInputText type="number" formControlName="ws" placeholder="Required"/>
+        </div>
+        <div class="ui-grid-col-4">
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!teilnehmer.controls['ws'].valid&&teilnehmer.controls['ws'].dirty">
+            <i class="fa fa-close"></i>
+            Wundschwelle is required
+          </div>
+        </div>
+      </div>
+
+      <div class="ui-grid-row" >
+        <div class="ui-grid-col-2">
           pa *:
         </div>
         <div class="ui-grid-col-6">

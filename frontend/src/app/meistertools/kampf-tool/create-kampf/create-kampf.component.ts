@@ -41,6 +41,7 @@ export class CreateKampfComponent implements OnInit {
       name: new FormControl('', Validators.required),
       iniBase: new FormControl('', Validators.required),
       maxLep: new FormControl('', Validators.required),
+      ws: new FormControl('', Validators.required),
       pa: new FormControl('', Validators.required),
       ausweichen: new FormControl('', Validators.required),
       ruestung: new FormControl('', Validators.required),

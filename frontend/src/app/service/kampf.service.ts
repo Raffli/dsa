@@ -73,6 +73,12 @@ export class KampfService {
     teilnehmer.ini -= amount;
   }
 
+  public addIni(amount: number, teilnehmer: Kampfteilnehmer) {
+    teilnehmer.ini += amount;
+  }
+
+
+
 
 
 
