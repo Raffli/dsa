@@ -8,6 +8,7 @@ import {CommandNext} from "./commands/CommandNext";
 import {Kampfdata} from "../../../data/kampf/Kampfdata";
 import {CommandAddPlayer} from "./commands/CommandAddPlayer";
 import {CommandIniAdd} from "./commands/CommandIniAdd";
+import {CommandAddWound} from './commands/CommandAddWound';
 
 @Component({
   selector: 'app-display-kampf',
@@ -38,11 +39,9 @@ export class DisplayKampfComponent implements OnInit, OnChanges {
     this.addCommand(new CommandDamage(this.kampfService));
     this.addCommand(new CommandIni(this.kampfService));
     this.addCommand(new CommandIniAdd(this.kampfService));
-
+    this.addCommand(new CommandAddWound(this.kampfService));
     this.addCommand(new CommandNext(this.kampfService));
     this.addCommand(new CommandAddPlayer(this.kampfService));
-
-
   }
 
   ngOnChanges() {

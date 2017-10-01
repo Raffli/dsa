@@ -56,7 +56,8 @@ export class KampfService {
   public prepareKampf(teilnehmer: Kampfteilnehmer[]) {
     teilnehmer.forEach(member => {
       member.currentLep = member.maxLep;
-      member.ini = member.iniBase + Math.floor(6 * Math.random())
+      member.ini = member.iniBase + Math.floor(6 * Math.random() + 1)
+      member.wunden = 0;
     })
   }
 
@@ -65,8 +66,22 @@ export class KampfService {
   }
 
   public reduceHealth(amount: number, teilnehmer: Kampfteilnehmer) {
+    const wunden = Math.floor(amount / teilnehmer.ws);
+    amount -= teilnehmer.ruestung;
+    if ( wunden !== 0) {
 
-    teilnehmer.currentLep -= (amount - teilnehmer.ruestung);
+      this.addWounds(wunden, teilnehmer);
+    }
+
+    teilnehmer.currentLep -= amount;
+  }
+
+  public addWounds(amount: number, teilnehmer: Kampfteilnehmer) {
+    teilnehmer.wunden += amount;
+    teilnehmer.ausweichen -= amount * 2;
+    teilnehmer.attacken.forEach(attacke => {
+      attacke.at -= amount * 2;
+    })
   }
 
   public reduceIni(amount: number, teilnehmer: Kampfteilnehmer) {

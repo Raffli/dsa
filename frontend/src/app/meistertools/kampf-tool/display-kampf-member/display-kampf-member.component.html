@@ -2,17 +2,18 @@
 
 <div *ngIf="teilnehmer" class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" [ngClass]="{active: active}">
   <div class="ui-grid-row">
-    <div class="ui-grid-col-4 pars">{{teilnehmer.name}}</div>
+    <div class="ui-grid-col-3 pars">{{teilnehmer.name}}</div>
     <div class="ui-grid-col-2 pars">{{teilnehmer.currentLep}} | {{teilnehmer.maxLep}}</div>
 
     <div class="ui-grid-col-1 pars">Rs: {{teilnehmer.ruestung}}</div>
     <div class="ui-grid-col-1 pars">Pa: {{teilnehmer.ausweichen}}</div>
-    <div class="ui-grid-col-1 pars">Ini: {{teilnehmer.ini}} ({{teilnehmer.iniBase}})</div>
+    <div class="ui-grid-col-2 pars">Ini: {{teilnehmer.ini}} ({{teilnehmer.iniBase}})</div>
     <div class="ui-grid-col-1 pars">WS: {{teilnehmer.ws}} </div>
+    <div class="ui-grid-col-2 pars">Wunden: {{teilnehmer.wunden}} </div>
 
   </div>
   <div class="ui-grid-row" *ngFor="let attacke of teilnehmer.attacken">
-    <div class="ui-grid-col-4 pars">{{attacke.name}}</div>
+    <div class="ui-grid-col-3 pars">{{attacke.name}}</div>
     <div class="ui-grid-col-1 pars">{{attacke.at}}</div>
     <div class="ui-grid-col-4 pars">{{attacke.schaden.w6}}W+{{attacke.schaden.fix}}</div>
   </div>
