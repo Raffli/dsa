@@ -158,14 +158,15 @@ export class CreateKampfComponent implements OnInit {
 
   loadKampfmemberFinished(kampfteilnehmer: Kampfteilnehmer) {
     if(kampfteilnehmer !== null) {
-      //TODO: Add to form
 
       const member = this.buildMember();
       member.patchValue(kampfteilnehmer);
       this.addTeilnehmer(member);
 
+    } else {
+      this.showLoadKampfMember = false;
     }
-    this.showLoadKampfMember = false;
+
   }
 
 

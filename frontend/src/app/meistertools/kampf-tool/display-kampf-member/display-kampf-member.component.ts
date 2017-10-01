@@ -9,6 +9,9 @@ import {Kampfteilnehmer} from '../../../data/kampf/Kampfteilnehmer';
 export class DisplayKampfMemberComponent implements OnInit {
 
   @Input()
+  public active = false;
+
+  @Input()
   public teilnehmer: Kampfteilnehmer;
 
   constructor() { }

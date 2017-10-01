@@ -1,13 +1,14 @@
 import {Kampfteilnehmer} from '../../../../data/kampf/Kampfteilnehmer';
 import {Kampf} from '../../../../data/kampf/Kampf';
 import {KampfService} from '../../../../service/kampf.service';
+import {Kampfdata} from "../../../../data/kampf/Kampfdata";
 /**
  * Created by pahil on 21.09.2017.
  */
 export abstract class Command {
   public abstract getName(): string;
-  public abstract perform(params: string[], kampfteilnehmer: Kampfteilnehmer[]);
-  public abstract autoComplete(string: string, params: string[], kampfteilnehmer: Kampfteilnehmer[]): string;
+  public abstract perform(params: string[], data: Kampfdata): boolean;
+  public abstract autoComplete(string: string, params: string[], data: Kampfdata): string;
 
 
   constructor(protected kampfService: KampfService){
