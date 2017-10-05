@@ -6,19 +6,17 @@ import {Router} from "@angular/router";
 @Injectable()
 export class SessionStoreService {
 
-  private _autoLoadHeld = false;
-
   private AUTO_LOAD_HELD_KEY = 'autoloadheld';
   private HELD_NAME_KEY = 'heldenname'
+  private HELD_PASSWORT_KEY= 'heldpasswort'
 
   get autoLoadHeld(): boolean {
-    return this._autoLoadHeld;
+    return sessionStorage.getItem(this.AUTO_LOAD_HELD_KEY) !== null;
   }
 
   set autoLoadHeld(value: boolean) {
-    this._autoLoadHeld = value;
-    if(value) {
-      sessionStorage.setItem(this.AUTO_LOAD_HELD_KEY, value.toString())
+    if (value) {
+      sessionStorage.setItem(this.AUTO_LOAD_HELD_KEY, '')
     } else {
       sessionStorage.removeItem(this.AUTO_LOAD_HELD_KEY);
     }
@@ -26,20 +24,29 @@ export class SessionStoreService {
 
   }
 
-  public setAutoloadHeld(name: string) {
-    sessionStorage.setItem(this.HELD_NAME_KEY, name)
+  set heldname(value: string) {
+    sessionStorage.setItem(this.HELD_NAME_KEY, value)
+  }
+
+  get heldname() {
+    return sessionStorage.getItem(this.HELD_NAME_KEY);
+  }
+
+  set heldpasswort(value: string) {
+    sessionStorage.setItem(this.HELD_PASSWORT_KEY, value)
+  }
+
+  get heldpasswort() {
+    return sessionStorage.getItem(this.HELD_PASSWORT_KEY);
   }
 
   constructor(private heldenService: HeldenService, private router: Router) {
-    const loadHeld = sessionStorage.getItem(this.AUTO_LOAD_HELD_KEY)
-    if(loadHeld !== null) {
-      this._autoLoadHeld = true;
-      const name = sessionStorage.getItem(this.HELD_NAME_KEY);
-      if(name !== null) {
-        console.log(name)
-        this.heldenService.getHeldByName(name).subscribe(
+    if (this.autoLoadHeld) {
+      const name =  this.heldname;
+      if (name !== null) {
+        this.heldenService.getHeldByName(name, this.heldpasswort).subscribe(
           (data: Heldendata) => {
-            if(data.xml !== undefined) {
+            if (data.xml !== undefined) {
               this.heldenService.loadHeldByXML(data.xml);
             }
           }
@@ -47,8 +54,6 @@ export class SessionStoreService {
 
       }
     }
-
-
   }
 
 

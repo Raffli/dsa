@@ -63,7 +63,7 @@ export class HeldLadenComponent implements OnInit {
   heldLoaded(data: Heldendata) {
     this.heldenName = null;
     if (data !== null) {
-      this.sessionStore.setAutoloadHeld(data.name);
+      this.sessionStore.heldname = data.name;
       this.heldenService.loadHeldByXML(data.xml);
 
     }
