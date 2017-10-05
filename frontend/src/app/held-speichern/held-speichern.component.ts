@@ -13,6 +13,7 @@ import {MessageService} from '../service/message.service';
 export class HeldSpeichernComponent implements OnInit {
 
   public gruppe: string;
+  public password: string = null;
 
   public gruppen: SelectItem[] = [];
 
@@ -22,7 +23,7 @@ export class HeldSpeichernComponent implements OnInit {
   ngOnInit() {
     this.heldenService.getGroups().subscribe(
       (data: string[]) => {
-        this.gruppen= [];
+        this.gruppen = [];
         this.gruppen.push({label: '', value: undefined})
         data.forEach(grp => {
           this.gruppen.push({label: grp, value: grp});
@@ -57,9 +58,14 @@ export class HeldSpeichernComponent implements OnInit {
   }
 
   public saveHeld() {
-    this.heldenService.saveHeld(this.held, this.gruppe).subscribe(
+    if (this.gruppe == null) return;
+    this.heldenService.saveHeld(this.held, this.gruppe, this.password).subscribe(
       () => {
         this.messageService.addMessage({severity: 'success', detail: 'Held wurde erfolgreich gespeichert'})
+      },
+      (error: any) => {
+        console.log(error)
+        this.messageService.addMessage({severity: 'error', detail: error._body})
       }
     );
   }

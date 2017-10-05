@@ -6,7 +6,6 @@
         Der Held {{held.name}} ist der Gruppe {{gruppe}} zugeordnet. Soll der Held gespeichert werden?
       </div>
 
-
     </div>
     <ng-template #noGruppe>
       <div class="ui-grid-row">
@@ -16,6 +15,12 @@
         <p-dropdown [options]="gruppen" [(ngModel)]="gruppe"></p-dropdown>
       </div>
     </ng-template>
+    <div class="ui-grid-row">
+      Bitte gib das Passwort für deinen Helden ein. Es ist möglich dieses Feld leer zu lassen falls dein Held bisher kein Passwort besitzt
+    </div>
+    <div class="ui-grid-row">
+      <input type="password" pInput [(ngModel)]="password" (keydown.enter)="saveHeld()" />
+    </div>
 
     <div class="ui-grid-row">
       <button (click)="saveHeld()" [disabled]="!gruppe">Speichern</button>

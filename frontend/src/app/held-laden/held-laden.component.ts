@@ -15,6 +15,7 @@ import {NameGroupPair} from '../data/NameGroupPair';
 export class HeldLadenComponent implements OnInit {
 
 
+  public heldenName = null;
   public helden: string[][] = [];
   public gruppenNamen: string[] = [];
 
@@ -48,11 +49,24 @@ export class HeldLadenComponent implements OnInit {
     this.heldenService.getHeldByName(name).subscribe(
       (data: Heldendata) => {
         if (data.xml !== undefined) {
-          this.sessionStore.setAutoloadHeld(name);
-          this.heldenService.loadHeldByXML(data.xml);
+          this.heldLoaded(data);
+        }
+      }, (error: any) => {
+        console.log(error)
+        if (error.status === 403) {
+          this.heldenName = name;
         }
       }
     )
+  }
+
+  heldLoaded(data: Heldendata) {
+    this.heldenName = null;
+    if (data !== null) {
+      this.sessionStore.setAutoloadHeld(data.name);
+      this.heldenService.loadHeldByXML(data.xml);
+
+    }
   }
 
   fileUploaded(event: any) {

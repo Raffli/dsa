@@ -37,6 +37,7 @@ import {SonderfertigkeitenService} from "./sonderfertigkeiten.service";
 import {isNullOrUndefined} from 'util';
 import {LoggingService} from "./logging.service";
 import {NameGroupPair} from '../data/NameGroupPair';
+import {Heldendataout} from '../data/heldendataout';
 
 @Injectable()
 export class HeldenService {
@@ -64,16 +65,21 @@ export class HeldenService {
       .catch((error: any) => Observable.throw(error))
   }
 
-  public getHeldByName(name: string): Observable<Heldendata> {
-    return this.restService.get('held/byname/?name=' + name).map((response: Response) => response.json())
-      .catch((error:any) => Observable.throw(error))
+  public getHeldByName(name: string, password?: string): Observable<Heldendata> {
+    let path = 'held/byname/?name=' + name;
+    if (password !== undefined && password !== null) {
+      path += '&password=' + password;
+    }
+    return this.restService.get(path).map((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error))
   }
 
-  public saveHeld(held: Held, gruppe: string): Observable<Response> {
-    const data: Heldendata = {
+  public saveHeld(held: Held, gruppe: string, password: string): Observable<Response> {
+    const data: Heldendataout = {
       name: held.name,
       xml: held.xml,
-      gruppe: gruppe
+      gruppe: gruppe,
+      password: password
     }
     return this.restService.post('held/upload', data);
   }

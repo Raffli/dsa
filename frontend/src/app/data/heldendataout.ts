@@ -1,6 +1,6 @@
-export class Heldendata {
+export class Heldendataout {
   name: string;
   xml: string;
   gruppe: string;
-  password: boolean;
+  password: string;
 }

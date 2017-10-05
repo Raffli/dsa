@@ -1,0 +1,10 @@
+<p-dialog [modal]="true" [visible]="name != null" header="Held laden" (onHide)="onDialogHide()" width="800">
+  <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+    <div class="ui-grid-row">
+      Bitte geben sie das Passwort für {{name}} ein
+    </div>
+    <div class="ui-grid-row">
+      <input type="password" pInput [(ngModel)]="password" (keydown.enter)="loadHeld()">
+    </div>
+  </div>
+</p-dialog>

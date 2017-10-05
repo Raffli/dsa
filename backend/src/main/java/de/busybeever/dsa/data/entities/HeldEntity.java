@@ -9,11 +9,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import de.busybeever.dsa.config.jackson.GruppeDeserializer;
 import de.busybeever.dsa.config.jackson.GruppeSerializer;
+import de.busybeever.dsa.config.jackson.PasswordSerializer;
 import de.busybeever.dsa.config.jackson.TalentSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,4 +42,6 @@ public class HeldEntity {
 	@JsonDeserialize(using = GruppeDeserializer.class)
 	private HeldenGruppeEntity gruppe;
 
+	@JsonSerialize(using = PasswordSerializer.class)
+	private String password;
 }

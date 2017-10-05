@@ -41,6 +41,7 @@ import { SaveKampfteilnehmerComponent } from './meistertools/kampf-tool/create-k
 import {MessageService} from './service/message.service';
 import { HeldSpeichernComponent } from './held-speichern/held-speichern.component';
 import { LoadKampfMemberComponent } from './meistertools/kampf-tool/load-kampf-member/load-kampf-member.component';
+import { HeldLadenPasswortComponent } from './held-laden/held-laden-passwort/held-laden-passwort.component';
 
 const appRoutes: Routes = [
   {
@@ -79,6 +80,7 @@ const appRoutes: Routes = [
     SaveKampfteilnehmerComponent,
     HeldSpeichernComponent,
     LoadKampfMemberComponent,
+    HeldLadenPasswortComponent,
   ],
   imports: [
     BrowserModule, FormsModule, BrowserAnimationsModule, MenuModule, MenubarModule,

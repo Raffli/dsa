@@ -10,6 +10,10 @@ export class MessageService {
 
   public addMessage(message: Message) {
     this.messages.push(message);
+
+    setTimeout(() => {
+      this.messages.splice(this.messages.indexOf(message), 1)
+    }, 5000)
   }
 
 }

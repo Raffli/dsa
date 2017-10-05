@@ -6,12 +6,12 @@ import {Router} from "@angular/router";
 @Injectable()
 export class SessionStoreService {
 
-  private _autoLoadHeld: boolean = false;
+  private _autoLoadHeld = false;
 
   private AUTO_LOAD_HELD_KEY = 'autoloadheld';
   private HELD_NAME_KEY = 'heldenname'
 
-  get autoLoadHeld():boolean {
+  get autoLoadHeld(): boolean {
     return this._autoLoadHeld;
   }
 

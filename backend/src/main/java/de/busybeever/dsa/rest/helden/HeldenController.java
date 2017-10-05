@@ -3,6 +3,7 @@ package de.busybeever.dsa.rest.helden;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,19 +40,37 @@ public class HeldenController {
 	}
 	
 	@GetMapping("byname")
-	public HeldEntity findByName(@RequestParam String name) {
-		return this.heldRepository.findByName(name);
+	public ResponseEntity<?> findByName(@RequestParam String name, @RequestParam(required=false) String password) {
+		HeldEntity entity = this.heldRepository.findByName(name);
+		if(entity.getPassword() != null ) {
+			if(!entity.getPassword().equals(password)) {
+				return new ResponseEntity<>("Wrong password", HttpStatus.FORBIDDEN);
+			}
+		}
+		
+		return new ResponseEntity<>(entity, HttpStatus.OK);
 	}
 	
 	@PostMapping("upload")
 	public ResponseEntity<?> uploadHeld(@RequestBody HeldEntity held) {
 		HeldEntity old = this.heldRepository.findByName(held.getName());
-		if(old != null) {
+		if(old == null) {
+			this.heldRepository.save(held);
+		} else {
+			
+			if(old.getPassword() != null) {
+				if(!old.getPassword().equals(held.getPassword())) {
+					log.info("Wrong password entered for held {}", old.getName());
+					return new ResponseEntity<String>("Wrong password", HttpStatus.FORBIDDEN);
+				}
+				
+			}
 			held.setId(old.getId());
+			this.heldRepository.save(held);
 		}
-		this.heldRepository.save(held);
 		return ResponseEntity.ok().build();
 	}
+	
 	
 	
 }
