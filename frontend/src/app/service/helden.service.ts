@@ -38,6 +38,7 @@ import {isNullOrUndefined} from 'util';
 import {LoggingService} from "./logging.service";
 import {NameGroupPair} from '../data/NameGroupPair';
 import {Heldendataout} from '../data/heldendataout';
+import {RuestungStats} from '../data/ausruestung/RuestungStats';
 
 @Injectable()
 export class HeldenService {
@@ -256,7 +257,7 @@ export class HeldenService {
   }
 
 
-  private extractAusruestung(xmlDoc: Document, kk: number, kampftalente: KampfTalent[], atBasis: number, paBasis: number, fkBasis: number,  sonderfertigkeiten: Sonderfertigkeiten, callback: (ausruestung: Ausruestung) => void ){
+  private extractAusruestung(xmlDoc: Document, kk: number, kampftalente: KampfTalent[], atBasis: number, paBasis: number, fkBasis: number,  sonderfertigkeiten: Sonderfertigkeiten, callback: (ausruestung: Ausruestung) => void ) {
 
     const nodes = xmlDoc.getElementsByTagName('heldenausruestung');
     const ausruestungen = [];
@@ -306,9 +307,13 @@ export class HeldenService {
         console.error('Ausruestungs typ unbekannt: ' + type);
       }
     }
+    if (ausruestungBatch.length === 0) {
+      this.calculateRuestungRSBE(ausruestungen, hasRgw3, hasRgw2)
+      callback(ret);
+      return;
+    }
     this.ausruetungsService.getEquipmentByNameAndType(ausruestungBatch).subscribe(
       (data: any[]) => {
-
 
         for (let i = 0; i < nodes.length; i++) {
 
@@ -331,37 +336,39 @@ export class HeldenService {
             ausruestungen[set].ruestungen.push(this.extractRuestung(data[i], hasRgw2, sonderfertigkeiten.andereSpezialisierungen))
           }
         }
-        for (let i = 0; i < ausruestungen.length; i++) {
-          let totalRs = 0;
-          let totalBe = 0;
-          let eBe = 0;
-          ausruestungen[i].ruestungen.forEach(ruestung => {
-            totalRs += ruestung.stats.rs;
-            totalBe += ruestung.stats.ebe;
-          })
-          if (hasRgw3) {
-            eBe = Math.max(0, totalBe - 2.0);
-          } else if (hasRgw2) {
-            eBe = Math.max(0, totalBe - 1.0);
-          } else {
-            eBe = totalBe;
-          }
-          eBe = Math.round(eBe * 10) / 10;
-
-
-
-          ausruestungen[i].ruestungsStats = {
-            rs: totalRs,
-            ebe: eBe,
-            be: totalBe
-          }
-
-        }
+        this.calculateRuestungRSBE(ausruestungen, hasRgw3, hasRgw2)
 
         callback(ret)
       }
     )
 
+  }
+
+  private calculateRuestungRSBE(ausruestungen: AusruestungsSet[], hasRgw3: boolean, hasRgw2: boolean) {
+    for (let i = 0; i < ausruestungen.length; i++) {
+      let totalRs = 0;
+      let totalBe = 0;
+      let eBe = 0;
+      ausruestungen[i].ruestungen.forEach(ruestung => {
+        totalRs += ruestung.stats.rs;
+        totalBe += ruestung.stats.ebe;
+      })
+      if (hasRgw3) {
+        eBe = Math.max(0, totalBe - 2.0);
+      } else if (hasRgw2) {
+        eBe = Math.max(0, totalBe - 1.0);
+      } else {
+        eBe = totalBe;
+      }
+      eBe = Math.round(eBe * 10) / 10;
+
+      ausruestungen[i].ruestungsStats = {
+        rs: totalRs,
+        ebe: eBe,
+        be: totalBe
+      } as RuestungStats;
+
+    }
   }
 
   private extractWaffe(node: Element, data: any, atBasis: number, paBasis: number, kk: number, kampftalente: KampfTalent[]): Waffe {
