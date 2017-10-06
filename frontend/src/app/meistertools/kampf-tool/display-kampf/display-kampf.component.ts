@@ -9,6 +9,9 @@ import {Kampfdata} from "../../../data/kampf/Kampfdata";
 import {CommandAddPlayer} from "./commands/CommandAddPlayer";
 import {CommandIniAdd} from "./commands/CommandIniAdd";
 import {CommandAddWound} from './commands/CommandAddWound';
+import {MessageService} from '../../../service/message.service';
+import {CommandParry} from './commands/CommandParry';
+import {CommandAttack} from './commands/CommandAttack';
 
 @Component({
   selector: 'app-display-kampf',
@@ -33,15 +36,18 @@ export class DisplayKampfComponent implements OnInit, OnChanges {
   }
 
 
-  constructor(private kampfService: KampfService) { }
+  constructor(private kampfService: KampfService, private messageService: MessageService) { }
 
   ngOnInit() {
-    this.addCommand(new CommandDamage(this.kampfService));
-    this.addCommand(new CommandIni(this.kampfService));
-    this.addCommand(new CommandIniAdd(this.kampfService));
-    this.addCommand(new CommandAddWound(this.kampfService));
-    this.addCommand(new CommandNext(this.kampfService));
-    this.addCommand(new CommandAddPlayer(this.kampfService));
+    this.addCommand(new CommandDamage(this.kampfService, this.messageService));
+    this.addCommand(new CommandIni(this.kampfService, this.messageService));
+    this.addCommand(new CommandIniAdd(this.kampfService, this.messageService));
+    this.addCommand(new CommandAddWound(this.kampfService, this.messageService));
+    this.addCommand(new CommandNext(this.kampfService, this.messageService));
+    this.addCommand(new CommandAddPlayer(this.kampfService, this.messageService));
+    this.addCommand(new CommandParry(this.kampfService, this.messageService));
+    this.addCommand(new CommandAttack(this.kampfService, this.messageService));
+
   }
 
   ngOnChanges() {
@@ -94,7 +100,6 @@ export class DisplayKampfComponent implements OnInit, OnChanges {
   }
 
   sharedStart(array: Command[]): string {
-    console.log(array)
     const A = array.concat().sort(),
       a1 = A[0], a2 = A[A.length - 1], L =  a1.getName().length;
     let i = 0;

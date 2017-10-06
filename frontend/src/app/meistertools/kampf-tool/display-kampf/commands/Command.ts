@@ -2,6 +2,7 @@ import {Kampfteilnehmer} from '../../../../data/kampf/Kampfteilnehmer';
 import {Kampf} from '../../../../data/kampf/Kampf';
 import {KampfService} from '../../../../service/kampf.service';
 import {Kampfdata} from "../../../../data/kampf/Kampfdata";
+import {MessageService} from '../../../../service/message.service';
 /**
  * Created by pahil on 21.09.2017.
  */
@@ -11,7 +12,7 @@ export abstract class Command {
   public abstract autoComplete(string: string, params: string[], data: Kampfdata): string;
   public abstract getDescription(): string;
 
-  constructor(protected kampfService: KampfService){
+  constructor(protected kampfService: KampfService, protected messageService: MessageService) {
 
   }
 

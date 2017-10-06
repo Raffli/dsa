@@ -16,4 +16,20 @@ export class MessageService {
     }, 5000)
   }
 
+  public error(message: string) {
+    const data: Message = {
+      detail: message,
+      severity: 'error'
+    }
+    this.addMessage(data);
+  }
+
+  public info(message: string) {
+    const data: Message = {
+      detail: message,
+      severity: 'info'
+    }
+    this.addMessage(data);
+  }
+
 }
