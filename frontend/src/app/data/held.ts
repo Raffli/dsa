@@ -9,6 +9,7 @@ import {Talente} from "./talente";
 import {Ausruestung} from "./ausruestung/Ausruestung";
 import {KampfTalent} from "./kampftalent";
 import {Sonderfertigkeiten} from "./Sonderfertigkeiten";
+import {Ereignis} from "./Ereignis";
 /**
  * Created by Patrick on 11.07.2017.
  */
@@ -19,7 +20,9 @@ export class Held {
               public name: string, public attribute: Attribut[], public vorteile: Vorteil[],
               public sonderfertigkeiten: Sonderfertigkeiten, public kultur: string,
               public groesse: number, public gewicht: number, public aussehen: Aussehen,
-              public talente: Talente, public ausruestung: Ausruestung, public ausweichen: number, public xml: string) {
+              public talente: Talente, public ausruestung: Ausruestung, public ausweichen: number, public xml: string,
+              public ereignisse: Ereignis[]
+  ) {
   }
 
   public getGeburtstag(): string {

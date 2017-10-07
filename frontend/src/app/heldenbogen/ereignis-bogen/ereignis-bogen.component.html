@@ -1,0 +1,14 @@
+<p-dataTable [value]="held.ereignisse">
+  <p-column field="text" header="Name"></p-column>
+  <p-column field="obj" header=""></p-column>
+  <p-column field="lernmethode" header=""></p-column>
+  <p-column field="ap" header="AP" [style]="{'width':'80px'}"></p-column>
+  <p-column field="color" header="Änderung"></p-column>
+  <p-column field="kommentar" header="Kommentar"></p-column>
+  <p-column field="datum" header="Datum" [style]="{'width':'90px'}">
+    <ng-template let-ereigniss="rowData" pTemplate="body">
+      <span>{{ereigniss.datum | date: 'dd.MM.yyyy'}}</span>
+    </ng-template>
+  </p-column>
+
+</p-dataTable>

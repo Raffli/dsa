@@ -39,6 +39,7 @@ import {LoggingService} from "./logging.service";
 import {NameGroupPair} from '../data/NameGroupPair';
 import {Heldendataout} from '../data/heldendataout';
 import {RuestungStats} from '../data/ausruestung/RuestungStats';
+import {Ereignis} from "../data/Ereignis";
 
 @Injectable()
 export class HeldenService {
@@ -117,7 +118,7 @@ export class HeldenService {
     const name = this.extractName(xmlDoc);
     const attribute = this.extractAttribute(xmlDoc);
     const vorteile = this.extractVorteile(xmlDoc);
-
+    const ereignisse = this.extractEreignisse(xmlDoc);
     const kultur = this.extractKultur(xmlDoc);
     const groesseGewicht = this.extractGewichtGroesse(xmlDoc);
     const aussehen = this.extractAussehen(xmlDoc);
@@ -128,9 +129,10 @@ export class HeldenService {
          attribute[17].value, sonderfertigkeiten, (ausruestung => {
            const ausweichen = this.extractAusweichen(attribute[16].value, ausruestung.sets[0],  sonderfertigkeiten.kampf);
          const hero = new Held(rasse, geschlecht, profession, apTotal, apFree, name, attribute, vorteile, sonderfertigkeiten, kultur,
-           groesseGewicht.groesse, groesseGewicht.gewicht, aussehen, talente, ausruestung, ausweichen, xml);
+           groesseGewicht.groesse, groesseGewicht.gewicht, aussehen, talente, ausruestung, ausweichen, xml, ereignisse);
          talente.processBe(ausruestung.sets[0]);
          callback(hero);
+         console.log(hero)
        }));
 
      })
@@ -178,9 +180,38 @@ export class HeldenService {
 
   }
 
+  private extractEreignisse(xmlDoc: Document): Ereignis[] {
+    const nodes = xmlDoc.getElementsByTagName('ereignis')
+    const ereignisse: Ereignis[] = [];
+    for (let i = 0; i < nodes.length; i ++) {
+      const node = nodes[i];
+      //console.log(node);
+      const ap = parseInt(node.getAttribute('Abenteuerpunkte'),10); //Optional
+      const lernmethode = node.getAttribute('Info'); //Optional
+      const datum = new Date(parseInt(node.getAttribute('time'),10))
+      const alterWert = parseInt(node.getAttribute('Alt'),10); //Optional
+      const neuerWert = parseInt(node.getAttribute('Neu'),10); //Optional
+      const text = node.getAttribute('text');
+      const kommentar = node.getAttribute('kommentar'); //Optional
+      const obj = node.getAttribute('obj');
 
+      const ereignis: Ereignis = {
+        text: text,
+        datum: datum,
+        obj: obj
+      }
+      if(!Number.isNaN(ap)) ereignis.ap = ap;
+      if(kommentar !== null) ereignis.kommentar = kommentar;
+      if(lernmethode !== null) ereignis.lernmethode = lernmethode;
+      if(!Number.isNaN(alterWert)) ereignis.alterWert = alterWert;
+      if(!Number.isNaN(neuerWert)) ereignis.neuerWert = neuerWert;
+      ereignisse.push(ereignis)
 
+    }
 
+    return ereignisse;
+
+  }
   private extractKultur(xmlDoc: Document) : string {
     const node = xmlDoc.getElementsByTagName('kultur')[0];
     const kultur = node.getAttribute('string');

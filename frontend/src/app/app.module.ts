@@ -42,6 +42,7 @@ import {MessageService} from './service/message.service';
 import { HeldSpeichernComponent } from './held-speichern/held-speichern.component';
 import { LoadKampfMemberComponent } from './meistertools/kampf-tool/load-kampf-member/load-kampf-member.component';
 import { HeldLadenPasswortComponent } from './held-laden/held-laden-passwort/held-laden-passwort.component';
+import { EreignisBogenComponent } from './heldenbogen/ereignis-bogen/ereignis-bogen.component';
 
 const appRoutes: Routes = [
   {
@@ -81,6 +82,7 @@ const appRoutes: Routes = [
     HeldSpeichernComponent,
     LoadKampfMemberComponent,
     HeldLadenPasswortComponent,
+    EreignisBogenComponent,
   ],
   imports: [
     BrowserModule, FormsModule, BrowserAnimationsModule, MenuModule, MenubarModule,
