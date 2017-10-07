@@ -16,6 +16,16 @@ export abstract class Command {
 
   }
 
+
+
+  protected findTeilnehmerByName(name: string, teilnehmer: Kampfteilnehmer[]): Kampfteilnehmer{
+    for ( let i = 0; i < teilnehmer.length; i++) {
+      if (teilnehmer[i].name === name) {
+        return teilnehmer[i];
+      }
+    }
+  }
+
   protected provideNameMatching(command: string, kampfteilnehmer: Kampfteilnehmer[]): string {
     const index = command.lastIndexOf(' ');
     const sub = command.substr(index + 1, command.length);
@@ -26,14 +36,6 @@ export abstract class Command {
       return command.substr(0, index) + ' ' + shared + ' ';
     }
 
-  }
-
-  protected findTeilnehmerByName(name: string, teilnehmer: Kampfteilnehmer[]): Kampfteilnehmer{
-    for ( let i = 0; i < teilnehmer.length; i++) {
-      if (teilnehmer[i].name === name) {
-        return teilnehmer[i];
-      }
-    }
   }
 
   private sharedStart(array: Kampfteilnehmer[], sub: string): string {

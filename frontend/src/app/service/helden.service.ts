@@ -471,7 +471,7 @@ export class HeldenService {
       if (spezialisierungen[i].talent === talent && spezialisierungen[i].name === name) {
         if (representation === undefined) {
           return true;
-        } else if(representation === spezialisierungen[i].representation) {
+        } else if (representation === spezialisierungen[i].representation) {
           return true;
         }
 
