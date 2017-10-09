@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {Kampfteilnehmer} from '../../../data/kampf/Kampfteilnehmer';
 
 @Component({
@@ -14,9 +14,26 @@ export class DisplayKampfMemberComponent implements OnInit {
   @Input()
   public teilnehmer: Kampfteilnehmer;
 
+  @Output()
+  public onAttack = new EventEmitter<number>();
+
+  @Output()
+  public onParry = new EventEmitter<void>();
+
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  attack(index: number) {
+    this.onAttack.emit(index);
+  }
+
+  parry() {
+    this.onParry.emit();
+  }
+
+
 
 }

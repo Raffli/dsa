@@ -65,8 +65,11 @@ export class DisplayKampfComponent implements OnInit, OnChanges {
   }
 
   public onCommandEnter() {
+    this.executeCommand(this.command);
+  }
 
-    const splits = this.command.split(' ');
+  public executeCommand(cmd: string) {
+    const splits = cmd.split(' ');
     const command = this.mapping[splits[0]];
     if (command !== undefined) {
       if (command.perform(splits, this.data)) {
@@ -127,6 +130,14 @@ export class DisplayKampfComponent implements OnInit, OnChanges {
         }
         return 0;
       })
+  }
+
+  onAttack(teilnehmer: Kampfteilnehmer, index: number) {
+    this.executeCommand('attack ' + teilnehmer.name + ' ' + index)
+  }
+
+  onParry(teilnehmer: Kampfteilnehmer) {
+    this.executeCommand('parry ' + teilnehmer.name)
   }
 
 

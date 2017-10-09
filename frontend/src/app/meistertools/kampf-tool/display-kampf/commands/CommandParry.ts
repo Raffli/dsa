@@ -17,7 +17,6 @@ export class CommandParry  extends Command {
   }
 
   public perform(params: string[] , data: Kampfdata): boolean {
-
     if (params.length >= 2) {
       const teilnehmer = this.findTeilnehmerByName(params[1], data.teilnehmer);
       if (teilnehmer === null) {
