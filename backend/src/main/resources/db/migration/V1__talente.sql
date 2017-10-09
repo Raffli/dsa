@@ -1,10 +1,10 @@
-create table IF NOT EXISTS talent_kategorien(
+create table talent_kategorien(
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	name varchar(25) NOT NULL,
     PRIMARY KEY(id)
 );
 
-create table talente(
+create table IF NOT EXISTS talente(
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	name varchar(40) NOT NULL UNIQUE,
 	kategorie_id BIGINT NOT NULL,

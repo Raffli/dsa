@@ -13,11 +13,6 @@ public class FlywayConfig {
 	@ConditionalOnProperty("flyway.cleanonstart")
 	@Bean
 	public Flyway flyway(DataSource datasource) {
-		System.out.println("call");
-		System.out.println("call");
-		System.out.println("call");
-		System.out.println("call");
-		System.out.println("call");
 		Flyway flyway = new Flyway();
 	    flyway.setDataSource(datasource);
 	   

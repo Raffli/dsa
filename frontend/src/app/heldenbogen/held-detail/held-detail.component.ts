@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {Held} from "../../data/held";
 import {HeldenService} from "../../service/helden.service";
 import {Attribut} from "../../data/attribut";
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'held-detail',
@@ -16,6 +17,10 @@ export class HeldDetailComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  isProd() {
+    return environment.production;
   }
 
 }

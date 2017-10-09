@@ -2,41 +2,28 @@
  * Created by Patrick on 12.07.2017.
  */
 export class Attribut {
-  name: string;
-  value: number;
-  startwert:number;
-  mod:number;
-  shortcut: string;
+  public static MUT = 0;
+  public static Klugheit = 1;
+  public static Intuition = 2;
+  public static Charisma = 3;
+  public static Fingerfertigkeit = 4;
+  public static Gewandhteit = 5;
+  public static Konstitution = 6;
+  public static Körperkraft = 7;
+  public static Sozialstatus = 8;
+  public static Lebensenergie = 9;
+  public static Ausdauer = 10;
+  public static Astralenergie = 11;
+  public static Karmaenenergie = 12;
+  public static Magieresistenz = 13;
+  public static ini = 14;
+  public static at = 15;
+  public static pa = 16;
+  public static fk = 17;
 
 
-  constructor(name: string, value: number, startwert: number, mod: number, shortcut:string) {
-    this.name = name;
-    this.value = value;
-    this.startwert = startwert;
-    this.mod = mod;
-    this.shortcut = shortcut;
+  constructor(public name: string, public value: number, public startwert: number, public mod: number,
+              public shortcut: string) {
   }
-
-  public static MUT: number  = 0;
-  public static Klugheit: number  = 1;
-  public static Intuition: number  = 2;
-  public static Charisma: number  = 3;
-  public static Fingerfertigkeit: number  = 4;
-  public static Gewandhteit: number  = 5;
-  public static Konstitution: number  = 6;
-  public static Körperkraft: number  = 7;
-  public static Sozialstatus: number  = 8;
-  public static Lebensenergie: number  = 9;
-  public static Ausdauer: number  = 10;
-  public static Astralenergie: number  = 11;
-  public static Karmaenenergie: number  = 12;
-  public static Magieresistenz: number  = 13;
-  public static ini: number  = 14;
-  public static at: number  = 15;
-  public static pa: number  = 16;
-  public static fk: number  = 17;
-
-
-
 
 }
