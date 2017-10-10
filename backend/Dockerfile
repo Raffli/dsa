@@ -8,4 +8,4 @@ RUN mvn install -B
 FROM java:8
 COPY --from=0 /usr/src/app/target/dsa-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
-CMD ["java", "-jar", "app.jar", "-Dspring.profiles.active=prod"]
+CMD ["java", "-jar", "app.jar", "--spring.profiles.active=dev"]
