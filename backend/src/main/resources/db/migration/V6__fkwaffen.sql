@@ -1,6 +1,6 @@
 create table fkwaffen(
 	id BIGINT NOT NULL AUTO_INCREMENT,
-	name varchar(25) NOT NULL,
+	name varchar(25) NOT NULL UNIQUE,
 	typ VARCHAR(10) NOT NULL,
 	schaden_w6 SMALLINT NOT NULL,
 	schaden_fix SMALLINT NOT NULL,
@@ -41,7 +41,6 @@ INSERT INTO fkwaffen(name, typ, schaden_w6, schaden_fix, entfernung, tpentfernun
 	('Langbogen', '', 1, +6, '(10/25/50/100/200)', '(+3/+2/+1/0/-1)', 4),
 	('Ork. Reiterbogen', '', 1, +5, '(5/15/30/60/100)', '(+3/+1/0/-1/-2)', 3),
 	('Fledermaus', '', 1, +2, '(0/5/10/15/25)', '(-/0/0/0/-1)', 1),
-	('Granatapfel', '', 4, 0, '(0/5/10/15/20)', '(-/-/-/-/-)', 0),
 	('Kettenkugel', '', 2, +2, '(0/2/5/8/15)', '(-/+1/0/0/0)', 2),
 	('Lasso', '', 1, +4, '(0/2/5/10/15)', '(-/0/0/-1/-2)', 1),
 	('Schleuder', '', 1, +2, '(0/5/15/25/40)', '(-/0/0/0/0)', 2),

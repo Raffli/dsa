@@ -50,6 +50,7 @@ public class AusruestungsController {
 		for (int i = 0; i < data.length; i++) {
 			AusruestungInfo info = jacksonObjectMapper.readValue(data[i], AusruestungInfo.class);
 			if(info.getType() == 0 ) {
+				System.out.println(info.getName());
 				ret[i] = this.waffenRepository.findByName(info.getName());
 			} else if(info.getType() == 1) {
 				//Fkwaffe
