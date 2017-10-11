@@ -136,6 +136,7 @@ INSERT INTO talente (name, kategorie_id, komplexitaet) VALUES
 	('Feuersteinbearbeitung', 5, 'B'),
 	('Fleischer', 5, 'B'),
 	('Gerber/Kürschner', 5, 'B'),
+	('Grobschmied', 5, 'B'),
 	('Glaskunst', 5, 'B'),
 	('Handel', 5, 'B'),
 	('Hauswirtschaft', 5, 'B'),
