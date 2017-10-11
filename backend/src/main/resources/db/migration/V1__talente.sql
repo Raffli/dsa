@@ -14,27 +14,7 @@ create table IF NOT EXISTS talente(
 );
 
 
-INSERT INTO talent_kategorien VALUES(0, 'Körperlich');
 
-INSERT INTO talente (name, kategorie_id, komplexitaet, be) VALUES 
-	('Akrobatik', 0, 'D', 'BEx2'),
-	('Athletik', 0, 'D', 'BEx2'),
-	('Fliegen', 0, 'D', 'BE'),
-	('Gaukeleien', 0, 'D', 'BEx2'),
-	('Klettern', 0, 'D', 'BEx2'),
-	('Körperbeherrschung', 0, 'D', 'BEx2'),
-	('Reiten', 0, 'D', ' BE-2'),
-	('Schleichen', 0, 'D', 'BE'),
-	('Schwimmen', 0, 'D', 'BEx2'),
-	('Selbstbeherrschung', 0, 'D', ''),
-	('Sich verstecken', 0, 'D', 'BE-2'),
-	('Singen', 0, 'D', 'BE-3'),
-	('Sinnenschärfe', 0, 'D', ''),
-	('Skifahren', 0, 'D', 'BE-2'),
-	('Stimmen Imitieren', 0, 'D', 'BE-4'),
-	('Tanzen', 0, 'D', 'BEx2'),
-	('Taschendiebstahl', 0, 'D', 'BEx2'),
-	('Zechen', 0, 'D', '');
 
 INSERT INTO talent_kategorien VALUES(1, 'Gesellschaftlich');
 
@@ -176,7 +156,27 @@ INSERT INTO talente (name, kategorie_id, komplexitaet) VALUES
 	('Ritualkenntnis: Gildenmagie', 6, 'E'),
 	('Gefahreninstinkt', 6, 'E');
 
-	
+INSERT INTO talent_kategorien VALUES(7, 'Körperlich');
+
+INSERT INTO talente (name, kategorie_id, komplexitaet, be) VALUES 
+	('Akrobatik', 7, 'D', 'BEx2'),
+	('Athletik', 7, 'D', 'BEx2'),
+	('Fliegen', 7, 'D', 'BE'),
+	('Gaukeleien', 7, 'D', 'BEx2'),
+	('Klettern', 7, 'D', 'BEx2'),
+	('Körperbeherrschung', 7, 'D', 'BEx2'),
+	('Reiten', 7, 'D', ' BE-2'),
+	('Schleichen', 7, 'D', 'BE'),
+	('Schwimmen', 7, 'D', 'BEx2'),
+	('Selbstbeherrschung', 7, 'D', ''),
+	('Sich verstecken', 7, 'D', 'BE-2'),
+	('Singen', 7, 'D', 'BE-3'),
+	('Sinnenschärfe', 7, 'D', ''),
+	('Skifahren', 7, 'D', 'BE-2'),
+	('Stimmen Imitieren', 7, 'D', 'BE-4'),
+	('Tanzen', 7, 'D', 'BEx2'),
+	('Taschendiebstahl', 7, 'D', 'BEx2'),
+	('Zechen', 7, 'D', '');	
 	
 create table sprachen(
 	id BIGINT NOT NULL AUTO_INCREMENT,

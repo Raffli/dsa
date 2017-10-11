@@ -4,7 +4,8 @@ create table schilde(
 	wm_at SMALLINT NOT NULL,
 	wm_pa SMALLINT NOT NULL,
 	bf SMALLINT NOT NULL,
-	ini SMALLINT NOT NULL
+	ini SMALLINT NOT NULL,
+	PRIMARY KEY(id)
 );	
 
 INSERT INTO schilde(name, wm_at, wm_pa, bf, ini) VALUES

@@ -6,7 +6,8 @@ create table fkwaffen(
 	schaden_fix SMALLINT NOT NULL,
 	entfernung VARCHAR(20) NOT NULL,
 	tpentfernung VARCHAR(20) NOT NULL,
-	ladezeit SMALLINT NOT NULL
+	ladezeit SMALLINT NOT NULL,
+	PRIMARY KEY(id)
 
 );
 

@@ -10,7 +10,8 @@ create table ruestungen(
   	stats_linkerarm FLOAT NOT NULL,
   	stats_rechterarm FLOAT NOT NULL,
   	stats_linkesbein FLOAT NOT NULL,
-  	stats_rechtsbein FLOAT NOT NULL
+  	stats_rechtsbein FLOAT NOT NULL,
+  	PRIMARY KEY(id)
 );
 
 INSERT INTO ruestungen(name, stats_kopf,stats_brust, stats_ruecken, stats_bauch, stats_linkerarm, stats_rechterarm, stats_linkesbein, stats_rechtsbein, stats_rs, stats_be) VALUES	('Amazonenrüstung (kpl.)', 3,5, 3, 5, 2, 2, 3, 3, 3.7, 1.7),

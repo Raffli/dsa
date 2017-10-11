@@ -2,12 +2,13 @@ create table sonderfertigkeiten(
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	name varchar(50) NOT NULL UNIQUE,
 	kosten SMALLINT NOT NULL,
-	typ SMALLINT NOT NULL
+	typ SMALLINT NOT NULL,
+	PRIMARY KEY(id)
 );
 
 
 /*profan, magisch, kampf, talentSpezialisierung, zauberSpezialisierung, andereSpezialisierung */
-INSERT INTO SONDERFERTIGKEITEN (name, kosten, typ) VALUES
+INSERT INTO sonderfertigkeiten (name, kosten, typ) VALUES
 	('Kraftlinienmagie I', 100, 1),
 	('Meister der Improvisation', 100, 0),
 	('Linkhand', 100, 2),
