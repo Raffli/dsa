@@ -77,6 +77,10 @@ export class HeldenService {
   }
 
   public saveHeld(held: Held, gruppe: string, password: string): Observable<Response> {
+    while(held.name[held.name.length-1] == ' ') {
+      held.name = held.name.substring(0, held.name.length-1);
+      console.log(held.name)
+    }
     const data: Heldendataout = {
       name: held.name,
       xml: held.xml,
@@ -145,7 +149,7 @@ export class HeldenService {
     const nodes = doc.getElementsByTagName('zauber');
     for(let i = 0; i < nodes.length; i++) {
       const node = nodes[i];
-      console.log(node);
+     // console.log(node);
     }
   }
 

@@ -41,7 +41,11 @@ public class HeldenController {
 
 	@GetMapping("byname")
 	public ResponseEntity<?> findByName(@RequestParam String name, @RequestParam(required = false) String password) {
+
 		HeldEntity entity = this.heldRepository.findByName(name);
+		if(entity == null) {
+			return ResponseEntity.notFound().build();
+		}
 		if(performPasswordCheck(password, entity)) {
 			return new ResponseEntity<>(entity, HttpStatus.OK);
 		} else {
@@ -53,16 +57,21 @@ public class HeldenController {
 
 	@PostMapping("upload")
 	public ResponseEntity<?> uploadHeld(@RequestBody HeldEntity held) {
+		
 		HeldEntity old = this.heldRepository.findByName(held.getName());
 		if (old == null) {
+			log.info("Saving new held with name {}", held.getName());
+			
 			this.heldRepository.save(held);
 		} else {
 
 			if (!performPasswordCheck(held.getPassword(), old)) {
 				log.info("Wrong password entered for held {}", old.getName());
+				
 				return new ResponseEntity<String>("Wrong password", HttpStatus.FORBIDDEN);
 			} else {
 				held.setId(old.getId());
+				log.info("Updating held with name {}", held.getName());
 				this.heldRepository.save(held);
 			}
 		}
@@ -70,11 +79,9 @@ public class HeldenController {
 	}
 
 	private boolean performPasswordCheck(String password, HeldEntity held) {
-		//Stop reading this you are not supposed to see this until its fixed :<
-		System.out.println("check");
-		
+		//Stop reading this you are not supposed to see this until its fixed :<	
 		if("master".equals(password)) {
-			System.out.println(0);
+			
 			return true;
 		}
 		if (held.getPassword() != null) {

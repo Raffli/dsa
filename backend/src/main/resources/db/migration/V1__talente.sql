@@ -223,6 +223,7 @@ INSERT INTO sprachen (name, komplexitaet, lernkomplexitaet) VALUES
 	('Zhayad', 7, 'A'),
 	('Atak', 7, 'A'),
 	('Alt-Imperial/Aureliani', 7, 'A'),
+	('Oloarkh', 7, 'A'),
 	('Füchsisch', 7, 'A');
 
 create table schriften(
