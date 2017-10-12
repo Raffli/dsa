@@ -1,11 +1,11 @@
-CREATE TABLE HELDENGRUPPE(
+CREATE TABLE heldengruppe(
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	name varchar(50) NOT NULL UNIQUE,
 	password VARCHAR(20),
 	PRIMARY KEY (id)
 );
 
-INSERT INTO HELDENGRUPPE (id, name) VALUES
+INSERT INTO heldengruppe (id, name) VALUES
 	(1,'Der Runde Tisch' ),
 	(2,'Schlacht um Hamburg Mitte'),
 	(3,'Testing');
