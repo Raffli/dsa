@@ -1,0 +1,18 @@
+
+<table>
+  <tr></tr>
+  <!--<div *ngFor="let zauber of held.talente.zauber"> -->
+    <tr *ngFor="let zauber of held.talente.zauber">
+      <td>{{zauber.name}}</td>
+      <td>{{zauber.representation}}</td>
+      <td>{{zauber.probe}}</td>
+      <td>{{zauber.value}}</td>
+    </tr>
+  <!--
+    <tr *ngFor="let spezialisierung of zauber.spezialisierungen">
+      <td colspan="4">{{spezialisierung.name}}</td>
+    </tr>
+  </div>
+  -->
+
+</table>

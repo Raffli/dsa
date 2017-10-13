@@ -15,12 +15,20 @@
     <p-tabPanel header="Kampfbogen">
       <app-kampfbogen [held]="held"></app-kampfbogen>
     </p-tabPanel>
+    <p-tabPanel header="Zauber" *ngIf="held.talente.zauber.length != 0">
+      <app-zauberbogen [held]="held"></app-zauberbogen>
+    </p-tabPanel>
     <p-tabPanel header="Ereignisse">
       <app-ereignis-bogen [held]="held"></app-ereignis-bogen>
     </p-tabPanel>
+
+
   </p-tabView>
   <ng-template #dev>
     <p-tabView>
+      <p-tabPanel header="Zauber" *ngIf="held.talente.zauber.length != 0">
+        <app-zauberbogen [held]="held"></app-zauberbogen>
+      </p-tabPanel>
       <p-tabPanel header="Ereignisse">
         <app-ereignis-bogen [held]="held"></app-ereignis-bogen>
       </p-tabPanel>

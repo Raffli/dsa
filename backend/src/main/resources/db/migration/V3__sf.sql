@@ -71,6 +71,14 @@ INSERT INTO sonderfertigkeiten (name, kosten, typ) VALUES
 	('Elfenlied: Freundschaftslied', 100, 2),
 	('Repräsentation: Elf', 100, 2),
 	('Salasandra', 100, 2),
+	('Apport', 100, 2),
+	('Merkmalskenntnis: Eigenschaften', 100, 2),
+	('Merkmalskenntnis: Schaden', 100, 2),
+	('Zauberkontrolle', 100, 2),
+	('Zauberroutine', 100, 2),
+	('Stabzauber: Hammer des Magus', 100, 2),
+	('Stabzauber: Kraftfokus', 100, 2),
+	('Stabzauber: Zauberspeicher', 100, 2),
 	
 	
 	('Tanz der Mada', 100, 0);

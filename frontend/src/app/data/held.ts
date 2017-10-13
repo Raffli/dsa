@@ -10,6 +10,7 @@ import {Ausruestung} from "./ausruestung/Ausruestung";
 import {KampfTalent} from "./kampftalent";
 import {Sonderfertigkeiten} from "./Sonderfertigkeiten";
 import {Ereignis} from "./Ereignis";
+import {Zauber} from './Zauber';
 /**
  * Created by Patrick on 11.07.2017.
  */
@@ -21,17 +22,17 @@ export class Held {
               public sonderfertigkeiten: Sonderfertigkeiten, public kultur: string,
               public groesse: number, public gewicht: number, public aussehen: Aussehen,
               public talente: Talente, public ausruestung: Ausruestung, public ausweichen: number, public xml: string,
-              public ereignisse: Ereignis[]
-  ) {
+              public ereignisse: Ereignis[])
+  {
   }
 
   public getGeburtstag(): string {
-    return this.aussehen.gbtag+ '. '+Monate.VALUES[this.aussehen.gbmonat] + ' '+this.aussehen.gbjahr+ ' BF    '+this.aussehen.alter + ' Jahre';
+    return this.aussehen.gbtag + '. '+ Monate.VALUES[this.aussehen.gbmonat] + ' ' + this.aussehen.gbjahr + ' BF    '+this.aussehen.alter + ' Jahre';
   }
 
 
   public getRingenRaufen(): KampfTalent[] {
-    let ret = [];
+    const ret = [];
     for (let i = 0; i < this.talente.kampftalente.length; i++) {
       if (this.talente.kampftalente[i].name == 'Raufen') {
         ret.push(this.talente.kampftalente[i]);

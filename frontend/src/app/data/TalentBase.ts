@@ -1,5 +1,6 @@
 import {Spezialisierung} from "./Spezialisierung";
 import {AusruestungsSet} from "./ausruestung/AusruestungsSet";
+import {Talent} from './talent';
 export class TalentBase {
 
 

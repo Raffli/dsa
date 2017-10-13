@@ -40,7 +40,7 @@ export class SheetOverviewComponent implements OnInit {
     const schriftTalente: SprachTalent[] = [];
     const talente: Talent[] = [];
     const kampfTalente: KampfTalent[] = [];
-    this.filteredTalente = new Talente(sprachTalente, schriftTalente, talente, kampfTalente);
+    this.filteredTalente = new Talente(sprachTalente, schriftTalente, talente, kampfTalente, []);
 
     this.held.talente.talente.forEach(talent => {
       if (talent.name.toLowerCase().indexOf(this.filter.toLowerCase() ) !== -1) {

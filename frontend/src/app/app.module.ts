@@ -43,6 +43,7 @@ import { HeldSpeichernComponent } from './held-speichern/held-speichern.componen
 import { LoadKampfMemberComponent } from './meistertools/kampf-tool/load-kampf-member/load-kampf-member.component';
 import { HeldLadenPasswortComponent } from './held-laden/held-laden-passwort/held-laden-passwort.component';
 import { EreignisBogenComponent } from './heldenbogen/ereignis-bogen/ereignis-bogen.component';
+import { ZauberbogenComponent } from './heldenbogen/zauberbogen/zauberbogen.component';
 
 const appRoutes: Routes = [
   {
@@ -83,6 +84,7 @@ const appRoutes: Routes = [
     LoadKampfMemberComponent,
     HeldLadenPasswortComponent,
     EreignisBogenComponent,
+    ZauberbogenComponent,
   ],
   imports: [
     BrowserModule, FormsModule, BrowserAnimationsModule, MenuModule, MenubarModule,
