@@ -29,10 +29,6 @@ export class Talente {
   // TODO
 
 
-  public processBe(ausruestung: AusruestungsSet) {
-    const eBe = Math.round(ausruestung.ruestungsStats.ebe);
-    this.talente.forEach(talent => talent.calculateEtaw(eBe))
-    this.kampftalente.forEach(talent => talent.calculateEtawWithATPA(eBe))
-  }
+
 
 }

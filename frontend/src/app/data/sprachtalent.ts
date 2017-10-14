@@ -1,12 +1,8 @@
+import {TalentBase} from "./TalentBase";
 /**
  * Created by Patrick on 09.08.2017.
  */
-export class SprachTalent {
-  id: number;
-  kategorie: string;
-  komplexitaet: number;
+export interface SprachTalent  extends TalentBase{
   lernkomplexitaet: number;
-  name: string;
-  value: number;
-  be: string;
+  kategorie: string
 }

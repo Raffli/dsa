@@ -26,7 +26,7 @@
   </p-tabView>
   <ng-template #dev>
     <p-tabView>
-      <p-tabPanel header="Zauber" *ngIf="held.talente.zauber.length != 0">
+      <p-tabPanel header="Zauber">
         <app-zauberbogen [held]="held"></app-zauberbogen>
       </p-tabPanel>
       <p-tabPanel header="Ereignisse">

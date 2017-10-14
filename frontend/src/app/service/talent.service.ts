@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 import {Talent} from "../data/talent";
 import {TalentData} from "../data/talentdata";
-import {Http, RequestOptionsArgs, Response} from "@angular/http"
+import {Http, RequestOptionsArgs, Response, URLSearchParams} from "@angular/http"
 import {RestService} from "./rest.service";
 import {Spezialisierung} from '../data/Spezialisierung';
 import {Zauber} from '../data/Zauber';
@@ -35,20 +35,16 @@ export class TalentService {
       .catch((error:any) => Observable.throw(error))
   }
 
-  public attachZauberSpezialisierung(talente: Talente, spezialisierung: Spezialisierung) {
-    const zauber = this.findZauberByName(spezialisierung.talent, talente)
-    console.log('do rep check')
-    zauber.spezialisierungen.push(spezialisierung)
-  }
 
-  public findZauberByName(name: string, talente: Talente): Zauber {
-    for (let i = 0; i < talente.zauber.length; i++) {
-      if (talente.zauber[i].name === name) {
-        return talente.zauber[i];
+  public findTalentByName(name: string, talente: TalentBase[]) {
+    for (let i = 0; i < talente.length; i++) {
+      if (talente[i].name === name) {
+        return talente[i];
       }
     }
   }
 
+  /*
   public hasSpezialisierungFor(name: string, talente: Talente): boolean {
     const zauber = this.findZauberByName(name, talente);
     for (let i = 0; i < zauber.spezialisierungen.length; i++) {
@@ -56,6 +52,16 @@ export class TalentService {
         return true;
       }
     }
+  }
+  */
+
+  public hasSpezialisierungFor(name: string, talent: TalentBase): boolean {
+    for( let i = 0; i<talent.spezialisierungen.length; i++) {
+      if(talent.spezialisierungen[i].name === name) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public calculateEtaw(eBe: number, talent: TalentBase) {
@@ -72,7 +78,6 @@ export class TalentService {
         talent.eTaw = talent.value - eBe * val;
       }
     }
-
   }
 
   public calculateEtawWithATPA(eBe: number, talent: KampfTalent) {

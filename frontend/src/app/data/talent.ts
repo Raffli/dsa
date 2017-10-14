@@ -7,6 +7,21 @@ import {TalentBase} from "./TalentBase";
  */
 export interface Talent extends TalentBase {
 
-  kategorie: string,
+  kategorie: string;
+  probe: string;
+
+}
+
+export function talentFactory(name: string, value: number, lernmethode: string, be: string, komplexitaet: string, kategorie: string, probe: string): Talent {
+  return {
+    name: name,
+    value: value,
+    lernmethode: lernmethode,
+    be: be,
+    komplexitaet: komplexitaet,
+    kategorie: kategorie,
+    probe: probe,
+    spezialisierungen: []
+  } as Talent
 
 }

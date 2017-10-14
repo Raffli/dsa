@@ -6,4 +6,21 @@ import {TalentBase} from './TalentBase';
 export interface Zauber extends TalentBase{
   hauszauber: boolean;
   representation: string;
+  probe: string;
+
+
+}
+export function zauberFactory(name: string, value: number, lernmethode: string, be: string, komplexitaet: string, hauszauber: boolean, representation: string, probe: string): Zauber {
+  return {
+    name: name,
+    value: value,
+    lernmethode: lernmethode,
+    be: be,
+    komplexitaet: komplexitaet,
+    hauszauber: hauszauber,
+    representation: representation,
+    probe: probe,
+    spezialisierungen: []
+  } as Zauber
+
 }

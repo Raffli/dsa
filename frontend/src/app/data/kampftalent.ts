@@ -10,3 +10,17 @@ export interface KampfTalent extends TalentBase {
   pa: number
 }
 
+export function kampfTalentFactory(name: string, value: number, lernmethode: string, be: string, komplexitaet: string, at: number, pa?: number): KampfTalent {
+  return {
+    name: name,
+    value: value,
+    lernmethode: lernmethode,
+    be: be,
+    komplexitaet: komplexitaet,
+    at: at,
+    pa: pa,
+    spezialisierungen: []
+  } as KampfTalent
+
+}
+

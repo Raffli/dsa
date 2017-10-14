@@ -8,7 +8,7 @@ import {Held} from "../data/held";
 import {Attribut} from "../data/attribut";
 import {Vorteil} from "../data/vorteil";
 import {Sonderfertigkeit} from "../data/sonderfertigkeit";
-import {Talent} from "../data/talent";
+import {Talent, talentFactory} from "../data/talent";
 import {Lernmethode} from "../data/enums/lernmethode";
 import {AttributService} from "./attribut.service";
 import {TalentService} from "./talent.service";
@@ -16,7 +16,7 @@ import {TalentData} from "../data/talentdata";
 import {Observable, Observer} from 'rxjs/Rx'
 import {Aussehen} from "../data/aussehen";
 import {SprachTalent} from "../data/sprachtalent";
-import {KampfTalent} from "../data/kampftalent";
+import {KampfTalent, kampfTalentFactory} from "../data/kampftalent";
 import {Talente} from "../data/talente";
 import {AtPaPair} from "../data/AtPaPair";
 import {Ausruestung} from "../data/ausruestung/Ausruestung";
@@ -40,8 +40,9 @@ import {NameGroupPair} from '../data/NameGroupPair';
 import {Heldendataout} from '../data/heldendataout';
 import {RuestungStats} from '../data/ausruestung/RuestungStats';
 import {Ereignis} from "../data/Ereignis";
-import {Zauber} from '../data/Zauber';
+import {Zauber, zauberFactory} from '../data/Zauber';
 import {skip} from 'rxjs/operator/skip';
+import {Schaden} from "../data/ausruestung/schaden";
 
 @Injectable()
 export class HeldenService {
@@ -77,6 +78,8 @@ export class HeldenService {
     return this.restService.get(path).map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error))
   }
+
+
 
   public saveHeld(held: Held, gruppe: string, password: string): Observable<Response> {
     while(held.name[held.name.length-1] == ' ') {
@@ -138,7 +141,7 @@ export class HeldenService {
             const hero = new Held(rasse, geschlecht, profession, apTotal, apFree, name, attribute,
               vorteile, sonderfertigkeiten, kultur, groesseGewicht.groesse, groesseGewicht.gewicht,
               aussehen, talente, ausruestung, ausweichen, xml, ereignisse);
-            talente.processBe(ausruestung.sets[0]);
+            this.processBe(talente, ausruestung.sets[0])
             callback(hero);
             console.log(hero)
           }));
@@ -169,19 +172,17 @@ export class HeldenService {
       }
       const probe = node.getAttribute('probe')
       const repraesentation = node.getAttribute('repraesentation')
-      const zauber: Zauber = {
-        hauszauber: hauszauber,
-        komplexitaet: komplexitaet,
-        lernmethode: lernmethode,
-        representation: repraesentation,
-        value: value,
-        name: name,
-        probe: probe,
-        spezialisierungen: []
-      }
+      const zauber = zauberFactory(name, value, lernmethode, '0', komplexitaet, hauszauber, repraesentation, probe)
+
       result.push(zauber);
     }
     return result;
+  }
+
+  public processBe(talente: Talente,  ausruestung: AusruestungsSet) {
+    const eBe = Math.round(ausruestung.ruestungsStats.ebe);
+    talente.talente.forEach(talent => this.talentService.calculateEtaw(eBe, talent))
+    talente.kampftalente.forEach(talent => this.talentService.calculateEtawWithATPA(eBe, talent))
   }
 
   private extractAusweichen(paBasis: number, ausruestung: AusruestungsSet, kampfSonderfertigkeiten: Sonderfertigkeit[]) : number {
@@ -464,22 +465,21 @@ export class HeldenService {
       waffe.at = kampfTalent.at + waffe.wm.at;
       waffe.pa = kampfTalent.pa + waffe.wm.pa;
       waffe.be = parseInt(kampfTalent.be.substr(2, kampfTalent.be.length));
-
-      if (kampfTalent.hasSpezialisierungFor(waffe.name)) {
-        waffe.at ++;
-        waffe.pa ++;
-      }
+     if(this.talentService.hasSpezialisierungFor(waffe.name, kampfTalent)) {
+       waffe.at ++;
+       waffe.pa ++;
+     }
     }
 
     if (waffe.tpKK.minKK > kk - waffe.tpKK.mod) {
       const mod = Math.floor((waffe.tpKK.minKK - kk) / waffe.tpKK.mod);
       waffe.at -= mod;
       waffe.pa -= mod;
-      waffe.totalSchaden = {w6: waffe.schaden.w6, fix: waffe.schaden.fix -= mod}
+      waffe.totalSchaden = {w6: waffe.schaden.w6, fix: waffe.schaden.fix -= mod} as Schaden;
 
     } else {
       const additionalDamage = Math.floor((kk - waffe.tpKK.minKK) / waffe.tpKK.mod);
-      waffe.totalSchaden = {w6: waffe.schaden.w6, fix: waffe.schaden.fix + additionalDamage}
+      waffe.totalSchaden = {w6: waffe.schaden.w6, fix: waffe.schaden.fix + additionalDamage} as Schaden;
 
     }
 
@@ -606,16 +606,18 @@ export class HeldenService {
           const spezialisierung = name.substring(name.indexOf('(') + 1, name.indexOf(')'));
 
           const zs = new Spezialisierung(zauberName, spezialisierung, representation);
-          // talente.findZauberByName(zauberName).attachSpezialisierung(zs);
+
           zauberSpezialisierungen.push(zs)
-          this.talentService.attachZauberSpezialisierung(talente, zs)
-          console.log(zs)
+          const zauber = this.talentService.findTalentByName(zs.talent, talente.zauber);
+          this.talentService.attachSpezialisierung(zs, zauber);
         } else if (type === 'talent') {
           const talentName = name.substring(22, name.indexOf('(') - 1);
           const spezialisierung = name.substring(name.indexOf('(') + 1, name.indexOf(')'));
           const ts = new Spezialisierung(talentName, spezialisierung);
           talentSpezialisierungen.push(ts);
-          talente.findTalentByName(talentName).attachSpezialisierung(ts);
+
+          const talent = (this.talentService.findTalentByName(talentName, talente.talente));
+          this.talentService.attachSpezialisierung(ts, talent)
 
         } else {
           window.alert('Paddi hat einen Fall vergessen! Fallname: ' + name);
@@ -703,25 +705,25 @@ export class HeldenService {
             let talent: KampfTalent;
             if (atpa === undefined) {
               // Fernkampf Talent
-              talent = new KampfTalent(name, lernmethode, value, data.be, fkBasis + value, null, value)
+              talent = kampfTalentFactory(name, value, lernmethode, data.be, data.komplexitaet, fkBasis)
+
             } else {
-              talent = new KampfTalent(name, lernmethode, value, data.be, atpa.at, atpa.pa, value)
+              talent = kampfTalentFactory(name, value, lernmethode, data.be, data.komplexitaet, atpa.at, atpa.pa)
             }
 
             kampftalente.push(talent);
           } else if (data.kategorie === 'Sprachen') {
-            const talent: SprachTalent =  data as SprachTalent;
+            const talent: SprachTalent =  data as any as SprachTalent;
             talent.value = value;
             sprachtalente.push(talent);
 
           } else if (data.kategorie === 'Schrift') {
-            const talent: SprachTalent =  data as SprachTalent;
+            const talent: SprachTalent =  data as any as SprachTalent;
             talent.value = value;
             schriftTalente.push(talent);
           } else {
-            const talent = new Talent(lernmethode, name, probe, value, data.be);
-            talent.komplexitaet = data.komplexitaet;
-            talent.kategorie = data.kategorie;
+
+            const talent = talentFactory(name, value, lernmethode, data.be, data.komplexitaet, data.kategorie, probe)
             talente.push(talent);
 
           }
