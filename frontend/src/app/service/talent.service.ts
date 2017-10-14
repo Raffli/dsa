@@ -11,6 +11,8 @@ import {RestService} from "./rest.service";
 import {Spezialisierung} from '../data/Spezialisierung';
 import {Zauber} from '../data/Zauber';
 import {Talente} from '../data/talente';
+import {TalentBase} from '../data/TalentBase';
+import {KampfTalent} from '../data/kampftalent';
 
 @Injectable()
 export class TalentService {
@@ -54,6 +56,44 @@ export class TalentService {
         return true;
       }
     }
+  }
+
+  public calculateEtaw(eBe: number, talent: TalentBase) {
+    if (talent.be === null || talent.be === '') {
+      talent.eTaw = talent.value;
+    } else if (talent.be === 'BE') {
+      talent.eTaw = talent.value - eBe;
+    } else {
+      const beS = talent.be.substr(2, talent.be.length);
+      const val = parseInt(beS.substr(1, beS.length), 10) // beS.length should alway be 2
+      if (beS.startsWith('-')) {
+        talent.eTaw = talent.value - Math.max(0, eBe - val)
+      } else {
+        talent.eTaw = talent.value - eBe * val;
+      }
+    }
+
+  }
+
+  public calculateEtawWithATPA(eBe: number, talent: KampfTalent) {
+    this.calculateEtaw(eBe, talent);
+    if (talent.eTaw < talent.value) {
+      const diff = talent.value - talent.eTaw;
+      talent.at -= Math.ceil(diff / 2);
+      talent.pa -= Math.floor(diff / 2);
+    }
+  }
+
+  public hasTalentSpezialisierungFor(name: string, talent: TalentBase): boolean {
+    for (let i = 0; i < talent.spezialisierungen.length; i++) {
+      if (talent.spezialisierungen[i].name === name) {
+        return true;
+      }
+    }
+  }
+
+  public attachSpezialisierung(sf: Spezialisierung, talent: TalentBase) {
+    talent.spezialisierungen.push(sf);
   }
 
 }

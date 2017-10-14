@@ -1,14 +1,9 @@
 import {Spezialisierung} from './Spezialisierung';
+import {TalentBase} from './TalentBase';
 /**
  * Created by pahil on 08.10.2017.
  */
-export interface Zauber {
+export interface Zauber extends TalentBase{
   hauszauber: boolean;
-  komplexitaet: string;
-  lernmethode: string;
   representation: string;
-  value: number;
-  name: string;
-  probe: string;
-  spezialisierungen: Spezialisierung[];
 }
