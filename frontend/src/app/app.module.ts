@@ -10,7 +10,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HeldenbogenComponent } from './heldenbogen/heldenbogen.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { HeldDetailComponent } from './heldenbogen/held-detail/held-detail.component';
 import {AttributService} from './service/attribut.service';
 import {HeldenService} from './service/helden.service';
 
@@ -69,7 +68,6 @@ const appRoutes: Routes = [
     HeldenbogenComponent,
     HomeComponent,
     PageNotFoundComponent,
-    HeldDetailComponent,
     SheetOverviewComponent,
     KampfbogenComponent,
     HeldLadenComponent,
