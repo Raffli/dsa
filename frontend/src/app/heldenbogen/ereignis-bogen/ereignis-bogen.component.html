@@ -5,7 +5,7 @@
   <p-column field="ap" header="AP" [style]="{'width':'80px'}"></p-column>
   <p-column field="color" header="Änderung"></p-column>
   <p-column field="kommentar" header="Kommentar"></p-column>
-  <p-column field="datum" header="Datum" [style]="{'width':'90px'}">
+  <p-column field="datum" header="Datum" [style]="{'width':'90px'}" sortable="true">
     <ng-template let-ereigniss="rowData" pTemplate="body">
       <span>{{ereigniss.datum | date: 'dd.MM.yyyy'}}</span>
     </ng-template>
