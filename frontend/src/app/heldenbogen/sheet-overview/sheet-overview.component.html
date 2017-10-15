@@ -54,11 +54,11 @@
         <td>eTaw</td>
       </tr>
       <tr *ngFor="let talent of filteredTalente.kampftalente">
-        <td>{{talent.name}}</td>
+        <td>{{talent.name}} {{getSpezialisierungen(talent)}}</td>
         <td>{{talent.be}}</td>
         <td>{{talent.at}}</td>
         <td>{{talent.pa}}</td>
-        <td>{{talent.taw}}</td>
+        <td>{{talent.value}}</td>
         <td>{{talent.eTaw}}</td>
       </tr>
     </table>
@@ -110,7 +110,7 @@
       <td>ETaw</td>
     </tr>
     <tr *ngFor="let talent of filteredTalente.talente">
-      <td>{{talent.name}}</td>
+      <td>{{talent.name}} {{getSpezialisierungen(talent)}}</td>
       <td>{{talent.kategorie}}</td>
       <td>{{talent.be}}</td>
       <td>{{talent.probe}}</td>

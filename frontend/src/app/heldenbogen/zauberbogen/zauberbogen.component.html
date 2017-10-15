@@ -3,7 +3,7 @@
   <tr></tr>
   <!--<div *ngFor="let zauber of held.talente.zauber"> -->
     <tr *ngFor="let zauber of held.talente.zauber">
-      <td>{{zauber.name}}</td>
+      <td>{{zauber.name}} {{getSpezialisierungen(zauber)}}</td>
       <td>{{zauber.representation}}</td>
       <td>{{zauber.probe}}</td>
       <td>{{zauber.value}}</td>

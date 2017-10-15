@@ -5,6 +5,7 @@ import {Talente} from "../../data/talente";
 import {SprachTalent} from "../../data/sprachtalent";
 import {Talent} from "../../data/talent";
 import {KampfTalent} from "../../data/kampftalent";
+import {TalentBase} from '../../data/TalentBase';
 
 @Component({
   selector: 'app-sheet-overview',
@@ -68,8 +69,21 @@ export class SheetOverviewComponent implements OnInit {
   }
 
   onEnter() {
+  }
 
-
+  getSpezialisierungen(talent: TalentBase): string {
+    if (talent.spezialisierungen.length === 0) {
+      return ''
+    }
+    let ret = '(';
+    for (let i = 0; i < talent.spezialisierungen.length; i++) {
+      ret += talent.spezialisierungen[i].name
+      if (i !== talent.spezialisierungen.length - 1) {
+        ret += ' |'
+      }
+    }
+    ret += ')';
+    return ret;
   }
 
 }
