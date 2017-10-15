@@ -42,6 +42,7 @@ export class TalentService {
         return talente[i];
       }
     }
+    return null;
   }
 
   /*

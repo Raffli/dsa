@@ -598,7 +598,7 @@ export class HeldenService {
       const node = nodes.item(i);
       const name = node.getAttribute('name');
       if (name.indexOf('(') !== -1 && node.childNodes.length !== 0) {
-        //Talent / Zauberspezialisierung
+        // Talent / Zauberspezialisierung
         const type = node.childNodes[0].nodeName;
         if (type === 'zauber') {
           const zauberName = name.substring(22, name.indexOf('[')- 1);
@@ -616,7 +616,13 @@ export class HeldenService {
           const ts = new Spezialisierung(talentName, spezialisierung);
           talentSpezialisierungen.push(ts);
 
-          const talent = (this.talentService.findTalentByName(talentName, talente.talente));
+          let talent = this.talentService.findTalentByName(talentName, talente.talente);
+          if(talent === null) {
+            talent = this.talentService.findTalentByName(talentName, talente.kampftalente);
+          }
+          if(talent === null) {
+            window.alert('Talent konnte nicht gefunden werden: ' + talentName)
+          }
           this.talentService.attachSpezialisierung(ts, talent)
 
         } else {
