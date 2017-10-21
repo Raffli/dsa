@@ -1,13 +1,14 @@
 import {Command} from './Command';
-import {Kampfdata} from '../../../../data/kampf/Kampfdata';
+import {Kampfteilnehmer} from '../../../../data/kampf/Kampfteilnehmer';
+import {Kampfdata} from "../../../../data/kampf/Kampfdata";
 import {Attacke} from '../../../../data/kampf/Attacke';
 /**
- * Created by pahil on 05.10.2017.
+ * Created by pahil on 21.09.2017.
  */
-export class CommandAttack  extends Command {
+export class CommandDoDamage extends Command {
 
   public getName(): string {
-    return 'attack';
+    return 'dodamage';
   }
 
   public autoComplete(string: string, params: string[], data: Kampfdata): string {
@@ -21,7 +22,6 @@ export class CommandAttack  extends Command {
   }
 
   public perform(params: string[] , data: Kampfdata): boolean {
-
     if (params.length === 2 || params.length === 3 || params.length === 4 && params[3] === '') {
       const teilnehmer = this.findTeilnehmerByName(params[1], data.teilnehmer);
       if (teilnehmer === null) {
@@ -38,25 +38,24 @@ export class CommandAttack  extends Command {
           attacke = teilnehmer.attacken[attackenIndex];
         }
       }
-      console.log(attacke)
       if (attacke === undefined) {
         this.messageService.error('Teilnehmer Attacke nicht gefunden')
         return false;
       }
-      const roll = Math.floor(Math.random() * 20) + 1;
-      if (roll <= attacke.at) {
-        this.messageService.info('Treffer: ' + roll);
-      } else {
-        this.messageService.info('Daneben: ' + roll);
+      let dmg = attacke.schaden.fix;
+      for (let i = 0; i < attacke.schaden.w6; i++) {
 
       }
+
+
 
     }
     return false;
   }
 
+
   public getDescription(): string {
-    return 'attack <name> <?attackenindex>';
+    return 'damage <teilnehmername> <amount>';
   }
 
   protected provideAttackeMatching(command: string, attacken: Attacke[]): string {

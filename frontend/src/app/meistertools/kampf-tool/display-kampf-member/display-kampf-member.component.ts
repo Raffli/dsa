@@ -20,6 +20,11 @@ export class DisplayKampfMemberComponent implements OnInit {
   @Output()
   public onParry = new EventEmitter<void>();
 
+  @Output()
+  public onDamage = new EventEmitter<void>();
+
+
+
 
   constructor() { }
 
@@ -32,6 +37,10 @@ export class DisplayKampfMemberComponent implements OnInit {
 
   parry() {
     this.onParry.emit();
+  }
+
+  damage() {
+    this.onDamage.emit();
   }
 
 

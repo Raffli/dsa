@@ -140,6 +140,10 @@ export class DisplayKampfComponent implements OnInit, OnChanges {
     this.executeCommand('parry ' + teilnehmer.name)
   }
 
+  onDamage(teilnehmer: Kampfteilnehmer) {
+    this.executeCommand('dodamage ' + teilnehmer.name )
+  }
+
 
 
 }

@@ -9,12 +9,10 @@
     <div class="ui-grid-col-2 pars">Ini: {{teilnehmer.ini}} ({{teilnehmer.iniBase}})</div>
     <div class="ui-grid-col-1 pars">WS: {{teilnehmer.ws}} </div>
     <div class="ui-grid-col-2 pars">Wunden: {{teilnehmer.wunden}} </div>
-  </div>
-  <div class="ui-grid-row">
     <div class="ui-grid-col-2">
-      <button (click)="parry()">Parieren</button>
+      <button (click)="parry()">P</button>
+      <button (click)="damage()">D</button>
     </div>
-
   </div>
   <div class="ui-grid-row" *ngFor="let attacke of teilnehmer.attacken; let i = index">
     <div class="ui-grid-col-3 pars">{{attacke.name}}</div>

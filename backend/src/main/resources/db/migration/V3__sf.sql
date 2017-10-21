@@ -6,8 +6,8 @@ create table sonderfertigkeiten(
 	PRIMARY KEY(id)
 );
 
+/*profan, magisch, kampf, klerikal */
 
-/*profan, magisch, kampf, talentSpezialisierung, zauberSpezialisierung, andereSpezialisierung */
 INSERT INTO sonderfertigkeiten (name, kosten, typ) VALUES
 	('Kraftlinienmagie I', 100, 1),
 	('Meister der Improvisation', 100, 0),

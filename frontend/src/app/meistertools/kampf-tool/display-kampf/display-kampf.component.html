@@ -16,7 +16,8 @@
 
 
 -->
-<app-display-kampf-member *ngFor="let member of data.teilnehmer; let i = index" [teilnehmer]="member" [active]="data.current==i" (onAttack)="onAttack(member, $event)" (onParry)="onParry(member)">
+<app-display-kampf-member *ngFor="let member of data.teilnehmer; let i = index" [teilnehmer]="member"
+                          [active]="data.current==i" (onAttack)="onAttack(member, $event)" (onParry)="onParry(member)" (onDamage)="onDamage(member)">
 
 </app-display-kampf-member>
 
