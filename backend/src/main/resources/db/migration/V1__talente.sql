@@ -173,7 +173,7 @@ INSERT INTO talente (name, kategorie_id, komplexitaet, be) VALUES
 	('Singen', 7, 'D', 'BE-3'),
 	('Sinnenschärfe', 7, 'D', ''),
 	('Skifahren', 7, 'D', 'BE-2'),
-	('Stimmen Imitieren', 7, 'D', 'BE-4'),
+	('Stimmen imitieren', 7, 'D', 'BE-4'),
 	('Tanzen', 7, 'D', 'BEx2'),
 	('Taschendiebstahl', 7, 'D', 'BEx2'),
 	('Zechen', 7, 'D', '');	

@@ -37,6 +37,8 @@ INSERT INTO waffen (name, schaden_w6, schaden_fix, tpKK_minKK,tpKK_mod, ini, bf,
 	('Vulkanglasdolch', 1, -1, 12, 5, -2, 6, 'Do', 'H', -2, -3),
 	('Wurfdolch', 1, 1, 12, 5, -1, 2, 'Do', 'H', -1, -2),
 	('Wurfmesser', 1, -1, 12, 6, -1, 2, 'Do', 'H', -2, -3),
+	('Kriegsbeil', 1, 4, 13, 2, 0, 2, 'Hi', 'N', 0, -1),
+	
 	('Degen', 1, 3, 12, 5, 2, 3, 'Fe', 'N', 0, -1),
 	('Florett', 1, 3, 13, 5, 3, 4, 'Fe', 'N', 1, -1),
 	('Magierdegen', 1, 2, 13, 5, 1, 4, 'Fe', 'N', 0, -2),

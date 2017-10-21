@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,16 +43,12 @@ public class AusruestungsController {
 	@Autowired
 	private RuestungRepository ruestungRepository; 
 	
-	@Autowired
-	private ObjectMapper jacksonObjectMapper;
-	
-	@GetMapping("bynames") 
-	public Object[] getAusruestungByNamesAndTypes(@RequestParam String[] data) throws JsonParseException, JsonMappingException, IOException {
+	@PostMapping("bynames") 
+	public Object[] getAusruestungByNamesAndTypes(@RequestBody AusruestungInfo[] data) throws JsonParseException, JsonMappingException, IOException {
 		Object[] ret = new Object[data.length];
 		for (int i = 0; i < data.length; i++) {
-			AusruestungInfo info = jacksonObjectMapper.readValue(data[i], AusruestungInfo.class);
+			AusruestungInfo info = data[i];
 			if(info.getType() == 0 ) {
-				System.out.println(info.getName());
 				ret[i] = this.waffenRepository.findByName(info.getName());
 			} else if(info.getType() == 1) {
 				//Fkwaffe
@@ -70,6 +68,8 @@ public class AusruestungsController {
 			
 		return ret;
 	}
+	
+
 	
 	@GetMapping("waffe/byname")
 	public ResponseEntity<?> findByWaffeName(@RequestParam("name")String name) {

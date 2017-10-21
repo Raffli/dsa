@@ -43,6 +43,7 @@ import {Ereignis} from "../data/Ereignis";
 import {Zauber, zauberFactory} from '../data/Zauber';
 import {skip} from 'rxjs/operator/skip';
 import {Schaden} from "../data/ausruestung/schaden";
+import {MessageService} from "./message.service";
 
 @Injectable()
 export class HeldenService {
@@ -53,7 +54,7 @@ export class HeldenService {
 
   constructor(private attributService: AttributService, private talentService: TalentService, private ausruetungsService: AusruestungService,
               private kampftalentService: KampfTalentService, private restService: RestService,
-              private sonderfertigkeitenService: SonderfertigkeitenService, private log: LoggingService ) {
+              private sonderfertigkeitenService: SonderfertigkeitenService, private log: LoggingService, private messageService: MessageService ) {
     if (!environment.production) {
       this.loadHeldByXML(this.testHeld);
     }
@@ -167,9 +168,6 @@ export class HeldenService {
       const lernmethode = node.getAttribute('lernmethode')
       const value = parseInt(node.getAttribute('value'), 10);
       const name = node.getAttribute('name')
-      if(name === 'Ignisphaero Feuerball') {
-        console.log(node)
-      }
       const probe = node.getAttribute('probe')
       const repraesentation = node.getAttribute('repraesentation')
       const zauber = zauberFactory(name, value, lernmethode, '0', komplexitaet, hauszauber, repraesentation, probe)
@@ -621,12 +619,17 @@ export class HeldenService {
             talent = this.talentService.findTalentByName(talentName, talente.kampftalente);
           }
           if(talent === null) {
+
             window.alert('Talent konnte nicht gefunden werden: ' + talentName)
           }
           this.talentService.attachSpezialisierung(ts, talent)
 
         } else {
-          window.alert('Paddi hat einen Fall vergessen! Fallname: ' + name);
+          if(node.parentElement.parentElement.tagName == 'Wesen') {
+            this.messageService.infoOnce('Tier-Sonderfertigkeiten werden nicht unterstützt')
+          } else {
+            this.messageService.error('Paddi hat einen Fall vergessen! Fallname: ' + name);
+          }
         }
       } else if (node.childNodes.length === 1) {
         // Rüstungsgewöhnung oder Kulturkunde
@@ -634,7 +637,12 @@ export class HeldenService {
         andereSpezialisierungen.push(new Spezialisierung(name, spezialisierung));
 
       } else {
-        requestData.push(name);
+        if(node.parentElement.parentElement.tagName === 'Wesen') {
+          this.messageService.infoOnce('Tier-Sonderfertigkeiten werden nicht unterstützt');
+        } else {
+          requestData.push(name);
+        }
+
 
 
       }
@@ -647,7 +655,8 @@ export class HeldenService {
         for ( let i = 0; i < sfs.length; i++) {
           const data = sfs[i];
           if (data === null) {
-            window.alert('Sonderfertigkeit nicht in der Datenbank vorhanden: ' + requestData[i]);
+
+            this.messageService.info('Sonderfertigkeit nicht in der Datenbank vorhanden: ' + requestData[i]);
             continue;
           }
           if (data.typ === 'magisch') {

@@ -8,6 +8,8 @@ export class MessageService {
 
   constructor() { }
 
+  private singleMessages = [];
+
   public addMessage(message: Message) {
     this.messages.push(message);
 
@@ -31,5 +33,13 @@ export class MessageService {
     }
     this.addMessage(data);
   }
+
+  public infoOnce(message: string) {
+    if(this.singleMessages.indexOf(message) === -1) {
+      this.singleMessages.push(message)
+      this.info(message)
+    }
+  }
+
 
 }

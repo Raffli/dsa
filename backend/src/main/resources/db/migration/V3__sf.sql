@@ -79,7 +79,13 @@ INSERT INTO sonderfertigkeiten (name, kosten, typ) VALUES
 	('Stabzauber: Hammer des Magus', 100, 2),
 	('Stabzauber: Kraftfokus', 100, 2),
 	('Stabzauber: Zauberspeicher', 100, 2),
+	('Gebirgskundig', 100, 2),
 	
+	('Fass I', 100, 2),
+	('Fass II', 100, 2),
+	('Gezielter Biss', 100, 2),
+	('Kehrtwende', 100, 2),
+	('Kommen auf Signal', 100, 2),
 	
 	('Tanz der Mada', 100, 0);
 	

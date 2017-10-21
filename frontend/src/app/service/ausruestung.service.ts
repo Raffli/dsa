@@ -38,13 +38,7 @@ export class AusruestungService {
   }
 
   public getEquipmentByNameAndType(data: any[]): Observable<any[]> {
-    const options: RequestOptionsArgs = {
-      params: {
-        data: data
-      }
-    }
-    return this.rest.getWithOptions('ausruestung/bynames', options).map((res:Response) =>res.json())
-      .catch((error: any) => Observable.throw(error))
+    return this.rest.post('ausruestung/bynames', data).map((res:Response) => res.json())
   }
 
 }
