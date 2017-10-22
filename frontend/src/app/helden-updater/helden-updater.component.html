@@ -1,0 +1,29 @@
+
+<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid"  *ngIf="held">
+
+  <div class="ui-grid-row">
+    Es wird nach einer Aktualisierung für den Helden mit dem Namen {{held.name}} gesucht
+  </div>
+  <div *ngFor="let upload of uploads" class="ui-grid-row">
+    <button (click)="onClick(upload)">
+      <div class="ui-grid-row">
+        Uploader: {{upload.uploader}}
+      </div>
+      <div class="ui-grid-row">
+        Nachricht: {{upload.uploadMessage}}
+      </div>
+      <div class="ui-grid-row">
+        Datum: {{upload.uploadedAt | date}}
+      </div>
+
+    </button>
+  </div>
+
+
+  <div class="ui-grid-row">
+    Neuen Schlüssel hochladen: <input type="text" (keydown.enter)="updateKey()" [(ngModel)]="key">
+  </div>
+</div>
+
+
+

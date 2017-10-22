@@ -43,6 +43,8 @@ import { LoadKampfMemberComponent } from './meistertools/kampf-tool/load-kampf-m
 import { HeldLadenPasswortComponent } from './held-laden/held-laden-passwort/held-laden-passwort.component';
 import { EreignisBogenComponent } from './heldenbogen/ereignis-bogen/ereignis-bogen.component';
 import { ZauberbogenComponent } from './heldenbogen/zauberbogen/zauberbogen.component';
+import { HeldenUpdaterComponent } from './helden-updater/helden-updater.component';
+import {HeldenUpdaterService} from "./service/helden-updater.service";
 
 const appRoutes: Routes = [
   {
@@ -58,6 +60,7 @@ const appRoutes: Routes = [
   { path: 'laden', component: HeldLadenComponent },
   { path: 'tools/kampf', component: KampfToolComponent},
   { path: 'save', component: HeldSpeichernComponent},
+  { path: 'updater', component: HeldenUpdaterComponent},
 
   { path: '**', component: PageNotFoundComponent }
 ];
@@ -83,6 +86,7 @@ const appRoutes: Routes = [
     HeldLadenPasswortComponent,
     EreignisBogenComponent,
     ZauberbogenComponent,
+    HeldenUpdaterComponent,
   ],
   imports: [
     BrowserModule, FormsModule, BrowserAnimationsModule, MenuModule, MenubarModule,
@@ -93,7 +97,7 @@ const appRoutes: Routes = [
       { enableTracing: false }
     )
   ],
-  providers: [AttributService, HeldenService, TalentService, RestService, AusruestungService, KampfTalentService, SonderfertigkeitenService, LoggingService, SessionStoreService, KampfService, MessageService],
+  providers: [AttributService, HeldenService, TalentService, RestService, AusruestungService, KampfTalentService, SonderfertigkeitenService, LoggingService, SessionStoreService, KampfService, MessageService, HeldenUpdaterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

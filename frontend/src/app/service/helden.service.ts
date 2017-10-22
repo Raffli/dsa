@@ -44,6 +44,7 @@ import {Zauber, zauberFactory} from '../data/Zauber';
 import {skip} from 'rxjs/operator/skip';
 import {Schaden} from "../data/ausruestung/schaden";
 import {MessageService} from "./message.service";
+import {UploadInfo} from "../data/UploadInfo";
 
 @Injectable()
 export class HeldenService {
@@ -78,6 +79,15 @@ export class HeldenService {
     }
     return this.restService.get(path).map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error))
+  }
+
+  public getUploadInfos(): Observable<UploadInfo[]> {
+    return this.restService.get('held/uploads').map((response: Response) => response.json());
+  }
+
+  public updateHeld(name: string, downloadLink: string): Observable<Heldendata> {
+    return this.restService.get('held/update?name=' + name + '&downloadLink=' + downloadLink).map((response: Response) => response.json());
+
   }
 
 

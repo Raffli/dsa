@@ -34,6 +34,10 @@ export class AppComponent {
     {
       label: 'Kampf-Tool',
       routerLink: 'tools/kampf'
+    },
+    {
+      label: 'Updater',
+      routerLink: 'updater'
     }
   ];
   constructor(private sessionStore: SessionStoreService, private messageService: MessageService) {

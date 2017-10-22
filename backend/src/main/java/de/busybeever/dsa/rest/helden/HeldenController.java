@@ -16,6 +16,8 @@ import de.busybeever.dsa.data.entities.HeldEntity;
 import de.busybeever.dsa.data.entities.HeldenGruppeEntity;
 import de.busybeever.dsa.data.repository.HeldRepository;
 import de.busybeever.dsa.data.repository.HeldenGruppeRepository;
+import de.busybeever.dsa.service.DownloadFileService;
+import de.busybeever.dsa.service.UploadInfo;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -29,6 +31,9 @@ public class HeldenController {
 	@Autowired
 	private HeldenGruppeRepository heldenGruppeRepository;
 
+	@Autowired
+	private DownloadFileService downloadFileService;
+	
 	@GetMapping("names")
 	public List<NameGroupPair> getAllNames() {
 		return this.heldRepository.getAllNames();
@@ -91,6 +96,21 @@ public class HeldenController {
 			}
 		}
 		return true;
+	}
+	
+	@GetMapping("update")
+	public HeldEntity downloadHeld(@RequestParam String name, @RequestParam String downloadLink) {
+		return this.downloadFileService.downloadHeld(name, downloadLink );
+	}
+	
+	@GetMapping("uploads")
+	public UploadInfo[] getUploads() {
+		return this.downloadFileService.getMessages();
+	}
+	
+	@PostMapping("access-key")
+	public void uploadAccessKey(@RequestBody String key) {
+		this.downloadFileService.uploadAccessKey(key);
 	}
 
 }

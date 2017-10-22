@@ -12,7 +12,7 @@ INSERT INTO heldengruppe (id, name) VALUES
 
 create table helden(
 	id BIGINT NOT NULL AUTO_INCREMENT,
-	name varchar(50) NOT NULL UNIQUE,
+	name varchar(200) NOT NULL UNIQUE,
 	gruppeid INTEGER NOT NULL,
 	password VARCHAR(20),
 	xml text NOT NULL,
