@@ -28,7 +28,7 @@ import {KampfTalentService} from "./kampf-talent.service";
 import {FernkampfWaffe} from "../data/ausruestung/FernkampfWaffe";
 import {Schild} from "../data/ausruestung/Schild";
 import {Ruestung} from "../data/ausruestung/Ruestung";
-import {environment} from "../../environments/environment";
+import {environment, environment} from "../../environments/environment";
 import {RestService} from "./rest.service";
 import {Heldendata} from "../data/heldendata";
 import {Sonderfertigkeiten} from "../data/Sonderfertigkeiten";
@@ -136,6 +136,9 @@ export class HeldenService {
     const apTotal = this.extractApTotal(xmlDoc);
     const apFree = this.extractApFree(xmlDoc);
     const name = this.extractName(xmlDoc);
+    if(environment.production) {
+      this.messageService.info('Lade held: ' + name)
+    }
     const attribute = this.extractAttribute(xmlDoc);
     const vorteile = this.extractVorteile(xmlDoc);
     const ereignisse = this.extractEreignisse(xmlDoc);

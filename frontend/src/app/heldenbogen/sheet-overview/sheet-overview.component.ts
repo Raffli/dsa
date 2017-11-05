@@ -86,4 +86,18 @@ export class SheetOverviewComponent implements OnInit {
     return ret;
   }
 
+  getVorteileNachteile(): string {
+    let ret ="";
+    for(let i=0; i<this.held.vorteile.length; i++) {
+      const vorteil = this.held.vorteile[i];
+      ret += vorteil.name;
+      if(vorteil.value) ret+= ': ' + vorteil.value;
+      if(i != this.held.vorteile.length-1) {
+        ret+='; '
+      }
+    }
+
+    return ret;
+  }
+
 }

@@ -1,30 +1,67 @@
-/* You can add global styles to this file, and also import other style files */
-body {
-  margin: 0;
-  font-family: Roboto, sans-serif;
+table {
+  border-collapse: collapse;
+  width:100%;
 }
 
-
-html, body {
-    height: 100%;
-    margin:0; padding:0;
-	
+table, th, td {
+  border: 1px solid black;
 }
 
-md-card {
-  max-width: 80%;
-  margin: 1em auto;
+td {
+  height: 40px;
   text-align: center;
+  min-width: 10px;
+
+}
+td.noborder {
+  border:none !important;
 }
 
-md-toolbar-row {
-  justify-content: space-between;
-  height:100%
+td.noheight {
+  height: 0px !important;
 }
 
-.done {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  color: white;
+
+
+/* CSS FOR ROUND EDGES */
+table {
+  border-collapse:separate;
+  border:solid black 1px;
+  border-radius:6px;
+  -moz-border-radius:6px;
+}
+
+td, th {
+  border-left:solid black 1px;
+  border-top:solid black 1px;
+}
+
+th {
+  background-color: blue;
+  border-top: none;
+}
+
+td:first-child, th:first-child {
+  border-left: none;
+}
+
+.round-border {
+  border:solid black 1px;
+  border-radius:3px;
+  -moz-border-radius:3px;
+  padding:2px;
+}
+
+.ellipting {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.top-margin {
+  margin-top:10px
 }

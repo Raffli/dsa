@@ -25,16 +25,17 @@
 
   </p-tabView>
   <ng-template #dev>
-    <p-tabView>
+    <p-tabView><p-tabPanel header="Übersicht">
+      <app-sheet-overview [held]="held"></app-sheet-overview>
+    </p-tabPanel>
+
       <p-tabPanel header="Zauber">
         <app-zauberbogen [held]="held"></app-zauberbogen>
       </p-tabPanel>
       <p-tabPanel header="Ereignisse">
         <app-ereignis-bogen [held]="held"></app-ereignis-bogen>
       </p-tabPanel>
-      <p-tabPanel header="Übersicht">
-        <app-sheet-overview [held]="held"></app-sheet-overview>
-      </p-tabPanel>
+
       <p-tabPanel header="Kampfbogen">
         <app-kampfbogen [held]="held"></app-kampfbogen>
       </p-tabPanel>
