@@ -72,6 +72,7 @@ public class TalentController {
 	private <T> ResponseEntity<T> buildEntity(T from, String errorMessage) {
 		
 		if(from == null) {
+			System.out.println(from);
 			log.error(errorMessage);
 			return new ResponseEntity<T>(HttpStatus.NOT_FOUND);
 		} else {

@@ -18,23 +18,23 @@ public class SonderfertigkeitController {
 
 	@Autowired
 	private SonderfertigkeitRepository sonderfertigkeitRepository;
-	
+
 	@GetMapping("byname")
 	public ResponseEntity<?> findByName(@RequestParam String name) {
 		SonderfertigkeitEntity entity = this.sonderfertigkeitRepository.findByName(name);
-		if(entity == null) {
-			log.error("No mapping found for sf:" +name);
+		if (entity == null) {
+			log.error("No mapping found for sf:" + name);
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(entity);
 	}
-	
+
 	@GetMapping("bynames")
 	public SonderfertigkeitEntity[] findByNames(@RequestParam String[] names) {
 		SonderfertigkeitEntity[] rEntities = new SonderfertigkeitEntity[names.length];
 		for (int i = 0; i < rEntities.length; i++) {
 			rEntities[i] = this.sonderfertigkeitRepository.findByName(names[i]);
-			if(rEntities[i] == null) {
+			if (rEntities[i] == null) {
 				log.error("No mapping found for sf:" + names[i]);
 			}
 		}

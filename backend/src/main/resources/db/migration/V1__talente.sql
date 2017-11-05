@@ -125,6 +125,7 @@ INSERT INTO talente (name, kategorie_id, komplexitaet) VALUES
 	('Heilkunde: Seele', 5, 'B'),
 	('Heilkunde: Wunden', 5, 'B'),
 	('Holzbearbeitung', 5, 'B'),
+	('Kartografie', 5, 'B'),
 	('Instrumentenbauer', 5, 'B'),
 	('Kartographie', 5, 'B'),
 	('Kochen', 5, 'B'),
@@ -134,7 +135,7 @@ INSERT INTO talente (name, kategorie_id, komplexitaet) VALUES
 	('Maurer', 5, 'B'),
 	('Metallguss', 5, 'B'),
 	('Musizieren', 5, 'B'),
-	('Schlösser Knacken', 5, 'B'),
+	('Schlösser knacken', 5, 'B'),
 	('Schnaps Brennen', 5, 'B'),
 	('Schneidern', 5, 'B'),
 	('Seefahrt', 5, 'B'),
@@ -142,7 +143,7 @@ INSERT INTO talente (name, kategorie_id, komplexitaet) VALUES
 	('Steinmetz', 5, 'B'),
 	('Steinschneider/Juwelier', 5, 'B'),
 	('Stellmacher', 5, 'B'),
-	('Stoffe Färben', 5, 'B'),
+	('Stoffe färben', 5, 'B'),
 	('Tätowieren', 5, 'B'),
 	('Töpfern', 5, 'B'),
 	('Viehzucht', 5, 'B'),
@@ -154,6 +155,7 @@ INSERT INTO talent_kategorien VALUES(6, 'Gaben');
 
 INSERT INTO talente (name, kategorie_id, komplexitaet) VALUES
 	('Ritualkenntnis: Gildenmagie', 6, 'E'),
+	('Ritualkenntnis: Druide', 6, 'E'),
 	('Gefahreninstinkt', 6, 'E');
 
 INSERT INTO talent_kategorien VALUES(7, 'Körperlich');

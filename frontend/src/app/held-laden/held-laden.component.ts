@@ -70,7 +70,7 @@ export class HeldLadenComponent implements OnInit {
   }
 
   fileUploaded(event: any) {
-    const files = event.srcElement.files;
+    const files = event.target.files;
     const reader = new FileReader();
     reader.onload = file => {
       const contents: any = file.target;

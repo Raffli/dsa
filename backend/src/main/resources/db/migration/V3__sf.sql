@@ -80,14 +80,16 @@ INSERT INTO sonderfertigkeiten (name, kosten, typ) VALUES
 	('Stabzauber: Kraftfokus', 100, 2),
 	('Stabzauber: Zauberspeicher', 100, 2),
 	('Gebirgskundig', 100, 2),
-	
-	('Fass I', 100, 2),
-	('Fass II', 100, 2),
-	('Gezielter Biss', 100, 2),
-	('Kehrtwende', 100, 2),
-	('Kommen auf Signal', 100, 2),
-	
-	('Tanz der Mada', 100, 0);
+	('Tanz der Mada', 100, 0),
+	('Blutmagie', 100, 0),
+	('Druidenrache', 100, 0),
+	('Representation: Druide', 100, 0),
+	('Repräsentation: Druide', 100, 0),
+	('Verbotene Pforten', 100, 0),
+	('Waldkundig', 100, 0),
+	('Druidisches Dolchritual: Lebenskraft', 100, 0),
+	('Druidisches Dolchritual: Leib', 100, 0),
+	('Druidisches Dolchritual: Weihe', 100, 0);
 	
 	
 	
