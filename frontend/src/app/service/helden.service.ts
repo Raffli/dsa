@@ -3,48 +3,48 @@ import {HttpClient} from '@angular/common/http'
 
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
-import {Response} from "@angular/http"
-import {Held} from "../data/held";
-import {Attribut} from "../data/attribut";
-import {Vorteil} from "../data/vorteil";
-import {Sonderfertigkeit} from "../data/sonderfertigkeit";
-import {Talent, talentFactory} from "../data/talent";
-import {Lernmethode} from "../data/enums/lernmethode";
-import {AttributService} from "./attribut.service";
-import {TalentService} from "./talent.service";
-import {TalentData} from "../data/talentdata";
+import {Response} from '@angular/http'
+import {Held} from '../data/held';
+import {Attribut} from '../data/attribut';
+import {Vorteil} from '../data/vorteil';
+import {Sonderfertigkeit} from '../data/sonderfertigkeit';
+import {Talent, talentFactory} from '../data/talent';
+import {Lernmethode} from '../data/enums/lernmethode';
+import {AttributService} from './attribut.service';
+import {TalentService} from './talent.service';
+import {TalentData} from '../data/talentdata';
 import {Observable, Observer} from 'rxjs/Rx'
-import {Aussehen} from "../data/aussehen";
-import {SprachTalent} from "../data/sprachtalent";
-import {KampfTalent, kampfTalentFactory} from "../data/kampftalent";
-import {Talente} from "../data/talente";
-import {AtPaPair} from "../data/AtPaPair";
-import {Ausruestung} from "../data/ausruestung/Ausruestung";
-import {AusruestungService} from "./ausruestung.service";
-import {Waffe} from "../data/ausruestung/Waffe";
-import {Hand} from "../data/ausruestung/Hand";
-import {AusruestungsSet} from "../data/ausruestung/AusruestungsSet";
-import {KampfTalentService} from "./kampf-talent.service";
-import {FernkampfWaffe} from "../data/ausruestung/FernkampfWaffe";
-import {Schild} from "../data/ausruestung/Schild";
-import {Ruestung} from "../data/ausruestung/Ruestung";
-import {environment, environment} from "../../environments/environment";
-import {RestService} from "./rest.service";
-import {Heldendata} from "../data/heldendata";
-import {Sonderfertigkeiten} from "../data/Sonderfertigkeiten";
-import {Spezialisierung} from "../data/Spezialisierung";
-import {SonderfertigkeitenService} from "./sonderfertigkeiten.service";
+import {Aussehen} from '../data/aussehen';
+import {SprachTalent} from '../data/sprachtalent';
+import {KampfTalent, kampfTalentFactory} from '../data/kampftalent';
+import {Talente} from '../data/talente';
+import {AtPaPair} from '../data/AtPaPair';
+import {Ausruestung} from '../data/ausruestung/Ausruestung';
+import {AusruestungService} from './ausruestung.service';
+import {Waffe} from '../data/ausruestung/Waffe';
+import {Hand} from '../data/ausruestung/Hand';
+import {AusruestungsSet} from '../data/ausruestung/AusruestungsSet';
+import {KampfTalentService} from './kampf-talent.service';
+import {FernkampfWaffe} from '../data/ausruestung/FernkampfWaffe';
+import {Schild} from '../data/ausruestung/Schild';
+import {Ruestung} from '../data/ausruestung/Ruestung';
+import {environment} from '../../environments/environment';
+import {RestService} from './rest.service';
+import {Heldendata} from '../data/heldendata';
+import {Sonderfertigkeiten} from '../data/Sonderfertigkeiten';
+import {Spezialisierung} from '../data/Spezialisierung';
+import {SonderfertigkeitenService} from './sonderfertigkeiten.service';
 import {isNullOrUndefined} from 'util';
-import {LoggingService} from "./logging.service";
+import {LoggingService} from './logging.service';
 import {NameGroupPair} from '../data/NameGroupPair';
 import {Heldendataout} from '../data/heldendataout';
 import {RuestungStats} from '../data/ausruestung/RuestungStats';
-import {Ereignis} from "../data/Ereignis";
+import {Ereignis} from '../data/Ereignis';
 import {Zauber, zauberFactory} from '../data/Zauber';
 import {skip} from 'rxjs/operator/skip';
-import {Schaden} from "../data/ausruestung/schaden";
-import {MessageService} from "./message.service";
-import {UploadInfo} from "../data/UploadInfo";
+import {Schaden} from '../data/ausruestung/schaden';
+import {MessageService} from './message.service';
+import {UploadInfo} from '../data/UploadInfo';
 
 @Injectable()
 export class HeldenService {
@@ -53,9 +53,13 @@ export class HeldenService {
 
   public heldLoaded: EventEmitter<Held> = new EventEmitter();
 
-  constructor(private attributService: AttributService, private talentService: TalentService, private ausruetungsService: AusruestungService,
-              private kampftalentService: KampfTalentService, private restService: RestService,
-              private sonderfertigkeitenService: SonderfertigkeitenService, private log: LoggingService, private messageService: MessageService ) {
+  constructor(private attributService: AttributService,
+              private talentService: TalentService,
+              private ausruetungsService: AusruestungService,
+              private kampftalentService: KampfTalentService,
+              private restService: RestService,
+              private sonderfertigkeitenService: SonderfertigkeitenService,
+              private log: LoggingService, private messageService: MessageService ) {
     if (!environment.production) {
       this.loadHeldByXML(this.testHeld);
     }
@@ -136,11 +140,12 @@ export class HeldenService {
     const apTotal = this.extractApTotal(xmlDoc);
     const apFree = this.extractApFree(xmlDoc);
     const name = this.extractName(xmlDoc);
-    if(environment.production) {
       this.messageService.info('Lade held: ' + name)
-    }
+
     const attribute = this.extractAttribute(xmlDoc);
     const vorteile = this.extractVorteile(xmlDoc);
+    const lep = this.extractLep(attribute, xmlDoc);
+    const aup = this.extractAup(attribute, xmlDoc);
     const ereignisse = this.extractEreignisse(xmlDoc);
     const kultur = this.extractKultur(xmlDoc);
     const groesseGewicht = this.extractGewichtGroesse(xmlDoc);
@@ -154,16 +159,32 @@ export class HeldenService {
               ausruestung.sets[0],  sonderfertigkeiten.kampf);
             const hero = new Held(rasse, geschlecht, profession, apTotal, apFree, name, attribute,
               vorteile, sonderfertigkeiten, kultur, groesseGewicht.groesse, groesseGewicht.gewicht,
-              aussehen, talente, ausruestung, ausweichen, xml, ereignisse);
+              aussehen, talente, ausruestung, ausweichen, xml, ereignisse, lep, aup);
             this.processBe(talente, ausruestung.sets[0])
-            callback(hero);
-            console.log(hero)
+            callback(hero)
           }));
-
       })
     });
 
   }
+
+  private extractLep(attribute: Attribut[], doc: XMLDocument): number {
+    const ko = attribute[Attribut.Konstitution].value;
+    const kk = attribute[Attribut.Körperkraft].value;
+    const leMods = attribute[Attribut.Lebensenergie];
+    // TODO Vorteile
+    return Math.round((ko + ko + kk) /2 + leMods.value);
+  }
+
+  private extractAup(attribute: Attribut[], doc: XMLDocument): number {
+    const mu = attribute[Attribut.MUT].value;
+    const ko = attribute[Attribut.Konstitution].value;
+    const ge = attribute[Attribut.Gewandhteit].value;
+    const auMods = attribute[Attribut.Ausdauer];
+    // TODO Vorteile
+    return Math.round((mu + ko + ge) / 2 + auMods.value);
+  }
+
 
   private extractZauber(doc: XMLDocument): Zauber[] {
     const nodes = Array.prototype.slice.call(doc.getElementsByTagName('zauber'), 0);
@@ -197,7 +218,7 @@ export class HeldenService {
   }
 
   private extractAusweichen(paBasis: number, ausruestung: AusruestungsSet, kampfSonderfertigkeiten: Sonderfertigkeit[]) : number {
-    let ausweichen = paBasis - ausruestung.ruestungsStats.ebe;
+    let ausweichen = paBasis
     if(this.hasSonderfertigkeit('Ausweichen I', kampfSonderfertigkeiten)) {
       ausweichen += 3;
       if(this.hasSonderfertigkeit('Ausweichen II', kampfSonderfertigkeiten)) {
@@ -211,10 +232,10 @@ export class HeldenService {
     return Math.floor(ausweichen);
   }
 
-  private extractGewichtGroesse(xmlDoc : Document) : any {
+  private extractGewichtGroesse(xmlDoc: Document): any {
     const node = xmlDoc.getElementsByTagName('groesse')[0];
-    const gewicht = parseInt(node.getAttribute('gewicht'));
-    const groesse = parseInt(node.getAttribute('value'));
+    const gewicht = parseInt(node.getAttribute('gewicht'), 10);
+    const groesse = parseInt(node.getAttribute('value'), 10);
     return {gewicht: gewicht, groesse: groesse}
 
   }
@@ -343,7 +364,6 @@ export class HeldenService {
 
 
   private extractAusruestung(xmlDoc: Document, kk: number, kampftalente: KampfTalent[], atBasis: number, paBasis: number, fkBasis: number,  sonderfertigkeiten: Sonderfertigkeiten, callback: (ausruestung: Ausruestung) => void ) {
-
     const nodes = xmlDoc.getElementsByTagName('heldenausruestung');
     const ausruestungen = [];
     ausruestungen.push(new AusruestungsSet());
@@ -407,8 +427,8 @@ export class HeldenService {
           const set = parseInt(node.getAttribute('set'), 10);
 
           if (data[index] === null) {
-            this.log.error('Unable to extract equipment with name: ' + ausruestungBatch[index].name,
-              'heldenservice.extractAusruestung');
+            console.log(index + ' ' + i)
+            index++;
             continue;
           }
           if (ausruestungBatch[index].type === 0 ) {

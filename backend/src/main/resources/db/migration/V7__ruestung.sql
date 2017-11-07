@@ -16,7 +16,7 @@ create table ruestungen(
 
 INSERT INTO ruestungen(name, stats_kopf,stats_brust, stats_ruecken, stats_bauch, stats_linkerarm, stats_rechterarm, stats_linkesbein, stats_rechtsbein, stats_rs, stats_be) VALUES	('Amazonenrüstung (kpl.)', 3,5, 3, 5, 2, 2, 3, 3, 3.7, 1.7),
 	('Armschienen, Bronze', 0,0, 0, 0, 2, 2, 0, 0, 0.2, 0.2),
-	('Armschienen, Stahl', 0,0, 0, 0, 3, 3, 0, 0, 0.3, 0.3),
+	('Armschienen (Paar), Stahl', 0,0, 0, 0, 3, 3, 0, 0, 0.3, 0.3),
 	('Bart / Halsberge', 2,1, 1, 0, 0, 0, 0, 0, 0.6, 0.6),
 	('Beinschienen, Bronze', 0,0, 0, 0, 0, 0, 2, 2, 0.4, 0.4),
 	('Beinschienen, Stahl', 0,0, 0, 0, 0, 0, 3, 3, 0.6, 0.6),

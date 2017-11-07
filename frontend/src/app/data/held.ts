@@ -22,7 +22,7 @@ export class Held {
               public sonderfertigkeiten: Sonderfertigkeiten, public kultur: string,
               public groesse: number, public gewicht: number, public aussehen: Aussehen,
               public talente: Talente, public ausruestung: Ausruestung, public ausweichen: number, public xml: string,
-              public ereignisse: Ereignis[])
+              public ereignisse: Ereignis[], public lep: number, public aup: number)
   {
   }
 

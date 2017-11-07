@@ -2,3 +2,42 @@
   width:10% !important;
   display:inline-block;
 }
+
+.sub-attribute {
+  width:10.75% !important;
+  display:inline-block;
+}
+
+.talent-table {
+  column-count: 3;
+  column-gap: 20px;
+  max-height: 1000px;
+  column-rule: 1px solid black;
+}
+
+
+.kampf-talent-name {
+  display:block;
+  width: 40%;
+  float: left;
+}
+
+.kampf-talent-be {
+  display:block;
+  width: 20%;
+  float: left;
+}
+
+.kampf-talent-atpa {
+  border-left: 1px solid darkblue;
+  border-right: 1px solid darkblue;
+  display:block;
+  width: 30%;
+  float: left;
+}
+
+.kampf-talent-taw {
+  display:block;
+  float: left;
+  width: 10%;
+}

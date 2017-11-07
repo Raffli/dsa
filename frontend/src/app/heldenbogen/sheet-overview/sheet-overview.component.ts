@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ElementRef} from '@angular/core';
+import {Component, OnInit, Input, ElementRef, OnChanges, ViewChild} from '@angular/core';
 import {Held} from "../../data/held";
 import {Attribut} from "../../data/attribut";
 import {Talente} from "../../data/talente";
@@ -6,18 +6,20 @@ import {SprachTalent} from "../../data/sprachtalent";
 import {Talent} from "../../data/talent";
 import {KampfTalent} from "../../data/kampftalent";
 import {TalentBase} from '../../data/TalentBase';
+import {Sonderfertigkeiten} from "../../data/Sonderfertigkeiten";
+import {Sonderfertigkeit} from "../../data/sonderfertigkeit";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-sheet-overview',
   templateUrl: './sheet-overview.component.html',
   styleUrls: ['./sheet-overview.component.css']
 })
-export class SheetOverviewComponent implements OnInit {
+export class SheetOverviewComponent implements OnInit{
 
   public filter: string;
 
   public filteredTalente: Talente;
-
 
   @Input()
   held: Held;
@@ -87,17 +89,63 @@ export class SheetOverviewComponent implements OnInit {
   }
 
   getVorteileNachteile(): string {
-    let ret ="";
-    for(let i=0; i<this.held.vorteile.length; i++) {
+    let ret = '';
+    for (let i = 0; i < this.held.vorteile.length; i++) {
       const vorteil = this.held.vorteile[i];
       ret += vorteil.name;
-      if(vorteil.value) ret+= ': ' + vorteil.value;
-      if(i != this.held.vorteile.length-1) {
-        ret+='; '
+      if (vorteil.value) {
+        ret += ': ' + vorteil.value;
+      }
+      if (i !== this.held.vorteile.length - 1) {
+        ret += '; '
       }
     }
 
     return ret;
   }
 
+  getSonderfertigkeiten(): string {
+    let ret = '';
+    ret = this.appendSonderfertigkeite(this.held.sonderfertigkeiten.magische, ret);
+    ret = this.appendSonderfertigkeite(this.held.sonderfertigkeiten.kampf, ret);
+    ret = this.appendSonderfertigkeite(this.held.sonderfertigkeiten.profane, ret);
+
+    return ret;
+  }
+
+  private appendSonderfertigkeite(sonderfertigkeiten: Sonderfertigkeit[], s: string) {
+    if (sonderfertigkeiten.length === 0) {
+      return s;
+    }
+
+    for (let i = 0; i < sonderfertigkeiten.length; i++) {
+      s += sonderfertigkeiten[i].name
+      s += '; '
+
+    }
+
+    return s;
+  }
+
+  public getAtBasis() {
+    return this.held.attribute[Attribut.at].value;
+  }
+
+  public getPaBasis() {
+    return this.held.attribute[Attribut.pa].value;
+  }
+
+  public getFkBasis() {
+    return this.held.attribute[Attribut.fk].value;
+
+  }
+
+  public getIniBasis() {
+    return this.held.attribute[Attribut.ini].value;
+
+  }
+
+  public test(talent) {
+    console.log(talent)
+  }
 }

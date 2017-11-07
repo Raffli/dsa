@@ -1,0 +1,11 @@
+<div *ngFor="let val of getIteratorCollection(); let i = index">
+  <div style="float:left" [style.width]="100/rows +'%'">
+    <div class="round-border distance-holder">
+      <ng-container *ngFor="let element of getSubset(i)">
+        <ng-container *ngTemplateOutlet="element"></ng-container>
+      </ng-container>
+
+    </div>
+
+  </div>
+</div>

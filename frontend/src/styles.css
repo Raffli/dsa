@@ -50,6 +50,7 @@ td:first-child, th:first-child {
   border-radius:3px;
   -moz-border-radius:3px;
   padding:2px;
+  overflow:hidden;
 }
 
 .ellipting {

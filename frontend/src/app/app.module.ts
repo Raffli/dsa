@@ -45,7 +45,7 @@ import { EreignisBogenComponent } from './heldenbogen/ereignis-bogen/ereignis-bo
 import { ZauberbogenComponent } from './heldenbogen/zauberbogen/zauberbogen.component';
 import { HeldenUpdaterComponent } from './helden-updater/helden-updater.component';
 import {HeldenUpdaterService} from "./service/helden-updater.service";
-
+import { GridComponent } from './grid/grid.component';
 const appRoutes: Routes = [
   {
     path: 'home',
@@ -87,6 +87,7 @@ const appRoutes: Routes = [
     EreignisBogenComponent,
     ZauberbogenComponent,
     HeldenUpdaterComponent,
+    GridComponent,
   ],
   imports: [
     BrowserModule, FormsModule, BrowserAnimationsModule, MenuModule, MenubarModule,
