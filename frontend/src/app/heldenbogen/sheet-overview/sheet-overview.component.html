@@ -111,7 +111,7 @@
 
 <input type="text" [(ngModel)]="filter" (ngModelChange)="filterChanged()" (keyup.enter)="onEnter()" />
 <app-grid>
-  <div>
+  <ng-template>
     <div>
       <span class="kampf-talent-name bold">Kampftalente</span>
       <span class="kampf-talent-be">BE</span>
@@ -120,8 +120,8 @@
     </span>
       <span class="kampf-talent-taw">TaW</span>
     </div>
-  </div>
-    <div *ngFor="let talent of filteredTalente.kampftalente">
+  </ng-template>
+    <ng-template *ngFor="let talent of filteredTalente.kampftalente">
       <div>
         <span class="kampf-talent-name">{{talent?.name}}</span>
         <span class="kampf-talent-be">{{talent?.be}}</span>
@@ -133,12 +133,17 @@
       </div>
 
 
-    </div>
+    </ng-template>
 
 
-  <div>
+  <ng-template>
     <span class="bold">Sprachen</span>
-  </div>
+  </ng-template>
+  <ng-template *ngFor="let talent of filteredTalente.sprachen">
+    <span class="kampf-talent-name">{{talent?.name}}</span>
+    <span class="kampf-talent-be">{{talent?.komplexitaet}}</span>
+      <span class="kampf-talent-atpa">{{talent?.value}}</span>
+  </ng-template>
 
 </app-grid>
 <div class="row"></div>
