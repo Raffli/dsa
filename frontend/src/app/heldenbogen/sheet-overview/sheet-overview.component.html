@@ -127,7 +127,8 @@
         <span class="kampf-talent-be">{{talent?.be}}</span>
         <span class="kampf-talent-atpa">
       <span>{{talent?.at}}</span>
-    <span>{{talent ?'|' + talent?.pa: ''}}</span>
+    <span>{{talent ?'|' + talent && talent.pa? talent?.pa: '' : ''}}</span>
+
     </span>
         <span class="kampf-talent-taw">{{talent?.value}}</span>
       </div>
@@ -137,12 +138,24 @@
 
 
   <ng-template>
-    <span class="bold">Sprachen</span>
+    <span class="kampf-talent-name bold">Sprachen</span>
+    <span class="kampf-talent-be">Kompl.</span>
+    <span class="kampf-talent-atpa">TaW</span>
   </ng-template>
   <ng-template *ngFor="let talent of filteredTalente.sprachen">
     <span class="kampf-talent-name">{{talent?.name}}</span>
     <span class="kampf-talent-be">{{talent?.komplexitaet}}</span>
       <span class="kampf-talent-atpa">{{talent?.value}}</span>
+  </ng-template>
+  <ng-template>
+    <span class="kampf-talent-name bold">Schriften</span>
+    <span class="kampf-talent-be">Kompl.</span>
+    <span class="kampf-talent-atpa">TaW</span>
+  </ng-template>
+  <ng-template *ngFor="let talent of filteredTalente.schriften">
+    <span class="kampf-talent-name">{{talent?.name}}</span>
+    <span class="kampf-talent-be">{{talent?.komplexitaet}}</span>
+    <span class="kampf-talent-atpa">{{talent?.value}}</span>
   </ng-template>
 
 </app-grid>

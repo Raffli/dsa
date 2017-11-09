@@ -17,14 +17,13 @@ export class GridComponent implements AfterContentInit{
   }
 
   ngAfterContentInit() {
-    console.log(this.tabs.toArray())
   }
 
   public getSubset(index: number) {
     const setSize = Math.ceil(this.tabs.length / this.rows);
     const startIndex = index * setSize;
     const endIndex = Math.min(startIndex + setSize, this.tabs.length);
-
+  console.log(setSize)
     return this.tabs.toArray().slice(startIndex, endIndex)
   }
 
